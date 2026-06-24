@@ -2,7 +2,7 @@
     <a href="https://v2.nonebot.dev/store">
     <img src="https://raw.githubusercontent.com/fllesser/nonebot-plugin-template/refs/heads/resource/.docs/NoneBotPlugin.svg" width="310" alt="logo"></a>
 
-## ✨ HiBank 城市银行查询 ✨
+## ✨城市银行查询与标记 ✨
 
 [![LICENSE](https://img.shields.io/github/license/WhyPilotXia/nonebot-plugin-hibank.svg)](./LICENSE)[![pypi](https://img.shields.io/pypi/v/nonebot-plugin-hibank.svg)](https://pypi.python.org/pypi/nonebot-plugin-hibank)[![python](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org)[![NoneBot](https://img.shields.io/badge/NoneBot-2.x-green.svg)](https://github.com/nonebot/nonebot2)
 
