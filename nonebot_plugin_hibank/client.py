@@ -1,0 +1,388 @@
+from __future__ import annotations
+
+import asyncio
+import html
+import json
+import re
+import warnings
+from typing import Any
+from urllib.parse import quote
+
+import requests
+from bs4 import BeautifulSoup
+from urllib3.exceptions import InsecureRequestWarning
+from nonebot import get_plugin_config
+
+from . import cache
+from .config import HibankConfig
+from .models import BankRef, BranchDetail, CacheStats, CityDetail, CityRef
+
+
+STATE_RE = re.compile(
+    r"window\.__HIBANK_PINIA_STATE__\s*=\s*(\{.*?\})</script>",
+    re.S,
+)
+BRANCH_HREF_RE = re.compile(r"^/branches/([^/]+)/([^/]+)/(.+)$")
+SUFFIXES = (
+    "省",
+    "市",
+    "自治区",
+    "特别行政区",
+    "壮族自治区",
+    "回族自治区",
+    "维吾尔自治区",
+    "自治州",
+    "地区",
+    "盟",
+)
+
+
+class HibankError(RuntimeError):
+    pass
+
+
+class HibankClient:
+    def __init__(self) -> None:
+        self.config = get_plugin_config(HibankConfig)
+        self._indexes: dict[str, Any] | None = None
+
+    @property
+    def base_url(self) -> str:
+        return self.config.hibank_base_url.rstrip("/")
+
+    async def ensure_indexes(self) -> dict[str, Any]:
+        if self._indexes is not None:
+            return self._indexes
+        cached = cache.read_json(cache.INDEXES_FILE)
+        if self._indexes_valid(cached):
+            self._indexes = cached
+            return cached
+        html_text = await self._fetch_text("/cities")
+        state = self._parse_state(html_text)
+        indexes = state.get("data", {}).get("indexes", {})
+        if not self._indexes_valid(indexes):
+            raise HibankError("城市索引解析失败。")
+        cache.write_json(cache.INDEXES_FILE, indexes)
+        self._indexes = indexes
+        return indexes
+
+    async def search_cities(self, keyword: str, limit: int = 20) -> list[CityRef]:
+        keyword_norm = normalize(keyword)
+        if not keyword_norm:
+            return []
+        results: list[tuple[int, CityRef]] = []
+        for city in await self.iter_cities():
+            city_norm = normalize(city.city)
+            province_norm = normalize(city.province)
+            text = province_norm + city_norm
+            if keyword_norm == city_norm:
+                score = 100
+            elif city_norm.startswith(keyword_norm):
+                score = 80
+            elif keyword_norm in city_norm:
+                score = 60
+            elif keyword_norm in text:
+                score = 40
+            else:
+                continue
+            results.append((score, city))
+        results.sort(key=lambda item: (-item[0], item[1].province_code, item[1].city_slug))
+        return [city for _, city in results[:limit]]
+
+    async def search_banks(self, keyword: str, limit: int = 30) -> list[str]:
+        keyword_norm = normalize(keyword)
+        if not keyword_norm:
+            return []
+        bank_names = await self.all_bank_names()
+        results = [
+            name
+            for name in bank_names
+            if keyword_norm in normalize(name)
+        ]
+        results.sort(key=lambda name: (normalize(name).find(keyword_norm), len(name), name))
+        return results[:limit]
+
+    async def all_bank_names(self) -> set[str]:
+        indexes = await self.ensure_indexes()
+        bank_names: set[str] = set()
+        banks = indexes.get("banks", [])
+        if isinstance(banks, list):
+            for group in banks:
+                if not isinstance(group, dict):
+                    continue
+                value = group.get("value", [])
+                if not isinstance(value, list):
+                    continue
+                for item in value:
+                    if not isinstance(item, dict):
+                        continue
+                    name = item.get("name")
+                    if isinstance(name, str) and name.strip():
+                        bank_names.add(name.strip())
+        return bank_names
+
+    async def split_known_banks(self, banks: list[str]) -> tuple[list[str], list[str]]:
+        known_names = await self.all_bank_names()
+        known_by_norm = {normalize(name) for name in known_names}
+        known: list[str] = []
+        unknown: list[str] = []
+        for bank in banks:
+            target = bank.strip()
+            if not target:
+                continue
+            if normalize(target) in known_by_norm:
+                known.append(target)
+            else:
+                unknown.append(target)
+        return known, unknown
+
+    async def iter_cities(self) -> list[CityRef]:
+        indexes = await self.ensure_indexes()
+        cities = indexes.get("cities", {})
+        refs: list[CityRef] = []
+        for province, payload in cities.items():
+            if not isinstance(payload, dict):
+                continue
+            code = payload.get("code")
+            city_map = payload.get("cities", {})
+            if not isinstance(code, str) or not isinstance(city_map, dict):
+                continue
+            for city, slug in city_map.items():
+                if isinstance(city, str) and isinstance(slug, str):
+                    refs.append(CityRef(province, code, city, slug))
+        return refs
+
+    async def resolve_city(self, query: str) -> CityRef:
+        parts = [part for part in query.strip().split() if part]
+        province_kw = ""
+        city_kw = query
+        if len(parts) >= 2:
+            province_kw = parts[0]
+            city_kw = "".join(parts[1:])
+        city_norm = normalize(city_kw)
+        province_norm = normalize(province_kw)
+        if not city_norm:
+            raise HibankError("请提供城市名。")
+
+        matches: list[tuple[int, CityRef]] = []
+        for city in await self.iter_cities():
+            current_city = normalize(city.city)
+            current_province = normalize(city.province)
+            if province_norm and province_norm not in current_province:
+                continue
+            if city_norm == current_city:
+                score = 100
+            elif current_city.startswith(city_norm):
+                score = 80
+            elif city_norm in current_city:
+                score = 60
+            elif city_norm in current_province + current_city:
+                score = 40
+            else:
+                continue
+            matches.append((score, city))
+        if not matches:
+            raise HibankError(f"未找到城市：{query}")
+        matches.sort(key=lambda item: (-item[0], item[1].province_code, item[1].city_slug))
+        return matches[0][1]
+
+    async def get_city_detail(self, city: CityRef) -> CityDetail:
+        cached = cache.read_json(cache.city_cache_path(city.key))
+        if isinstance(cached, dict) and cached.get("groups"):
+            return CityDetail(
+                city=city,
+                groups=cached["groups"],
+                bank_paths=cached.get("bank_paths", {}),
+                from_cache=True,
+            )
+        html_text = await self._fetch_text(f"/cities/{city.province_code}/{city.city_slug}")
+        state = self._parse_state(html_text)
+        city_cache = state.get("data", {}).get("cache", {}).get("cities", {})
+        groups = city_cache.get(city.key)
+        if not isinstance(groups, dict):
+            if len(city_cache) == 1:
+                groups = next(iter(city_cache.values()))
+        if not isinstance(groups, dict):
+            raise HibankError(f"{city.city} 银行列表解析失败。")
+        normalized_groups = {
+            str(category): [str(item) for item in items]
+            for category, items in groups.items()
+            if isinstance(items, list)
+        }
+        bank_paths = self._extract_bank_paths(html_text, city)
+        cache.write_json(
+            cache.city_cache_path(city.key),
+            {"city": city.__dict__, "groups": normalized_groups, "bank_paths": bank_paths},
+        )
+        return CityDetail(city=city, groups=normalized_groups, bank_paths=bank_paths)
+
+    async def get_branch_detail(
+        self,
+        city: CityRef,
+        bank_query: str,
+        page: int = 1,
+    ) -> BranchDetail:
+        city_detail = await self.get_city_detail(city)
+        bank = self.resolve_bank(city_detail, bank_query)
+        cached = cache.read_json(cache.branch_cache_path(city.key, bank.name))
+        if isinstance(cached, list):
+            return BranchDetail(
+                city=city,
+                bank=bank,
+                branches=cached,
+                page=page,
+                page_size=self.config.hibank_branch_page_size,
+                from_cache=True,
+            )
+        bank_path = bank.path
+        if not bank_path.startswith("%"):
+            bank_path = quote(bank_path, safe="")
+        html_text = await self._fetch_text(
+            f"/branches/{city.province_code}/{city.city_slug}/{bank_path}"
+        )
+        state = self._parse_state(html_text)
+        branch_cache = state.get("data", {}).get("cache", {}).get("branches", {})
+        branches: Any = branch_cache.get(f"{city.key}_{bank.name}")
+        if not isinstance(branches, list) and len(branch_cache) == 1:
+            branches = next(iter(branch_cache.values()))
+        if not isinstance(branches, list):
+            raise HibankError(f"{city.city} {bank.name} 网点列表解析失败。")
+        normalized = [
+            item
+            for item in branches
+            if isinstance(item, dict)
+        ]
+        cache.write_json(cache.branch_cache_path(city.key, bank.name), normalized)
+        return BranchDetail(
+            city=city,
+            bank=bank,
+            branches=normalized,
+            page=page,
+            page_size=self.config.hibank_branch_page_size,
+        )
+
+    def resolve_bank(self, city_detail: CityDetail, query: str) -> BankRef:
+        query_norm = normalize(query)
+        if not query_norm:
+            raise HibankError("请提供银行名。")
+        candidates = city_detail.bank_paths
+        if not candidates:
+            candidates = {
+                bank: bank
+                for banks in city_detail.groups.values()
+                for bank in banks
+            }
+        matches: list[tuple[int, str, str]] = []
+        for name, path in candidates.items():
+            name_norm = normalize(name)
+            base_norm = normalize(name.split("(", 1)[0])
+            if query_norm == name_norm or query_norm == base_norm:
+                score = 100
+            elif name_norm.startswith(query_norm) or base_norm.startswith(query_norm):
+                score = 80
+            elif query_norm in name_norm:
+                score = 60
+            else:
+                continue
+            matches.append((score, name, path))
+        if not matches:
+            raise HibankError(f"{city_detail.city.city} 未找到银行：{query}")
+        matches.sort(key=lambda item: (-item[0], len(item[1]), item[1]))
+        _, name, path = matches[0]
+        return BankRef(name=name, path=path)
+
+    def get_cache_stats(self) -> CacheStats:
+        city_count, branch_count = cache.cache_counts()
+        return CacheStats(
+            indexes_cached=cache.INDEXES_FILE.exists(),
+            city_cache_count=city_count,
+            branch_cache_count=branch_count,
+            cache_dir=str(cache.DATA_DIR),
+        )
+
+    def _indexes_valid(self, indexes: Any) -> bool:
+        if not isinstance(indexes, dict):
+            return False
+        cities = indexes.get("cities")
+        banks = indexes.get("banks")
+        if not isinstance(cities, dict) or not isinstance(banks, list):
+            return False
+        sichuan = cities.get("四川省")
+        if not isinstance(sichuan, dict):
+            return False
+        city_map = sichuan.get("cities")
+        if not isinstance(city_map, dict):
+            return False
+        return city_map.get("成都市") == "chengdu"
+
+    async def clear_cache(self) -> None:
+        await asyncio.to_thread(cache.clear_cache)
+        self._indexes = None
+
+    async def _fetch_text(self, path: str) -> str:
+        url = self.base_url + path
+        return await asyncio.to_thread(self._fetch_text_sync, url)
+
+    def _fetch_text_sync(self, url: str) -> str:
+        headers = {
+            "User-Agent": (
+                "Mozilla/5.0 AppleWebKit/537.36 "
+                "(KHTML, like Gecko) Chrome/126.0 Safari/537.36"
+            )
+        }
+        try:
+            with warnings.catch_warnings():
+                if not self.config.hibank_verify_ssl:
+                    warnings.simplefilter("ignore", InsecureRequestWarning)
+                response = requests.get(
+                    url,
+                    headers=headers,
+                    timeout=self.config.hibank_timeout,
+                    verify=self.config.hibank_verify_ssl,
+                )
+            response.raise_for_status()
+        except requests.RequestException as exc:
+            raise HibankError(f"请求 HiBank 失败：{exc}") from exc
+        response.encoding = "utf-8"
+        return response.text
+
+    def _parse_state(self, html_text: str) -> dict[str, Any]:
+        match = STATE_RE.search(html_text)
+        if not match:
+            raise HibankError("页面状态数据解析失败。")
+        try:
+            return json.loads(match.group(1))
+        except json.JSONDecodeError as exc:
+            raise HibankError("页面状态 JSON 解析失败。") from exc
+
+    def _extract_bank_paths(self, html_text: str, city: CityRef) -> dict[str, str]:
+        soup = BeautifulSoup(html_text, "html.parser")
+        paths: dict[str, str] = {}
+        prefix = f"/branches/{city.province_code}/{city.city_slug}/"
+        for anchor in soup.find_all("a", href=True):
+            href = str(anchor.get("href"))
+            if not href.startswith(prefix):
+                continue
+            match = BRANCH_HREF_RE.match(href)
+            if not match:
+                continue
+            name = " ".join(anchor.get_text(" ", strip=True).split())
+            if not name:
+                image = anchor.find("img", alt=True)
+                if image is not None:
+                    name = str(image.get("alt", "")).strip()
+            if name:
+                paths[html.unescape(name)] = match.group(3)
+        return paths
+
+
+def normalize(value: str) -> str:
+    text = str(value).strip().lower()
+    for char in (" ", "\t", "\n", "\r", "　", "-", "_"):
+        text = text.replace(char, "")
+    for suffix in SUFFIXES:
+        text = text.replace(suffix, "")
+    return text
+
+
+client = HibankClient()
