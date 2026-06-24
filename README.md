@@ -138,6 +138,24 @@ plugins = ["nonebot_plugin_hibank"]
 - 标记或关注不存在于当前索引的银行时，会提示回复“确认”；回复其他内容不会写入。
 - `/复制标记`、`/复制关注` 会先展示对方列表图片；本方为空时回复“复制/取消”，本方已有数据时回复“合并/复制/取消”。
 
+
+## 🏷️ 指令示例
+
+
+<img width="761" height="521" alt="image" src="https://github.com/user-attachments/assets/15376dc2-e44f-4f37-b49b-dc0697824ba2" />
+
+
+<img width="815" height="744" alt="image" src="https://github.com/user-attachments/assets/a92ef43b-ed2c-49b4-92de-1138337c615e" />
+
+<img width="1280" height="3284" alt="3ae49cdf5f5063a56c5d6834247969a2_720" src="https://github.com/user-attachments/assets/b5d1be0a-9426-4ce6-8d33-a45ce47ccf2d" />
+
+<img width="806" height="530" alt="image" src="https://github.com/user-attachments/assets/a4fba9a8-c18d-477e-8805-d2d1e0f28143" />
+
+<img width="1280" height="3015" alt="1ef70bebb61163158a989e1936501fd5_720" src="https://github.com/user-attachments/assets/f2161437-c0f4-49f4-a4bd-8daf1540b0e7" />
+
+<img width="816" height="753" alt="image" src="https://github.com/user-attachments/assets/adb58da8-67a9-43cf-a272-3e3df918c1c7" />
+
+
 ## 📄 License
 
 GPL-3.0-or-later
