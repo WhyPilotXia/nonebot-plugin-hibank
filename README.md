@@ -8,7 +8,7 @@
 
 ## 📖 介绍
 
-查询城市银行分布与网点信息并提供标记关注等功能的 NoneBot2 插件。
+查询城市银行分布与网点信息并提供标记关注等功能的 NoneBot2 插件。集卡人的福音！
 
 功能特色：
 
@@ -154,6 +154,9 @@ plugins = ["nonebot_plugin_hibank"]
 <img width="1280" height="3015" alt="1ef70bebb61163158a989e1936501fd5_720" src="https://github.com/user-attachments/assets/f2161437-c0f4-49f4-a4bd-8daf1540b0e7" />
 
 <img width="816" height="753" alt="image" src="https://github.com/user-attachments/assets/adb58da8-67a9-43cf-a272-3e3df918c1c7" />
+
+
+<img width="811" height="790" alt="image" src="https://github.com/user-attachments/assets/a553d6f8-e02e-4b3a-a532-83b886652cec" />
 
 
 ## 📄 License
