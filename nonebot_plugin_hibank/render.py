@@ -9,6 +9,7 @@ from PIL import Image, ImageDraw, ImageFont
 
 from .models import BranchDetail, CacheStats, CityDetail, CityRef
 from .marks import UserBankMarks
+from .names import bank_name_match_keys
 
 
 FONT_PATH = Path(__file__).resolve().parent / "assets" / "原神字体.ttf"
@@ -172,18 +173,22 @@ def render_city_detail(detail: CityDetail, user_marks: UserBankMarks | None = No
 def bank_style(bank: str, user_marks: UserBankMarks | None) -> str | None:
     if user_marks is None:
         return None
-    marked = {normalize_mark_name(item) for item in user_marks.marked}
-    followed = {normalize_mark_name(item) for item in user_marks.followed}
-    current = normalize_mark_name(bank)
-    if current in marked:
+    marked = {
+        key
+        for item in user_marks.marked
+        for key in bank_name_match_keys(item)
+    }
+    followed = {
+        key
+        for item in user_marks.followed
+        for key in bank_name_match_keys(item)
+    }
+    current = bank_name_match_keys(bank)
+    if current & marked:
         return "marked"
-    if current in followed:
+    if current & followed:
         return "followed"
     return None
-
-
-def normalize_mark_name(value: str) -> str:
-    return str(value).strip().lower().replace(" ", "").replace("　", "")
 
 
 def render_branch_detail(detail: BranchDetail) -> bytes:
@@ -292,28 +297,19 @@ def render_cache_stats(stats: CacheStats) -> bytes:
 
 def render_help() -> bytes:
     rows = [
-        "/bank 城市 <城市名>",
-        "/bank 网点 <城市名> <银行名> [页码]",
-        "/银行 <城市名>",
-        "/网点 <城市名> <银行名> [页码]",
-        "/标记 <银行名...> 或 /mark <银行名...>",
-        "/取消标记 <银行名...> 或 /unmark <银行名...>",
-        "/批量标记 <城市名> <分类>",
-        "/批量取消标记 <城市名> <分类>",
-        "/复制标记 <@用户/QQ号>",
-        "/标记列表",
-        "/关注 <银行名...> 或 /follow <银行名...>",
-        "/取消关注 <银行名...> 或 /unfollow <银行名...>",
-        "/批量关注 <城市名> <分类>",
-        "/批量取消关注 <城市名> <分类>",
-        "/复制关注 <@用户/QQ号>",
-        "/关注列表",
-        "/bank 搜城市 <关键词>",
-        "/bank 搜银行 <关键词>",
+        "/bank 帮助 | /bank -h | /bank --help",
+        "/bank 城市 <城市名> | /银行 <城市名>",
+        "/bank 网点 <城市名> <银行名> [页码] | /网点 <城市名> <银行名> [页码]",
+        "/bank 搜城市 <关键词> | /搜城市 <关键词>",
+        "/bank 搜银行 <关键词> | /搜银行 <关键词>",
+        "/<标记/关注> <银行名...> 或 /<mark/follow> <银行名...>",
+        "/<取消标记/取消关注> <银行名...> 或 /<unmark/unfollow> <银行名...>",
+        "/<批量标记/批量关注> <城市名> <分类>",
+        "/<批量取消标记/批量取消关注> <城市名> <分类>",
+        "/<复制标记/复制关注> <@用户/QQ号>",
+        "/<标记列表/关注列表>",
         "/bank 缓存",
         "/bank 清缓存",
-        "/搜城市 <关键词>",
-        "/搜银行 <关键词>",
     ]
     return render_simple_list("HiBank 命令帮助", rows)
 

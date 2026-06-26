@@ -30,6 +30,7 @@ from .render import (
 
 
 PAGE_RE = re.compile(r"\s+(\d+)$")
+HELP_ARGS = {"帮助", "-h", "--help", "help"}
 
 
 bank_command = on_command("bank", priority=5, block=True)
@@ -96,7 +97,7 @@ async def send_branch_detail(matcher, argument: str) -> None:
 @bank_command.handle()
 async def handle_bank(event: MessageEvent, args: Message = CommandArg()) -> None:
     raw = args.extract_plain_text().strip()
-    if not raw or raw in {"帮助", "-h", "--help", "help"}:
+    if not raw or raw in HELP_ARGS:
         await finish_image(bank_command, render_help())
 
     action, _, rest = raw.partition(" ")
@@ -275,11 +276,11 @@ async def handle_add_marks(
     known, unknown = await client.split_known_banks(banks)
     if unknown:
         state["hibank_mark_kind"] = kind
-        state["hibank_mark_banks"] = banks
+        state["hibank_mark_banks"] = known + unknown
         state["hibank_mark_known"] = known
         state["hibank_mark_unknown"] = unknown
         await matcher.pause(
-            "以下银行未在当前索引中找到，回复“确认”仍然写入，回复其他内容取消："
+            "以下银行未在全局索引和已缓存城市中找到，回复“确认”仍然写入，回复其他内容取消："
             + "、".join(unknown)
         )
     added = add_user_banks(event.get_user_id(), kind, known)
