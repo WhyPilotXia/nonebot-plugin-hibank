@@ -4,8 +4,8 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "nonebot-plugin-hibank"
-version = "0.1.0"
-description = "查询 HiBank 城市银行分布与网点信息的 NoneBot2 插件"
+version = "0.2.0"
+description = "查询 HiBank 城市银行分布与网点信息并提供标记关注等功能的 NoneBot2 插件"
 readme = "README.md"
 requires-python = ">=3.10"
 license = { text = "GPL-3.0-or-later" }

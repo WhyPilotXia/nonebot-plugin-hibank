@@ -2,13 +2,13 @@
     <a href="https://v2.nonebot.dev/store">
     <img src="https://raw.githubusercontent.com/fllesser/nonebot-plugin-template/refs/heads/resource/.docs/NoneBotPlugin.svg" width="310" alt="logo"></a>
 
-## ✨ HiBank 城市银行查询 ✨
+## ✨城市银行查询与标记 ✨
 
 [![LICENSE](https://img.shields.io/github/license/WhyPilotXia/nonebot-plugin-hibank.svg)](./LICENSE)[![pypi](https://img.shields.io/pypi/v/nonebot-plugin-hibank.svg)](https://pypi.python.org/pypi/nonebot-plugin-hibank)[![python](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org)[![NoneBot](https://img.shields.io/badge/NoneBot-2.x-green.svg)](https://github.com/nonebot/nonebot2)
 
 ## 📖 介绍
 
-基于 HiBank 页面数据查询城市银行分布与银行网点信息的 NoneBot2 插件。
+查询城市银行分布与网点信息并提供标记关注等功能的 NoneBot2 插件。集卡人的福音！
 
 功能特色：
 
@@ -137,6 +137,27 @@ plugins = ["nonebot_plugin_hibank"]
 - `/关注` 表示关注中的银行，城市银行图中会显示为 `#F780BE` 粉色文字。
 - 标记或关注不存在于当前索引的银行时，会提示回复“确认”；回复其他内容不会写入。
 - `/复制标记`、`/复制关注` 会先展示对方列表图片；本方为空时回复“复制/取消”，本方已有数据时回复“合并/复制/取消”。
+
+
+## 🏷️ 指令示例
+
+
+<img width="761" height="521" alt="image" src="https://github.com/user-attachments/assets/15376dc2-e44f-4f37-b49b-dc0697824ba2" />
+
+
+<img width="815" height="744" alt="image" src="https://github.com/user-attachments/assets/a92ef43b-ed2c-49b4-92de-1138337c615e" />
+
+<img width="1280" height="3284" alt="3ae49cdf5f5063a56c5d6834247969a2_720" src="https://github.com/user-attachments/assets/b5d1be0a-9426-4ce6-8d33-a45ce47ccf2d" />
+
+<img width="806" height="530" alt="image" src="https://github.com/user-attachments/assets/a4fba9a8-c18d-477e-8805-d2d1e0f28143" />
+
+<img width="1280" height="3015" alt="1ef70bebb61163158a989e1936501fd5_720" src="https://github.com/user-attachments/assets/f2161437-c0f4-49f4-a4bd-8daf1540b0e7" />
+
+<img width="816" height="753" alt="image" src="https://github.com/user-attachments/assets/adb58da8-67a9-43cf-a272-3e3df918c1c7" />
+
+
+<img width="811" height="790" alt="image" src="https://github.com/user-attachments/assets/a553d6f8-e02e-4b3a-a532-83b886652cec" />
+
 
 ## 📄 License
 
