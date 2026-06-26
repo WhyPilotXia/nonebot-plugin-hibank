@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import asyncio
 import re
 
 from nonebot import on_command
@@ -7,8 +8,10 @@ from nonebot.adapters.onebot.v11 import Message, MessageEvent, MessageSegment
 from nonebot.exception import FinishedException, PausedException, RejectedException
 from nonebot.log import logger
 from nonebot.params import CommandArg
+from nonebot.permission import SUPERUSER
 from nonebot.typing import T_State
 
+from .bank_icons import clear_bank_asset_cache, update_bank_icon_assets
 from .client import HibankError, client, normalize
 from .marks import (
     MarkKind,
@@ -17,6 +20,7 @@ from .marks import (
     remove_user_banks,
     set_user_banks,
 )
+from .names import bank_name_match_keys, bank_names_match
 from .render import (
     image_to_base64,
     render_bank_search,
@@ -24,6 +28,7 @@ from .render import (
     render_cache_stats,
     render_city_detail,
     render_city_search,
+    render_card_pack_mark_list,
     render_help,
     render_mark_list,
 )
@@ -50,6 +55,7 @@ batch_unmark_command = on_command("批量取消标记", priority=5, block=True)
 batch_unfollow_command = on_command("批量取消关注", priority=5, block=True)
 copy_mark_command = on_command("复制标记", priority=5, block=True)
 copy_follow_command = on_command("复制关注", priority=5, block=True)
+update_icons_command = on_command("更新银行图标", permission=SUPERUSER, priority=5, block=True)
 
 FLOW_EXCEPTIONS = (FinishedException, PausedException, RejectedException)
 
@@ -260,6 +266,61 @@ def copy_prompt_message(kind: MarkKind, source_user_id: str, source_banks: list[
     return (
         MessageSegment.text(text + "\n")
         + image_segment(render_mark_list(mark_kind_list_title(kind, source_user_id), source_banks))
+    )
+
+
+def classify_banks_by_category(
+    category_groups: dict[str, list[str]],
+    banks: list[str],
+) -> tuple[dict[str, list[str]], list[str]]:
+    grouped: dict[str, list[str]] = {category: [] for category in category_groups}
+    unmatched: list[str] = []
+    used_keys: set[str] = set()
+    for saved_bank in banks:
+        saved_keys = bank_name_match_keys(saved_bank)
+        matched_category = ""
+        matched_bank = ""
+        matched_keys: set[str] = set()
+        for category, category_banks in category_groups.items():
+            for category_bank in category_banks:
+                category_keys = bank_name_match_keys(category_bank)
+                if saved_keys & category_keys or bank_names_match(saved_bank, category_bank):
+                    matched_category = category
+                    matched_bank = saved_bank
+                    matched_keys = saved_keys or category_keys
+                    break
+            if matched_bank:
+                break
+        if matched_bank:
+            if not matched_keys or not (matched_keys & used_keys):
+                grouped[matched_category].append(matched_bank)
+                used_keys.update(matched_keys)
+            continue
+        unmatched.append(saved_bank)
+    return grouped, unmatched
+
+
+async def send_mark_list(
+    matcher,
+    event: MessageEvent,
+    argument: str,
+    kind: MarkKind,
+) -> None:
+    if argument.strip():
+        await matcher.finish(f"用法：/{mark_kind_name(kind)}列表（无需城市参数）")
+    marks = get_user_marks(event.get_user_id())
+    banks = sorted(marks.marked if kind == "marked" else marks.followed)
+    title = f"已{mark_kind_name(kind)}银行"
+    category_groups = await client.bank_category_groups()
+    grouped, unmatched = classify_banks_by_category(category_groups, banks)
+    await finish_image(
+        matcher,
+        render_card_pack_mark_list(
+            title,
+            grouped,
+            unmatched,
+            kind,
+        ),
     )
 
 
@@ -599,12 +660,45 @@ async def handle_copy_follow_confirm(event: MessageEvent, state: T_State) -> Non
 
 
 @mark_list_command.handle()
-async def handle_mark_list(event: MessageEvent) -> None:
-    marks = get_user_marks(event.get_user_id())
-    await finish_image(mark_list_command, render_mark_list("已标记银行", sorted(marks.marked)))
+async def handle_mark_list(event: MessageEvent, args: Message = CommandArg()) -> None:
+    try:
+        await send_mark_list(mark_list_command, event, args.extract_plain_text(), "marked")
+    except FLOW_EXCEPTIONS:
+        raise
+    except HibankError as exc:
+        await mark_list_command.finish(str(exc))
+    except Exception as exc:
+        logger.exception("HiBank 标记列表失败")
+        await mark_list_command.finish(f"HiBank 标记列表失败：{exc}")
 
 
 @follow_list_command.handle()
-async def handle_follow_list(event: MessageEvent) -> None:
-    marks = get_user_marks(event.get_user_id())
-    await finish_image(follow_list_command, render_mark_list("已关注银行", sorted(marks.followed)))
+async def handle_follow_list(event: MessageEvent, args: Message = CommandArg()) -> None:
+    try:
+        await send_mark_list(follow_list_command, event, args.extract_plain_text(), "followed")
+    except FLOW_EXCEPTIONS:
+        raise
+    except HibankError as exc:
+        await follow_list_command.finish(str(exc))
+    except Exception as exc:
+        logger.exception("HiBank 关注列表失败")
+        await follow_list_command.finish(f"HiBank 关注列表失败：{exc}")
+
+
+@update_icons_command.handle()
+async def handle_update_icons() -> None:
+    try:
+        records = await client.all_bank_records()
+        result = await asyncio.to_thread(update_bank_icon_assets, records)
+        clear_bank_asset_cache()
+        await update_icons_command.finish(
+            "银行图标已更新："
+            f"共 {result['total']} 个，icongo {result['icongo']} 个，"
+            f"HiBank {result['hibank']} 个，"
+            f"本地兜底 {result['fallback']} 个，源不可用 {result['failed']} 个。"
+        )
+    except FLOW_EXCEPTIONS:
+        raise
+    except Exception as exc:
+        logger.exception("HiBank 更新银行图标失败")
+        await update_icons_command.finish(f"HiBank 更新银行图标失败：{exc}")

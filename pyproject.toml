@@ -4,8 +4,8 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "nonebot-plugin-hibank"
-version = "0.2.4"
-description = "查询 HiBank 城市银行分布与网点信息并提供标记关注等功能的 NoneBot2 插件"
+version = "0.3.0"
+description = "查询 HiBank 城市银行分布与网点信息并提供标记关注渲染等功能的 NoneBot2 插件"
 readme = "README.md"
 requires-python = ">=3.10"
 license = { text = "GPL-3.0-or-later" }
@@ -14,6 +14,7 @@ authors = [
 ]
 dependencies = [
   "beautifulsoup4>=4.12,<5",
+  "CairoSVG>=2.7,<3",
   "nonebot2>=2.3.0",
   "nonebot-adapter-onebot>=2.0.0",
   "nonebot-plugin-localstore>=0.7.0",
@@ -34,4 +35,4 @@ where = ["."]
 include = ["nonebot_plugin_hibank*"]
 
 [tool.setuptools.package-data]
-nonebot_plugin_hibank = ["assets/*.ttf"]
+nonebot_plugin_hibank = ["assets/*.ttf", "assets/*.json", "assets/*.txt", "assets/bank_logos/*/*.png"]

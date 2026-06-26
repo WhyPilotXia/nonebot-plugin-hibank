@@ -1,0 +1,3384 @@
+{
+  "sources": [
+    {
+      "name": "icongo/bank-logos",
+      "url": "https://github.com/icongo/bank-logos",
+      "license": "MIT"
+    },
+    {
+      "name": "HiBank",
+      "url": "https://hi.zzz.moe/banks",
+      "license": "site-provided logo assets"
+    }
+  ],
+  "banks": {
+    "Mox": {
+      "logo": "bank_logos/fallback/mox_14988665c7.png",
+      "color": "#514077",
+      "source": "fallback",
+      "slug": "MoxBank",
+      "logo_base": "",
+      "hibank_name": "Mox"
+    },
+    "PAOBank": {
+      "logo": "bank_logos/icongo/paobank_f7d3243be0.png",
+      "color": "#C0520D",
+      "source": "icongo/bank-logos",
+      "slug": "PingAnDigitalBankInternational",
+      "logo_base": "pingan",
+      "hibank_name": ""
+    },
+    "ibk企业银行": {
+      "logo": "bank_logos/icongo/ibk企业银行_6c02a80329.png",
+      "color": "#00377B",
+      "source": "icongo/bank-logos",
+      "slug": "IndustrialBankofKorea",
+      "logo_base": "ibk",
+      "hibank_name": ""
+    },
+    "三井住友银行": {
+      "logo": "bank_logos/hibank/三井住友银行_92262ea992.png",
+      "color": "#97B237",
+      "source": "HiBank",
+      "slug": "SumitomoMitsuiBanking",
+      "logo_base": "",
+      "hibank_name": "三井住友银行"
+    },
+    "三信商业银行": {
+      "logo": "bank_logos/fallback/三信商业银行_55ac92408b.png",
+      "color": "#0C416E",
+      "source": "fallback",
+      "slug": "CotaBank",
+      "logo_base": "",
+      "hibank_name": "三信商业银行"
+    },
+    "三菱日联银行": {
+      "logo": "bank_logos/icongo/三菱日联银行_f015216cc9.png",
+      "color": "#C0000D",
+      "source": "icongo/bank-logos",
+      "slug": "MUFGBank",
+      "logo_base": "mufg",
+      "hibank_name": ""
+    },
+    "上海农商银行": {
+      "logo": "bank_logos/icongo/上海农商银行_e412c5fa00.png",
+      "color": "#00377B",
+      "source": "icongo/bank-logos",
+      "slug": "ShanghaiRuralCommercialBank",
+      "logo_base": "srcb",
+      "hibank_name": ""
+    },
+    "上海华瑞银行": {
+      "logo": "bank_logos/hibank/上海华瑞银行_949024c2c9.png",
+      "color": "#976E37",
+      "source": "HiBank",
+      "slug": "ShanghaiHuaruiBank",
+      "logo_base": "",
+      "hibank_name": "上海华瑞银行"
+    },
+    "上海商业储蓄银行": {
+      "logo": "bank_logos/fallback/上海商业储蓄银行_73e3223d8b.png",
+      "color": "#8D222C",
+      "source": "fallback",
+      "slug": "TheShanghaiCommercialSavingsBank",
+      "logo_base": "",
+      "hibank_name": ""
+    },
+    "上海商业银行": {
+      "logo": "bank_logos/hibank/上海商业银行_875d7b4590.png",
+      "color": "#C01B0D",
+      "source": "HiBank",
+      "slug": "ShanghaiCommercialBank",
+      "logo_base": "",
+      "hibank_name": "上海商业银行"
+    },
+    "上海科创银行": {
+      "logo": "bank_logos/hibank/上海科创银行_20ce8cf7b9.png",
+      "color": "#C00D44",
+      "source": "HiBank",
+      "slug": "ShanghaiInnovationBank",
+      "logo_base": "",
+      "hibank_name": "上海科创银行"
+    },
+    "上海银行": {
+      "logo": "bank_logos/icongo/上海银行_18c3fb317d.png",
+      "color": "#00377B",
+      "source": "icongo/bank-logos",
+      "slug": "BankofShanghai",
+      "logo_base": "bosc",
+      "hibank_name": ""
+    },
+    "上饶银行": {
+      "logo": "bank_logos/icongo/上饶银行_2d047e46ce.png",
+      "color": "#C0291B",
+      "source": "icongo/bank-logos",
+      "slug": "BankofShangrao",
+      "logo_base": "srbank",
+      "hibank_name": ""
+    },
+    "东亚银行": {
+      "logo": "bank_logos/icongo/东亚银行_a5394ce97c.png",
+      "color": "#C00D1B",
+      "source": "icongo/bank-logos",
+      "slug": "TheBankofEastAsia",
+      "logo_base": "hkbea",
+      "hibank_name": ""
+    },
+    "东方汇理银行": {
+      "logo": "bank_logos/hibank/东方汇理银行_2ca8e1d355.png",
+      "color": "#1B6044",
+      "source": "HiBank",
+      "slug": "CREDITAGRICOLECORPORATEANDINVESTMENTBANK",
+      "logo_base": "",
+      "hibank_name": "东方汇理银行"
+    },
+    "东莞农商银行": {
+      "logo": "bank_logos/icongo/东莞农商银行_ab1c7a2ec3.png",
+      "color": "#A5000D",
+      "source": "icongo/bank-logos",
+      "slug": "DongguanRuralCommercialBank",
+      "logo_base": "drcbank",
+      "hibank_name": ""
+    },
+    "东莞银行": {
+      "logo": "bank_logos/icongo/东莞银行_27560b2472.png",
+      "color": "#B2000D",
+      "source": "icongo/bank-logos",
+      "slug": "BankofDongguan",
+      "logo_base": "dongguanbank",
+      "hibank_name": ""
+    },
+    "东营银行": {
+      "logo": "bank_logos/icongo/东营银行_e867ef08dd.png",
+      "color": "#B2000D",
+      "source": "icongo/bank-logos",
+      "slug": "DongyingBank",
+      "logo_base": "dyccb",
+      "hibank_name": ""
+    },
+    "中信百信银行": {
+      "logo": "bank_logos/icongo/中信百信银行_4b5563bf3e.png",
+      "color": "#005297",
+      "source": "icongo/bank-logos",
+      "slug": "aiBank",
+      "logo_base": "yantaibank",
+      "hibank_name": ""
+    },
+    "中信银行": {
+      "logo": "bank_logos/icongo/中信银行_6cc73899f4.png",
+      "color": "#B20000",
+      "source": "icongo/bank-logos",
+      "slug": "ChinaCITICBank",
+      "logo_base": "citicbank",
+      "hibank_name": ""
+    },
+    "中信银行国际": {
+      "logo": "bank_logos/icongo/中信银行国际_c48d28e0f8.png",
+      "color": "#B20000",
+      "source": "icongo/bank-logos",
+      "slug": "CITICBankInternational",
+      "logo_base": "citicbank",
+      "hibank_name": ""
+    },
+    "中华邮政": {
+      "logo": "bank_logos/fallback/中华邮政_9a04d8f5fc.png",
+      "color": "#245F81",
+      "source": "fallback",
+      "slug": "ChunghwaPost",
+      "logo_base": "",
+      "hibank_name": "中华邮政"
+    },
+    "中原银行": {
+      "logo": "bank_logos/icongo/中原银行_cf6ca2ac9b.png",
+      "color": "#0D6EA5",
+      "source": "icongo/bank-logos",
+      "slug": "ZhongyuanBank",
+      "logo_base": "zybank",
+      "hibank_name": ""
+    },
+    "中国信托商业银行": {
+      "logo": "bank_logos/hibank/中国信托商业银行_5bdee7d3e5.png",
+      "color": "#B20D0D",
+      "source": "HiBank",
+      "slug": "CTBCBank",
+      "logo_base": "",
+      "hibank_name": "中国信托商业银行"
+    },
+    "中国工商银行（亚洲）": {
+      "logo": "bank_logos/icongo/中国工商银行_亚洲_f4d40c096d.png",
+      "color": "#A50000",
+      "source": "icongo/bank-logos",
+      "slug": "IndustrialandCommercialBankofChinaAsia",
+      "logo_base": "icbc",
+      "hibank_name": ""
+    },
+    "中国工商银行（澳门）": {
+      "logo": "bank_logos/hibank/中国工商银行_澳门_a32bf1988d.png",
+      "color": "#C0000D",
+      "source": "HiBank",
+      "slug": "IndustrialandCommercialBankofChinaMacau",
+      "logo_base": "",
+      "hibank_name": "中国工商银行（澳门）"
+    },
+    "中国建设银行（亚洲）": {
+      "logo": "bank_logos/icongo/中国建设银行_亚洲_f72608be14.png",
+      "color": "#004489",
+      "source": "icongo/bank-logos",
+      "slug": "ChinaConstructionBankAsia",
+      "logo_base": "ccb",
+      "hibank_name": ""
+    },
+    "中国输出入银行": {
+      "logo": "bank_logos/fallback/中国输出入银行_9df1ffd8e0.png",
+      "color": "#0C416E",
+      "source": "fallback",
+      "slug": "TheExportImportBankoftheRepublicofChina",
+      "logo_base": "",
+      "hibank_name": "中国输出入银行"
+    },
+    "中国银行": {
+      "logo": "bank_logos/icongo/中国银行_73a77781b5.png",
+      "color": "#970D1B",
+      "source": "icongo/bank-logos",
+      "slug": "BankofChina",
+      "logo_base": "boc",
+      "hibank_name": ""
+    },
+    "中国银行（澳门）": {
+      "logo": "bank_logos/hibank/中国银行_澳门_b73c9d2682.png",
+      "color": "#970D1B",
+      "source": "HiBank",
+      "slug": "BankofChinaMacau",
+      "logo_base": "",
+      "hibank_name": "中国银行（澳门）"
+    },
+    "中国银行（香港）": {
+      "logo": "bank_logos/hibank/中国银行_香港_5942de21d4.png",
+      "color": "#970D1B",
+      "source": "HiBank",
+      "slug": "BankofChinaHongKong",
+      "logo_base": "",
+      "hibank_name": "中国银行（香港）"
+    },
+    "中德住房储蓄银行": {
+      "logo": "bank_logos/icongo/中德住房储蓄银行_55053b71ae.png",
+      "color": "#004489",
+      "source": "icongo/bank-logos",
+      "slug": "SinoGermanBausparkasse",
+      "logo_base": "sgb",
+      "hibank_name": ""
+    },
+    "临商银行": {
+      "logo": "bank_logos/icongo/临商银行_4c2185cdd5.png",
+      "color": "#C0000D",
+      "source": "icongo/bank-logos",
+      "slug": "LinshangBank",
+      "logo_base": "lsbchina",
+      "hibank_name": ""
+    },
+    "丹东银行": {
+      "logo": "bank_logos/icongo/丹东银行_7e36202599.png",
+      "color": "#970D1B",
+      "source": "icongo/bank-logos",
+      "slug": "BankofDandong",
+      "logo_base": "dandongbank",
+      "hibank_name": ""
+    },
+    "乌海银行": {
+      "logo": "bank_logos/icongo/乌海银行_d85f4b9796.png",
+      "color": "#B2000D",
+      "source": "icongo/bank-logos",
+      "slug": "BankofWuhai",
+      "logo_base": "wuhaicb",
+      "hibank_name": ""
+    },
+    "乌鲁木齐银行": {
+      "logo": "bank_logos/hibank/乌鲁木齐银行_05998c8ced.png",
+      "color": "#004489",
+      "source": "HiBank",
+      "slug": "BankofUrumqi",
+      "logo_base": "",
+      "hibank_name": "乌鲁木齐银行"
+    },
+    "乐天国际商业银行": {
+      "logo": "bank_logos/fallback/乐天国际商业银行_2207bf43a8.png",
+      "color": "#245F81",
+      "source": "fallback",
+      "slug": "RakutenInternationalCommercialBank",
+      "logo_base": "",
+      "hibank_name": "乐天国际商业银行"
+    },
+    "乐山市商业银行": {
+      "logo": "bank_logos/icongo/乐山市商业银行_ca8642a397.png",
+      "color": "#B21B0D",
+      "source": "icongo/bank-logos",
+      "slug": "LeshanCityCommercialBank",
+      "logo_base": "lsccb",
+      "hibank_name": ""
+    },
+    "九江银行": {
+      "logo": "bank_logos/icongo/九江银行_5b0baec61f.png",
+      "color": "#00377B",
+      "source": "icongo/bank-logos",
+      "slug": "BankofJiujiang",
+      "logo_base": "jjccb",
+      "hibank_name": ""
+    },
+    "云南农信": {
+      "logo": "bank_logos/hibank/云南农信_2eaaf9281f.png",
+      "color": "#007B37",
+      "source": "HiBank",
+      "slug": "YunnanRuralCreditCooperativeUnion",
+      "logo_base": "",
+      "hibank_name": "云南农信"
+    },
+    "云南红塔银行": {
+      "logo": "bank_logos/hibank/云南红塔银行_129d8ed57c.png",
+      "color": "#C0000D",
+      "source": "HiBank",
+      "slug": "YunnanHongtaBank",
+      "logo_base": "",
+      "hibank_name": "云南红塔银行"
+    },
+    "交通银行": {
+      "logo": "bank_logos/icongo/交通银行_b9f4df3fbe.png",
+      "color": "#002960",
+      "source": "icongo/bank-logos",
+      "slug": "BankofCommunications",
+      "logo_base": "bankcomm",
+      "hibank_name": ""
+    },
+    "交通银行（香港）": {
+      "logo": "bank_logos/hibank/交通银行_香港_54cfa70697.png",
+      "color": "#0D1B6E",
+      "source": "HiBank",
+      "slug": "BankofCommunicationsHongKong",
+      "logo_base": "",
+      "hibank_name": "交通银行（香港）"
+    },
+    "京城商业银行": {
+      "logo": "bank_logos/fallback/京城商业银行_fdd17c9cb3.png",
+      "color": "#0C416E",
+      "source": "fallback",
+      "slug": "KingsTownBank",
+      "logo_base": "",
+      "hibank_name": "京城商业银行"
+    },
+    "众安银行": {
+      "logo": "bank_logos/fallback/众安银行_18581d5906.png",
+      "color": "#9E181D",
+      "source": "fallback",
+      "slug": "ZABank",
+      "logo_base": "",
+      "hibank_name": "众安银行"
+    },
+    "俄罗斯外贸银行": {
+      "logo": "bank_logos/fallback/俄罗斯外贸银行_f88f78f3c6.png",
+      "color": "#514077",
+      "source": "fallback",
+      "slug": "VTBBank",
+      "logo_base": "",
+      "hibank_name": ""
+    },
+    "保定银行": {
+      "logo": "bank_logos/icongo/保定银行_15e42be9d9.png",
+      "color": "#89000D",
+      "source": "icongo/bank-logos",
+      "slug": "BankofBaoding",
+      "logo_base": "bd-bank",
+      "hibank_name": ""
+    },
+    "元大商业银行": {
+      "logo": "bank_logos/fallback/元大商业银行_dde6b669a7.png",
+      "color": "#1E4A8E",
+      "source": "fallback",
+      "slug": "YuantaCommercialBank",
+      "logo_base": "",
+      "hibank_name": "元大商业银行"
+    },
+    "兆丰国际商业银行": {
+      "logo": "bank_logos/icongo/兆丰国际商业银行_6b8779185e.png",
+      "color": "#A58944",
+      "source": "icongo/bank-logos",
+      "slug": "MegaInternationalCommercialBank",
+      "logo_base": "megabank",
+      "hibank_name": ""
+    },
+    "光大银行": {
+      "logo": "bank_logos/icongo/光大银行_9027d82ada.png",
+      "color": "#520D6E",
+      "source": "icongo/bank-logos",
+      "slug": "ChinaEverbrightBank",
+      "logo_base": "cebbank",
+      "hibank_name": ""
+    },
+    "兰州银行": {
+      "logo": "bank_logos/icongo/兰州银行_00306d9ae2.png",
+      "color": "#00447B",
+      "source": "icongo/bank-logos",
+      "slug": "BankofLanzhou",
+      "logo_base": "lzbank",
+      "hibank_name": ""
+    },
+    "兴业银行": {
+      "logo": "bank_logos/icongo/兴业银行_3382785b3a.png",
+      "color": "#00376E",
+      "source": "icongo/bank-logos",
+      "slug": "IndustrialBank",
+      "logo_base": "cib",
+      "hibank_name": ""
+    },
+    "内蒙古农商银行": {
+      "logo": "bank_logos/hibank/内蒙古农商银行_d3abcd1e96.png",
+      "color": "#007B37",
+      "source": "HiBank",
+      "slug": "InnerMongoliaRuralCommercialBank",
+      "logo_base": "",
+      "hibank_name": "内蒙古农商银行"
+    },
+    "内蒙古银行": {
+      "logo": "bank_logos/hibank/内蒙古银行_d1d5092845.png",
+      "color": "#A50000",
+      "source": "HiBank",
+      "slug": "BankofInnerMongolia",
+      "logo_base": "",
+      "hibank_name": "内蒙古银行"
+    },
+    "农业银行": {
+      "logo": "bank_logos/icongo/农业银行_e6fbd56325.png",
+      "color": "#007B6E",
+      "source": "icongo/bank-logos",
+      "slug": "AgriculturalBankofChina",
+      "logo_base": "abchina",
+      "hibank_name": ""
+    },
+    "农会信用部": {
+      "logo": "bank_logos/fallback/农会信用部_31cd9e5ff5.png",
+      "color": "#0C416E",
+      "source": "fallback",
+      "slug": "CreditDepartmentsofFarmersAssociations",
+      "logo_base": "",
+      "hibank_name": "农会信用部"
+    },
+    "凯基商业银行": {
+      "logo": "bank_logos/fallback/凯基商业银行_c736841347.png",
+      "color": "#8D222C",
+      "source": "fallback",
+      "slug": "KGIBank",
+      "logo_base": "",
+      "hibank_name": "凯基商业银行"
+    },
+    "创兴银行": {
+      "logo": "bank_logos/hibank/创兴银行_0c00c6ae01.png",
+      "color": "#9E181D",
+      "source": "HiBank",
+      "slug": "ChongHingBank",
+      "logo_base": "",
+      "hibank_name": "创兴银行"
+    },
+    "加拿大丰业银行": {
+      "logo": "bank_logos/icongo/加拿大丰业银行_7c4a9fa800.png",
+      "color": "#C0000D",
+      "source": "icongo/bank-logos",
+      "slug": "TheBankofNovaScotia",
+      "logo_base": "scotiabank",
+      "hibank_name": ""
+    },
+    "加拿大皇家银行": {
+      "logo": "bank_logos/icongo/加拿大皇家银行_765d4a291b.png",
+      "color": "#0D376E",
+      "source": "icongo/bank-logos",
+      "slug": "RoyalBankofCanada",
+      "logo_base": "rbcroyalbank",
+      "hibank_name": ""
+    },
+    "北京中关村银行": {
+      "logo": "bank_logos/hibank/北京中关村银行_43ec9253da.png",
+      "color": "#1B376E",
+      "source": "HiBank",
+      "slug": "BeijingZhongguancunBank",
+      "logo_base": "",
+      "hibank_name": "北京中关村银行"
+    },
+    "北京农商银行": {
+      "logo": "bank_logos/icongo/北京农商银行_c4503fb0fe.png",
+      "color": "#A50D0D",
+      "source": "icongo/bank-logos",
+      "slug": "BeijingRuralCommercialBank",
+      "logo_base": "bjrcb",
+      "hibank_name": ""
+    },
+    "北京银行": {
+      "logo": "bank_logos/icongo/北京银行_01667e877b.png",
+      "color": "#C0000D",
+      "source": "icongo/bank-logos",
+      "slug": "BankofBeijing",
+      "logo_base": "bankofbeijing",
+      "hibank_name": ""
+    },
+    "北欧银行瑞典": {
+      "logo": "bank_logos/fallback/北欧银行瑞典_34bdc7a06c.png",
+      "color": "#9C4F14",
+      "source": "fallback",
+      "slug": "NordeaBankAB",
+      "logo_base": "",
+      "hibank_name": ""
+    },
+    "华侨银行": {
+      "logo": "bank_logos/icongo/华侨银行_5e062918ff.png",
+      "color": "#C0000D",
+      "source": "icongo/bank-logos",
+      "slug": "OCBCBank",
+      "logo_base": "ocbc",
+      "hibank_name": ""
+    },
+    "华侨银行（澳门）": {
+      "logo": "bank_logos/icongo/华侨银行_澳门_ab99a45595.png",
+      "color": "#C0000D",
+      "source": "icongo/bank-logos",
+      "slug": "OCBCBankMacau",
+      "logo_base": "ocbc",
+      "hibank_name": ""
+    },
+    "华侨银行（香港）": {
+      "logo": "bank_logos/icongo/华侨银行_香港_51bc0a0126.png",
+      "color": "#C0000D",
+      "source": "icongo/bank-logos",
+      "slug": "OCBCBankHongKong",
+      "logo_base": "ocbc",
+      "hibank_name": ""
+    },
+    "华南商业银行": {
+      "logo": "bank_logos/fallback/华南商业银行_055b091455.png",
+      "color": "#1E4A8E",
+      "source": "fallback",
+      "slug": "HuaNanCommercialBank",
+      "logo_base": "",
+      "hibank_name": ""
+    },
+    "华商银行": {
+      "logo": "bank_logos/icongo/华商银行_e0d488399b.png",
+      "color": "#B20000",
+      "source": "icongo/bank-logos",
+      "slug": "ChineseMercantileBank",
+      "logo_base": "cmbcn",
+      "hibank_name": ""
+    },
+    "华夏银行": {
+      "logo": "bank_logos/icongo/华夏银行_9ead388c1b.png",
+      "color": "#B2000D",
+      "source": "icongo/bank-logos",
+      "slug": "HuaXiaBank",
+      "logo_base": "hxb",
+      "hibank_name": ""
+    },
+    "华泰商业银行": {
+      "logo": "bank_logos/fallback/华泰商业银行_6de053a636.png",
+      "color": "#0C416E",
+      "source": "fallback",
+      "slug": "HwataiBank",
+      "logo_base": "",
+      "hibank_name": "华泰商业银行"
+    },
+    "华美银行": {
+      "logo": "bank_logos/icongo/华美银行_1d37f285b6.png",
+      "color": "#B2001B",
+      "source": "icongo/bank-logos",
+      "slug": "EastWestBank",
+      "logo_base": "eastwestbank",
+      "hibank_name": ""
+    },
+    "南京银行": {
+      "logo": "bank_logos/icongo/南京银行_284c41f081.png",
+      "color": "#A50D0D",
+      "source": "icongo/bank-logos",
+      "slug": "BankofNanjing",
+      "logo_base": "njcb",
+      "hibank_name": ""
+    },
+    "南洋商业银行": {
+      "logo": "bank_logos/icongo/南洋商业银行_0508163e95.png",
+      "color": "#290D60",
+      "source": "icongo/bank-logos",
+      "slug": "NanyangCommercialBank",
+      "logo_base": "ncbchina",
+      "hibank_name": ""
+    },
+    "南雄农商银行": {
+      "logo": "bank_logos/hibank/南雄农商银行_751eb12d6f.png",
+      "color": "#A53124",
+      "source": "HiBank",
+      "slug": "NanxiongRuralCommercialBank",
+      "logo_base": "",
+      "hibank_name": "南雄农商银行"
+    },
+    "印度国家银行": {
+      "logo": "bank_logos/fallback/印度国家银行_319cbb0abe.png",
+      "color": "#0C416E",
+      "source": "fallback",
+      "slug": "StateBankofIndia",
+      "logo_base": "",
+      "hibank_name": ""
+    },
+    "印度尼西亚曼底利银行": {
+      "logo": "bank_logos/fallback/印度尼西亚曼底利银行_d05dd68c26.png",
+      "color": "#9C4F14",
+      "source": "fallback",
+      "slug": "PTBank",
+      "logo_base": "",
+      "hibank_name": ""
+    },
+    "印度爱西爱西爱银行": {
+      "logo": "bank_logos/fallback/印度爱西爱西爱银行_aac17a3d53.png",
+      "color": "#0C7A6C",
+      "source": "fallback",
+      "slug": "ICICIBank",
+      "logo_base": "",
+      "hibank_name": ""
+    },
+    "厦门国际银行": {
+      "logo": "bank_logos/icongo/厦门国际银行_da7b364874.png",
+      "color": "#005289",
+      "source": "icongo/bank-logos",
+      "slug": "XiamenInternationalBank",
+      "logo_base": "xib",
+      "hibank_name": ""
+    },
+    "厦门银行": {
+      "logo": "bank_logos/hibank/厦门银行_044a88984f.png",
+      "color": "#1B6097",
+      "source": "HiBank",
+      "slug": "XiamenBank",
+      "logo_base": "",
+      "hibank_name": "厦门银行"
+    },
+    "友利银行": {
+      "logo": "bank_logos/hibank/友利银行_4dadc19445.png",
+      "color": "#007BB2",
+      "source": "HiBank",
+      "slug": "WooriBank",
+      "logo_base": "",
+      "hibank_name": "友利银行"
+    },
+    "台中商业银行": {
+      "logo": "bank_logos/fallback/台中商业银行_7ec3bae5cc.png",
+      "color": "#1A6842",
+      "source": "fallback",
+      "slug": "TaichungCommercialBank",
+      "logo_base": "",
+      "hibank_name": "台中商业银行"
+    },
+    "台中市第二信用合作社": {
+      "logo": "bank_logos/fallback/台中市第二信用合作社_f46b6fe220.png",
+      "color": "#9C4F14",
+      "source": "fallback",
+      "slug": "TheSecondCreditCooperativeofTaichung",
+      "logo_base": "",
+      "hibank_name": "台中市第二信用合作社"
+    },
+    "台北富邦商业银行": {
+      "logo": "bank_logos/fallback/台北富邦商业银行_e0eac99f69.png",
+      "color": "#514077",
+      "source": "fallback",
+      "slug": "TaipeiFubonCommercialBank",
+      "logo_base": "",
+      "hibank_name": "台北富邦商业银行"
+    },
+    "台北市第五信用合作社": {
+      "logo": "bank_logos/fallback/台北市第五信用合作社_1159656b3b.png",
+      "color": "#1E4A8E",
+      "source": "fallback",
+      "slug": "TheFifthCreditCooperationofTaipei",
+      "logo_base": "",
+      "hibank_name": "台北市第五信用合作社"
+    },
+    "台南第三信用合作社": {
+      "logo": "bank_logos/fallback/台南第三信用合作社_84119a0367.png",
+      "color": "#9E181D",
+      "source": "fallback",
+      "slug": "TheThirdCreditCooperativeofTainan",
+      "logo_base": "",
+      "hibank_name": "台南第三信用合作社"
+    },
+    "台州银行": {
+      "logo": "bank_logos/hibank/台州银行_3ede956811.png",
+      "color": "#3797B2",
+      "source": "HiBank",
+      "slug": "BankofTaizhou",
+      "logo_base": "",
+      "hibank_name": "台州银行"
+    },
+    "台新国际商业银行": {
+      "logo": "bank_logos/fallback/台新国际商业银行_b4c269a362.png",
+      "color": "#9E181D",
+      "source": "fallback",
+      "slug": "TaishinInternationalBank",
+      "logo_base": "",
+      "hibank_name": "台新国际商业银行"
+    },
+    "台湾中小企业银行": {
+      "logo": "bank_logos/hibank/台湾中小企业银行_f119307d31.png",
+      "color": "#C04400",
+      "source": "HiBank",
+      "slug": "TaiwanBusinessBank",
+      "logo_base": "",
+      "hibank_name": "台湾中小企业银行"
+    },
+    "台湾土地银行": {
+      "logo": "bank_logos/hibank/台湾土地银行_34af549a73.png",
+      "color": "#005229",
+      "source": "HiBank",
+      "slug": "LandBankofTaiwan",
+      "logo_base": "",
+      "hibank_name": "台湾土地银行"
+    },
+    "台湾新光商业银行": {
+      "logo": "bank_logos/fallback/台湾新光商业银行_48827548f5.png",
+      "color": "#9E181D",
+      "source": "fallback",
+      "slug": "ShinKongCommercialBank",
+      "logo_base": "",
+      "hibank_name": "台湾新光商业银行"
+    },
+    "台湾银行": {
+      "logo": "bank_logos/hibank/台湾银行_16f1900505.png",
+      "color": "#245F81",
+      "source": "HiBank",
+      "slug": "BankofTaiwan",
+      "logo_base": "",
+      "hibank_name": "台湾银行"
+    },
+    "合作金库商业银行": {
+      "logo": "bank_logos/hibank/合作金库商业银行_d57f90df05.png",
+      "color": "#006044",
+      "source": "HiBank",
+      "slug": "TaiwanCooperativeBank",
+      "logo_base": "",
+      "hibank_name": "合作金库商业银行"
+    },
+    "吉林亿联银行": {
+      "logo": "bank_logos/hibank/吉林亿联银行_6f6879ed65.png",
+      "color": "#C0000D",
+      "source": "HiBank",
+      "slug": "JilinYillionBANK",
+      "logo_base": "",
+      "hibank_name": "吉林亿联银行"
+    },
+    "吉林农信": {
+      "logo": "bank_logos/hibank/吉林农信_4017a0494d.png",
+      "color": "#C08900",
+      "source": "HiBank",
+      "slug": "JilinRuralCreditCooperativeUnion",
+      "logo_base": "",
+      "hibank_name": "吉林农信"
+    },
+    "吉林银行": {
+      "logo": "bank_logos/icongo/吉林银行_e660542985.png",
+      "color": "#B2000D",
+      "source": "icongo/bank-logos",
+      "slug": "BankofJilin",
+      "logo_base": "jlbank",
+      "hibank_name": ""
+    },
+    "哈密市商业银行": {
+      "logo": "bank_logos/hibank/哈密市商业银行_e22f36087c.png",
+      "color": "#890D29",
+      "source": "HiBank",
+      "slug": "HamiCityCommercialBank",
+      "logo_base": "",
+      "hibank_name": "哈密市商业银行"
+    },
+    "哈尔滨银行": {
+      "logo": "bank_logos/icongo/哈尔滨银行_b2d018285a.png",
+      "color": "#0D1B37",
+      "source": "icongo/bank-logos",
+      "slug": "HarbinBank",
+      "logo_base": "hrbb",
+      "hibank_name": ""
+    },
+    "唐山银行": {
+      "logo": "bank_logos/icongo/唐山银行_7ca769b43d.png",
+      "color": "#370D52",
+      "source": "icongo/bank-logos",
+      "slug": "BankofTangshan",
+      "logo_base": "ts-bank",
+      "hibank_name": ""
+    },
+    "嘉义市第三信用合作社": {
+      "logo": "bank_logos/fallback/嘉义市第三信用合作社_f57e46b918.png",
+      "color": "#1E4A8E",
+      "source": "fallback",
+      "slug": "ChiayiTheThirdCreditCooperation",
+      "logo_base": "",
+      "hibank_name": "嘉义市第三信用合作社"
+    },
+    "嘉兴银行": {
+      "logo": "bank_logos/hibank/嘉兴银行_a0736d6597.png",
+      "color": "#007BB2",
+      "source": "HiBank",
+      "slug": "BankofJiaxing",
+      "logo_base": "",
+      "hibank_name": "嘉兴银行"
+    },
+    "四川农商联合银行": {
+      "logo": "bank_logos/hibank/四川农商联合银行_68054cbf1a.png",
+      "color": "#007B37",
+      "source": "HiBank",
+      "slug": "SichuanRuralCommercialUnitedBank",
+      "logo_base": "",
+      "hibank_name": "四川农商联合银行"
+    },
+    "四川天府银行": {
+      "logo": "bank_logos/icongo/四川天府银行_f48ad572a9.png",
+      "color": "#9C4F14",
+      "source": "icongo/bank-logos",
+      "slug": "SichuanTianfuBank",
+      "logo_base": "tf",
+      "hibank_name": ""
+    },
+    "四川成都蒲江民富村镇银行(乐山市商业银行)": {
+      "logo": "bank_logos/hibank/四川成都蒲江民富村镇银行_乐山市商业银行_43cd228d26.png",
+      "color": "#B21B0D",
+      "source": "HiBank",
+      "slug": "",
+      "logo_base": "",
+      "hibank_name": "乐山市商业银行"
+    },
+    "四川成都龙泉驿稠州村镇银行(浙江稠州商业银行)": {
+      "logo": "bank_logos/hibank/四川成都龙泉驿稠州村镇银行_浙江稠州商业银行_d1808cf1eb.png",
+      "color": "#891B1B",
+      "source": "HiBank",
+      "slug": "",
+      "logo_base": "",
+      "hibank_name": "浙江稠州商业银行"
+    },
+    "四川新网银行": {
+      "logo": "bank_logos/hibank/四川新网银行_9a9cfdafd0.png",
+      "color": "#449737",
+      "source": "HiBank",
+      "slug": "SichuanXWBank",
+      "logo_base": "",
+      "hibank_name": "四川新网银行"
+    },
+    "四川银行": {
+      "logo": "bank_logos/hibank/四川银行_6fb7393481.png",
+      "color": "#006EA5",
+      "source": "HiBank",
+      "slug": "SichuanBank",
+      "logo_base": "",
+      "hibank_name": "四川银行"
+    },
+    "国民银行": {
+      "logo": "bank_logos/hibank/国民银行_d1252f6b11.png",
+      "color": "#1E4A8E",
+      "source": "HiBank",
+      "slug": "KookminBank",
+      "logo_base": "",
+      "hibank_name": "国民银行"
+    },
+    "国泰世华商业银行": {
+      "logo": "bank_logos/icongo/国泰世华商业银行_7ed2614c28.png",
+      "color": "#006E37",
+      "source": "icongo/bank-logos",
+      "slug": "CathayUnitedBank",
+      "logo_base": "cathaybk",
+      "hibank_name": ""
+    },
+    "国泰世华银行": {
+      "logo": "bank_logos/icongo/国泰世华银行_37466b0db1.png",
+      "color": "#006E37",
+      "source": "icongo/bank-logos",
+      "slug": "CathayUnitedBank",
+      "logo_base": "cathaybk",
+      "hibank_name": ""
+    },
+    "埃及国民银行": {
+      "logo": "bank_logos/hibank/埃及国民银行_504dff5d34.png",
+      "color": "#0D600D",
+      "source": "HiBank",
+      "slug": "NationalBankofEgypt",
+      "logo_base": "",
+      "hibank_name": "埃及国民银行"
+    },
+    "基隆市第二信用合作社": {
+      "logo": "bank_logos/fallback/基隆市第二信用合作社_d06548d3d2.png",
+      "color": "#9C4F14",
+      "source": "fallback",
+      "slug": "TheSecondCreditCooperativeofKeelung",
+      "logo_base": "",
+      "hibank_name": "基隆市第二信用合作社"
+    },
+    "基隆第一信用合作社": {
+      "logo": "bank_logos/fallback/基隆第一信用合作社_f4b4903063.png",
+      "color": "#9C4F14",
+      "source": "fallback",
+      "slug": "KeelungFirstCreditCooperative",
+      "logo_base": "",
+      "hibank_name": "基隆第一信用合作社"
+    },
+    "大丰银行": {
+      "logo": "bank_logos/hibank/大丰银行_e2fde9a9d1.png",
+      "color": "#C0970D",
+      "source": "HiBank",
+      "slug": "TaiFungBank",
+      "logo_base": "",
+      "hibank_name": "大丰银行"
+    },
+    "大众银行": {
+      "logo": "bank_logos/fallback/大众银行_ee0f148d77.png",
+      "color": "#245F81",
+      "source": "fallback",
+      "slug": "PublicBankHongKong",
+      "logo_base": "",
+      "hibank_name": ""
+    },
+    "大众银行（香港）": {
+      "logo": "bank_logos/fallback/大众银行_香港_4bbf7c9ddc.png",
+      "color": "#683582",
+      "source": "fallback",
+      "slug": "PublicBankHongKong",
+      "logo_base": "",
+      "hibank_name": ""
+    },
+    "大华银行": {
+      "logo": "bank_logos/icongo/大华银行_b8738ca464.png",
+      "color": "#0D1B6E",
+      "source": "icongo/bank-logos",
+      "slug": "UnitedOverseasBank",
+      "logo_base": "uobchina",
+      "hibank_name": ""
+    },
+    "大新银行": {
+      "logo": "bank_logos/icongo/大新银行_63b602a26f.png",
+      "color": "#970060",
+      "source": "icongo/bank-logos",
+      "slug": "DahSingBank",
+      "logo_base": "dahsing",
+      "hibank_name": ""
+    },
+    "大有银行": {
+      "logo": "bank_logos/fallback/大有银行_097f1893b4.png",
+      "color": "#A53124",
+      "source": "fallback",
+      "slug": "TaiYauBank",
+      "logo_base": "",
+      "hibank_name": "大有银行"
+    },
+    "大生银行": {
+      "logo": "bank_logos/fallback/大生银行_08b205cfb1.png",
+      "color": "#514077",
+      "source": "fallback",
+      "slug": "TaiSangBank",
+      "logo_base": "",
+      "hibank_name": "大生银行"
+    },
+    "大西洋银行": {
+      "logo": "bank_logos/fallback/大西洋银行_5fc04fe5d1.png",
+      "color": "#5B8343",
+      "source": "fallback",
+      "slug": "BancoNacionalUltramarino",
+      "logo_base": "",
+      "hibank_name": ""
+    },
+    "大连农商银行": {
+      "logo": "bank_logos/hibank/大连农商银行_5c41c486ac.png",
+      "color": "#B27B00",
+      "source": "HiBank",
+      "slug": "DalianRuralCommercialBank",
+      "logo_base": "",
+      "hibank_name": "大连农商银行"
+    },
+    "大连银行": {
+      "logo": "bank_logos/icongo/大连银行_acb8549aa9.png",
+      "color": "#A50000",
+      "source": "icongo/bank-logos",
+      "slug": "BankofDalian",
+      "logo_base": "bankofdl",
+      "hibank_name": ""
+    },
+    "天星银行": {
+      "logo": "bank_logos/fallback/天星银行_662e9508ca.png",
+      "color": "#1A6842",
+      "source": "fallback",
+      "slug": "AirstarBank",
+      "logo_base": "",
+      "hibank_name": "天星银行"
+    },
+    "天津农商银行": {
+      "logo": "bank_logos/icongo/天津农商银行_1cc61b7917.png",
+      "color": "#C04400",
+      "source": "icongo/bank-logos",
+      "slug": "TianjinRuralCommercialBank",
+      "logo_base": "trcbank",
+      "hibank_name": ""
+    },
+    "天津滨海农商银行": {
+      "logo": "bank_logos/icongo/天津滨海农商银行_c79fde2c65.png",
+      "color": "#007B29",
+      "source": "icongo/bank-logos",
+      "slug": "TianjinBinhaiRuralCommercialBank",
+      "logo_base": "tjbhb",
+      "hibank_name": ""
+    },
+    "天津金城银行": {
+      "logo": "bank_logos/icongo/天津金城银行_e87263696f.png",
+      "color": "#00447B",
+      "source": "icongo/bank-logos",
+      "slug": "KinchengBankofTianjin",
+      "logo_base": "bankoftianjin",
+      "hibank_name": ""
+    },
+    "天津银行": {
+      "logo": "bank_logos/icongo/天津银行_d0621c2b16.png",
+      "color": "#00447B",
+      "source": "icongo/bank-logos",
+      "slug": "BankofTianjin",
+      "logo_base": "bankoftianjin",
+      "hibank_name": ""
+    },
+    "奥地利奥合国际银行": {
+      "logo": "bank_logos/fallback/奥地利奥合国际银行_05c73f60c8.png",
+      "color": "#1E4A8E",
+      "source": "fallback",
+      "slug": "RaiffeisenBankInternationalAG",
+      "logo_base": "",
+      "hibank_name": ""
+    },
+    "威海蓝海银行": {
+      "logo": "bank_logos/hibank/威海蓝海银行_a950a44a4c.png",
+      "color": "#004489",
+      "source": "HiBank",
+      "slug": "WeihaiBlueOceanBank",
+      "logo_base": "",
+      "hibank_name": "威海蓝海银行"
+    },
+    "威海银行": {
+      "logo": "bank_logos/hibank/威海银行_86db42bee0.png",
+      "color": "#007B44",
+      "source": "HiBank",
+      "slug": "WeihaiCityCommercialBank",
+      "logo_base": "",
+      "hibank_name": "威海银行"
+    },
+    "宁夏银行": {
+      "logo": "bank_logos/icongo/宁夏银行_93cccda892.png",
+      "color": "#C00D1B",
+      "source": "icongo/bank-logos",
+      "slug": "BankofNingxia",
+      "logo_base": "bankofnx",
+      "hibank_name": ""
+    },
+    "宁波东海银行": {
+      "logo": "bank_logos/hibank/宁波东海银行_d620e3eab5.png",
+      "color": "#B21B1B",
+      "source": "HiBank",
+      "slug": "NingboDonghaiBank",
+      "logo_base": "",
+      "hibank_name": "宁波东海银行"
+    },
+    "宁波通商银行": {
+      "logo": "bank_logos/icongo/宁波通商银行_874eec100d.png",
+      "color": "#6EA51B",
+      "source": "icongo/bank-logos",
+      "slug": "NingboCommerceBank",
+      "logo_base": "ncbank",
+      "hibank_name": ""
+    },
+    "宁波银行": {
+      "logo": "bank_logos/icongo/宁波银行_959d56ee67.png",
+      "color": "#1E4A8E",
+      "source": "icongo/bank-logos",
+      "slug": "BankofNingbo",
+      "logo_base": "nbcb",
+      "hibank_name": ""
+    },
+    "安徽农信": {
+      "logo": "bank_logos/hibank/安徽农信_9b3835261f.png",
+      "color": "#B21B0D",
+      "source": "HiBank",
+      "slug": "AnhuiRuralCreditCooperativeUnion",
+      "logo_base": "",
+      "hibank_name": "安徽农信"
+    },
+    "安徽新安银行": {
+      "logo": "bank_logos/hibank/安徽新安银行_186ee159dc.png",
+      "color": "#A5001B",
+      "source": "HiBank",
+      "slug": "AnhuiXinanBank",
+      "logo_base": "",
+      "hibank_name": "安徽新安银行"
+    },
+    "安泰商业银行": {
+      "logo": "bank_logos/fallback/安泰商业银行_65cc4263d7.png",
+      "color": "#1E4A8E",
+      "source": "fallback",
+      "slug": "EnTieCommercialBank",
+      "logo_base": "",
+      "hibank_name": "安泰商业银行"
+    },
+    "宜兰信用合作社": {
+      "logo": "bank_logos/fallback/宜兰信用合作社_d08e36d6b1.png",
+      "color": "#9C4F14",
+      "source": "fallback",
+      "slug": "TheCreditCooperativeofIlan",
+      "logo_base": "",
+      "hibank_name": "宜兰信用合作社"
+    },
+    "宜宾市商业银行": {
+      "logo": "bank_logos/hibank/宜宾市商业银行_391433fb6f.png",
+      "color": "#295297",
+      "source": "HiBank",
+      "slug": "YibinCityCommercialBank",
+      "logo_base": "",
+      "hibank_name": "宜宾市商业银行"
+    },
+    "富滇银行": {
+      "logo": "bank_logos/icongo/富滇银行_c5379ab181.png",
+      "color": "#970D1B",
+      "source": "icongo/bank-logos",
+      "slug": "FudianBank",
+      "logo_base": "fudian",
+      "hibank_name": ""
+    },
+    "富融银行": {
+      "logo": "bank_logos/fallback/富融银行_b74dd40c08.png",
+      "color": "#683582",
+      "source": "fallback",
+      "slug": "FusionBank",
+      "logo_base": "",
+      "hibank_name": "富融银行"
+    },
+    "富邦华一银行": {
+      "logo": "bank_logos/icongo/富邦华一银行_e82f1300ce.png",
+      "color": "#00897B",
+      "source": "icongo/bank-logos",
+      "slug": "FubonBank",
+      "logo_base": "fubonchina",
+      "hibank_name": ""
+    },
+    "富邦银行（香港）": {
+      "logo": "bank_logos/fallback/富邦银行_香港_19e4cbead2.png",
+      "color": "#0C416E",
+      "source": "fallback",
+      "slug": "FubonBankHongKong",
+      "logo_base": "",
+      "hibank_name": "富邦银行（香港）"
+    },
+    "将来商业银行": {
+      "logo": "bank_logos/fallback/将来商业银行_b71270b2e0.png",
+      "color": "#683582",
+      "source": "fallback",
+      "slug": "NEXTCommercialBank",
+      "logo_base": "",
+      "hibank_name": "将来商业银行"
+    },
+    "山东农信": {
+      "logo": "bank_logos/hibank/山东农信_816b073041.png",
+      "color": "#C0000D",
+      "source": "HiBank",
+      "slug": "ShandongRuralCreditCooperativeUnion",
+      "logo_base": "",
+      "hibank_name": "山东农信"
+    },
+    "山西农商联合银行": {
+      "logo": "bank_logos/hibank/山西农商联合银行_7582b80749.png",
+      "color": "#007B37",
+      "source": "HiBank",
+      "slug": "ShanxiRuralCommercialUnitedBank",
+      "logo_base": "",
+      "hibank_name": "山西农商联合银行"
+    },
+    "山西银行": {
+      "logo": "bank_logos/hibank/山西银行_65944c5f3b.png",
+      "color": "#B2896E",
+      "source": "HiBank",
+      "slug": "ShanxiBank",
+      "logo_base": "",
+      "hibank_name": "山西银行"
+    },
+    "崇州上银村镇银行(上海银行)": {
+      "logo": "bank_logos/hibank/崇州上银村镇银行_上海银行_511d9b2b5c.png",
+      "color": "#00377B",
+      "source": "HiBank",
+      "slug": "",
+      "logo_base": "",
+      "hibank_name": "上海银行"
+    },
+    "工商银行": {
+      "logo": "bank_logos/icongo/工商银行_7f01bcf3af.png",
+      "color": "#A50000",
+      "source": "icongo/bank-logos",
+      "slug": "IndustrialandCommercialBankofChina",
+      "logo_base": "icbc",
+      "hibank_name": ""
+    },
+    "巴基斯坦哈比银行": {
+      "logo": "bank_logos/fallback/巴基斯坦哈比银行_00ed304f57.png",
+      "color": "#9E181D",
+      "source": "fallback",
+      "slug": "HabibBank",
+      "logo_base": "",
+      "hibank_name": ""
+    },
+    "巴西银行": {
+      "logo": "bank_logos/fallback/巴西银行_ce2eedbe85.png",
+      "color": "#0C7A6C",
+      "source": "fallback",
+      "slug": "BancodoBrasil",
+      "logo_base": "",
+      "hibank_name": ""
+    },
+    "平安银行": {
+      "logo": "bank_logos/icongo/平安银行_a898cfd9a6.png",
+      "color": "#C0520D",
+      "source": "icongo/bank-logos",
+      "slug": "PingAnBank",
+      "logo_base": "pingan",
+      "hibank_name": ""
+    },
+    "广东农信": {
+      "logo": "bank_logos/hibank/广东农信_f1fef6c9d3.png",
+      "color": "#A5601B",
+      "source": "HiBank",
+      "slug": "GuangdongRuralCreditCooperativeUnion",
+      "logo_base": "",
+      "hibank_name": "广东农信"
+    },
+    "广东华兴银行": {
+      "logo": "bank_logos/icongo/广东华兴银行_2a62af3e5a.png",
+      "color": "#970D1B",
+      "source": "icongo/bank-logos",
+      "slug": "GuangdongHuaxingBank",
+      "logo_base": "ghbank",
+      "hibank_name": ""
+    },
+    "广东华润银行": {
+      "logo": "bank_logos/hibank/广东华润银行_1a1b6203ba.png",
+      "color": "#0C7A6C",
+      "source": "HiBank",
+      "slug": "ChinaResourcesBankofZhuhai",
+      "logo_base": "",
+      "hibank_name": "广东华润银行"
+    },
+    "广东南海农商银行": {
+      "logo": "bank_logos/hibank/广东南海农商银行_6415adbb3b.png",
+      "color": "#B2001B",
+      "source": "HiBank",
+      "slug": "GuangdongNanhaiRuralCommercialBank",
+      "logo_base": "",
+      "hibank_name": "广东南海农商银行"
+    },
+    "广东南粤银行": {
+      "logo": "bank_logos/icongo/广东南粤银行_732726aae3.png",
+      "color": "#A51B29",
+      "source": "icongo/bank-logos",
+      "slug": "GuangdongNanyueBank",
+      "logo_base": "gdnybank",
+      "hibank_name": ""
+    },
+    "广东顺德农商银行": {
+      "logo": "bank_logos/hibank/广东顺德农商银行_733441bf3f.png",
+      "color": "#0D1B7B",
+      "source": "HiBank",
+      "slug": "GuangdongShundeRuralCommercialBank",
+      "logo_base": "",
+      "hibank_name": "广东顺德农商银行"
+    },
+    "广发银行": {
+      "logo": "bank_logos/icongo/广发银行_2d2c3284d4.png",
+      "color": "#600000",
+      "source": "icongo/bank-logos",
+      "slug": "ChinaGuangfaBank",
+      "logo_base": "cgbchina",
+      "hibank_name": ""
+    },
+    "广州农商银行": {
+      "logo": "bank_logos/hibank/广州农商银行_dd395a5316.png",
+      "color": "#1E4A8E",
+      "source": "HiBank",
+      "slug": "GuangzhouRuralCommercialBank",
+      "logo_base": "",
+      "hibank_name": "广州农商银行"
+    },
+    "广州银行": {
+      "logo": "bank_logos/icongo/广州银行_8246a77db7.png",
+      "color": "#B21B1B",
+      "source": "icongo/bank-logos",
+      "slug": "BankofGuangzhou",
+      "logo_base": "gzcb",
+      "hibank_name": ""
+    },
+    "广西农商联合银行": {
+      "logo": "bank_logos/hibank/广西农商联合银行_e431e09ad8.png",
+      "color": "#007B37",
+      "source": "HiBank",
+      "slug": "GuangxiRuralCommercialUnitedBank",
+      "logo_base": "",
+      "hibank_name": "广西农商联合银行"
+    },
+    "广西北部湾银行": {
+      "logo": "bank_logos/icongo/广西北部湾银行_b4a108a822.png",
+      "color": "#005297",
+      "source": "icongo/bank-logos",
+      "slug": "GuangxiBeibuGulfBank",
+      "logo_base": "bankofbbg",
+      "hibank_name": ""
+    },
+    "廊坊银行": {
+      "logo": "bank_logos/icongo/廊坊银行_9399b21ef7.png",
+      "color": "#0089C0",
+      "source": "icongo/bank-logos",
+      "slug": "BankofLangfang",
+      "logo_base": "lccb",
+      "hibank_name": ""
+    },
+    "建设银行": {
+      "logo": "bank_logos/icongo/建设银行_05a4cdb84e.png",
+      "color": "#004489",
+      "source": "icongo/bank-logos",
+      "slug": "ChinaConstructionBank",
+      "logo_base": "ccb",
+      "hibank_name": ""
+    },
+    "开泰银行": {
+      "logo": "bank_logos/hibank/开泰银行_af90cbfeef.png",
+      "color": "#C00D29",
+      "source": "HiBank",
+      "slug": "KASIKORNBANK",
+      "logo_base": "",
+      "hibank_name": "开泰银行"
+    },
+    "张家口银行": {
+      "logo": "bank_logos/hibank/张家口银行_a0b0f183d4.png",
+      "color": "#C0000D",
+      "source": "HiBank",
+      "slug": "BankofZhangjiakou",
+      "logo_base": "",
+      "hibank_name": "张家口银行"
+    },
+    "彭州民生村镇银行(民生银行)": {
+      "logo": "bank_logos/hibank/彭州民生村镇银行_民生银行_e78921bff2.png",
+      "color": "#448960",
+      "source": "HiBank",
+      "slug": "",
+      "logo_base": "",
+      "hibank_name": "民生银行"
+    },
+    "彰化商业银行": {
+      "logo": "bank_logos/fallback/彰化商业银行_8ef692cbd5.png",
+      "color": "#245F81",
+      "source": "fallback",
+      "slug": "ChangHwaCommercialBank",
+      "logo_base": "",
+      "hibank_name": "彰化商业银行"
+    },
+    "彰化第一信用合作社": {
+      "logo": "bank_logos/fallback/彰化第一信用合作社_f37f83ac71.png",
+      "color": "#683582",
+      "source": "fallback",
+      "slug": "TheFirstCreditCooperativeofChanghua",
+      "logo_base": "",
+      "hibank_name": "彰化第一信用合作社"
+    },
+    "彰化第五信用合作社": {
+      "logo": "bank_logos/fallback/彰化第五信用合作社_ec6f8321be.png",
+      "color": "#514077",
+      "source": "fallback",
+      "slug": "TheFifthCreditCooperationofChanghua",
+      "logo_base": "",
+      "hibank_name": "彰化第五信用合作社"
+    },
+    "彰化第六信用合作社": {
+      "logo": "bank_logos/fallback/彰化第六信用合作社_a422c9277e.png",
+      "color": "#514077",
+      "source": "fallback",
+      "slug": "TheSixthCreditCooperationofChanghua",
+      "logo_base": "",
+      "hibank_name": "彰化第六信用合作社"
+    },
+    "彰化第十信用合作社": {
+      "logo": "bank_logos/fallback/彰化第十信用合作社_881ced4772.png",
+      "color": "#9C4F14",
+      "source": "fallback",
+      "slug": "TheTenthCreditCooperativeofChanghua",
+      "logo_base": "",
+      "hibank_name": "彰化第十信用合作社"
+    },
+    "彰银商业银行": {
+      "logo": "bank_logos/hibank/彰银商业银行_3ed537b85d.png",
+      "color": "#B21B0D",
+      "source": "HiBank",
+      "slug": "ChangHuaCommercialBank",
+      "logo_base": "",
+      "hibank_name": "彰银商业银行"
+    },
+    "德国商业银行": {
+      "logo": "bank_logos/icongo/德国商业银行_447c8c5a8b.png",
+      "color": "#002960",
+      "source": "icongo/bank-logos",
+      "slug": "CommerzbankAG",
+      "logo_base": "z-bank",
+      "hibank_name": ""
+    },
+    "德国巴登－符腾堡州银行": {
+      "logo": "bank_logos/fallback/德国巴登_符腾堡州银行_631abe22bb.png",
+      "color": "#683582",
+      "source": "fallback",
+      "slug": "LandesbankBadenWurttemberg",
+      "logo_base": "",
+      "hibank_name": ""
+    },
+    "德州银行": {
+      "logo": "bank_logos/icongo/德州银行_9f81545079.png",
+      "color": "#C0000D",
+      "source": "icongo/bank-logos",
+      "slug": "DezhouBank",
+      "logo_base": "dzbchina",
+      "hibank_name": ""
+    },
+    "德意志银行": {
+      "logo": "bank_logos/icongo/德意志银行_a63e2fbd7f.png",
+      "color": "#1B1B6E",
+      "source": "icongo/bank-logos",
+      "slug": "DeutscheBank",
+      "logo_base": "chinadb",
+      "hibank_name": ""
+    },
+    "徽商银行": {
+      "logo": "bank_logos/icongo/徽商银行_c1641bfa09.png",
+      "color": "#A50D0D",
+      "source": "icongo/bank-logos",
+      "slug": "HuishangBank",
+      "logo_base": "hsbank",
+      "hibank_name": ""
+    },
+    "恒丰银行": {
+      "logo": "bank_logos/icongo/恒丰银行_f6aa2b9e2b.png",
+      "color": "#002960",
+      "source": "icongo/bank-logos",
+      "slug": "EvergrowingBank",
+      "logo_base": "hfbank",
+      "hibank_name": ""
+    },
+    "恒生银行": {
+      "logo": "bank_logos/icongo/恒生银行_bba9eb90a4.png",
+      "color": "#8D222C",
+      "source": "icongo/bank-logos",
+      "slug": "HangSengBank",
+      "logo_base": "hangseng",
+      "hibank_name": ""
+    },
+    "意大利联合圣保罗银行": {
+      "logo": "bank_logos/fallback/意大利联合圣保罗银行_e5921c14a9.png",
+      "color": "#0C416E",
+      "source": "fallback",
+      "slug": "IntesaSanpaolo",
+      "logo_base": "",
+      "hibank_name": ""
+    },
+    "成都农商银行": {
+      "logo": "bank_logos/hibank/成都农商银行_c95d785d35.png",
+      "color": "#005244",
+      "source": "HiBank",
+      "slug": "ChengduRuralCommercialBank",
+      "logo_base": "",
+      "hibank_name": "成都农商银行"
+    },
+    "成都双流诚民村镇银行(江苏江阴农商)": {
+      "logo": "bank_logos/hibank/成都双流诚民村镇银行_江苏江阴农商_85f8a6cea6.png",
+      "color": "#005229",
+      "source": "HiBank",
+      "slug": "",
+      "logo_base": "",
+      "hibank_name": "江苏江阴农商银行"
+    },
+    "成都郫都中银富登村镇银行(中国银行)": {
+      "logo": "bank_logos/hibank/成都郫都中银富登村镇银行_中国银行_0fb0a0d7eb.png",
+      "color": "#970D1B",
+      "source": "HiBank",
+      "slug": "",
+      "logo_base": "",
+      "hibank_name": "中国银行"
+    },
+    "成都银行": {
+      "logo": "bank_logos/icongo/成都银行_d7f3a76888.png",
+      "color": "#C0000D",
+      "source": "icongo/bank-logos",
+      "slug": "BankofChengdu",
+      "logo_base": "bocd",
+      "hibank_name": ""
+    },
+    "成都青白江融兴村镇银行(哈尔滨银行)": {
+      "logo": "bank_logos/hibank/成都青白江融兴村镇银行_哈尔滨银行_e4034173f9.png",
+      "color": "#B2601B",
+      "source": "HiBank",
+      "slug": "",
+      "logo_base": "",
+      "hibank_name": "哈尔滨银行"
+    },
+    "承德银行": {
+      "logo": "bank_logos/icongo/承德银行_4f71c3ce23.png",
+      "color": "#B2000D",
+      "source": "icongo/bank-logos",
+      "slug": "BankofChengde",
+      "logo_base": "chengdebank",
+      "hibank_name": ""
+    },
+    "抚顺银行": {
+      "logo": "bank_logos/icongo/抚顺银行_d39adae9f1.png",
+      "color": "#B20D0D",
+      "source": "icongo/bank-logos",
+      "slug": "BankofFushun",
+      "logo_base": "bankoffs",
+      "hibank_name": ""
+    },
+    "招商永隆银行": {
+      "logo": "bank_logos/hibank/招商永隆银行_dfdc140580.png",
+      "color": "#890D1B",
+      "source": "HiBank",
+      "slug": "CMBWingLungBank",
+      "logo_base": "",
+      "hibank_name": "招商永隆银行"
+    },
+    "招商银行": {
+      "logo": "bank_logos/icongo/招商银行_bff0099b0b.png",
+      "color": "#C0000D",
+      "source": "icongo/bank-logos",
+      "slug": "ChinaMerchantsBank",
+      "logo_base": "cmbchina",
+      "hibank_name": ""
+    },
+    "摩根士丹利国际银行": {
+      "logo": "bank_logos/hibank/摩根士丹利国际银行_8f37962699.png",
+      "color": "#4489B2",
+      "source": "HiBank",
+      "slug": "MorganStanleyBankInternational",
+      "logo_base": "",
+      "hibank_name": "摩根士丹利国际银行"
+    },
+    "摩根士丹利银行（亚洲）": {
+      "logo": "bank_logos/hibank/摩根士丹利银行_亚洲_9cfa128fa3.png",
+      "color": "#4489B2",
+      "source": "HiBank",
+      "slug": "MorganStanleyBankAsia",
+      "logo_base": "",
+      "hibank_name": "摩根士丹利银行（亚洲）"
+    },
+    "摩根大通银行": {
+      "logo": "bank_logos/icongo/摩根大通银行_c135c8a58c.png",
+      "color": "#00377B",
+      "source": "icongo/bank-logos",
+      "slug": "JPMorganChaseBank",
+      "logo_base": "jpmorganchina",
+      "hibank_name": ""
+    },
+    "摩洛哥非洲银行": {
+      "logo": "bank_logos/fallback/摩洛哥非洲银行_9eccb4f94d.png",
+      "color": "#0C7A6C",
+      "source": "fallback",
+      "slug": "BankofAfrica",
+      "logo_base": "",
+      "hibank_name": ""
+    },
+    "新津珠江村镇银行(广州农商)": {
+      "logo": "bank_logos/hibank/新津珠江村镇银行_广州农商_02513af541.png",
+      "color": "#0C7A6C",
+      "source": "HiBank",
+      "slug": "",
+      "logo_base": "",
+      "hibank_name": "广州农商银行"
+    },
+    "新疆农信": {
+      "logo": "bank_logos/hibank/新疆农信_e9c13306a7.png",
+      "color": "#1B97C0",
+      "source": "HiBank",
+      "slug": "XinjiangRuralCreditCooperativeUnion",
+      "logo_base": "",
+      "hibank_name": "新疆农信"
+    },
+    "新疆银行": {
+      "logo": "bank_logos/hibank/新疆银行_384e31ee24.png",
+      "color": "#003760",
+      "source": "HiBank",
+      "slug": "XinjiangBank",
+      "logo_base": "",
+      "hibank_name": "新疆银行"
+    },
+    "新竹第一信用合作社": {
+      "logo": "bank_logos/fallback/新竹第一信用合作社_e6fd31c43d.png",
+      "color": "#0C7A6C",
+      "source": "fallback",
+      "slug": "TheFirstCreditCooperativeofHsinchu",
+      "logo_base": "",
+      "hibank_name": "新竹第一信用合作社"
+    },
+    "新竹第三信用合作社": {
+      "logo": "bank_logos/fallback/新竹第三信用合作社_98865b2999.png",
+      "color": "#514077",
+      "source": "fallback",
+      "slug": "TheThirdCreditBankofHsinchu",
+      "logo_base": "",
+      "hibank_name": "新竹第三信用合作社"
+    },
+    "新联商业银行": {
+      "logo": "bank_logos/fallback/新联商业银行_2107fd6e5f.png",
+      "color": "#A53124",
+      "source": "fallback",
+      "slug": "AlliedCommercialBank",
+      "logo_base": "",
+      "hibank_name": ""
+    },
+    "新韩银行": {
+      "logo": "bank_logos/hibank/新韩银行_7648a59222.png",
+      "color": "#0060A5",
+      "source": "HiBank",
+      "slug": "ShinhanBank",
+      "logo_base": "",
+      "hibank_name": "新韩银行"
+    },
+    "无锡锡商银行": {
+      "logo": "bank_logos/hibank/无锡锡商银行_199ec48dd3.png",
+      "color": "#529744",
+      "source": "HiBank",
+      "slug": "WuxiXishangBank",
+      "logo_base": "",
+      "hibank_name": "无锡锡商银行"
+    },
+    "日本三井住友信托银行": {
+      "logo": "bank_logos/fallback/日本三井住友信托银行_58400cdfb6.png",
+      "color": "#9C4F14",
+      "source": "fallback",
+      "slug": "SumitomoMitsuiTrustBank",
+      "logo_base": "",
+      "hibank_name": ""
+    },
+    "日本名古屋银行": {
+      "logo": "bank_logos/hibank/日本名古屋银行_89505ae3af.png",
+      "color": "#007B52",
+      "source": "HiBank",
+      "slug": "TheBankofNagoya",
+      "logo_base": "",
+      "hibank_name": "日本名古屋银行"
+    },
+    "日本山口银行": {
+      "logo": "bank_logos/icongo/日本山口银行_ccd4ab5784.png",
+      "color": "#008937",
+      "source": "icongo/bank-logos",
+      "slug": "TheYamaguchiBank",
+      "logo_base": "yamaguchibank",
+      "hibank_name": ""
+    },
+    "日本横滨银行": {
+      "logo": "bank_logos/icongo/日本横滨银行_bc99024613.png",
+      "color": "#0D376E",
+      "source": "icongo/bank-logos",
+      "slug": "TheBankofYokohama",
+      "logo_base": "boy",
+      "hibank_name": ""
+    },
+    "日照银行": {
+      "logo": "bank_logos/icongo/日照银行_fa6a06b7b9.png",
+      "color": "#245F81",
+      "source": "icongo/bank-logos",
+      "slug": "BankofRizhao",
+      "logo_base": "bankofrizhao",
+      "hibank_name": ""
+    },
+    "昆仑银行": {
+      "logo": "bank_logos/icongo/昆仑银行_4b83019209.png",
+      "color": "#A50000",
+      "source": "icongo/bank-logos",
+      "slug": "BankofKunlun",
+      "logo_base": "klb",
+      "hibank_name": ""
+    },
+    "星展银行": {
+      "logo": "bank_logos/icongo/星展银行_94ddf93469.png",
+      "color": "#C0000D",
+      "source": "icongo/bank-logos",
+      "slug": "DBSBank",
+      "logo_base": "dbs",
+      "hibank_name": ""
+    },
+    "星展银行（香港）": {
+      "logo": "bank_logos/hibank/星展银行_香港_57e338c9fa.png",
+      "color": "#C0000D",
+      "source": "HiBank",
+      "slug": "DBSBankHongKong",
+      "logo_base": "",
+      "hibank_name": "星展银行（香港）"
+    },
+    "星展（台湾）商业银行": {
+      "logo": "bank_logos/hibank/星展_台湾_商业银行_dab8fb9b73.png",
+      "color": "#C0000D",
+      "source": "HiBank",
+      "slug": "DBSBankTaiwan",
+      "logo_base": "",
+      "hibank_name": "星展（台湾）商业银行"
+    },
+    "晋商银行": {
+      "logo": "bank_logos/icongo/晋商银行_310ab1a016.png",
+      "color": "#C0371B",
+      "source": "icongo/bank-logos",
+      "slug": "JinshangBank",
+      "logo_base": "jshbank",
+      "hibank_name": ""
+    },
+    "曲靖市商业银行": {
+      "logo": "bank_logos/icongo/曲靖市商业银行_2039b40e20.png",
+      "color": "#C0000D",
+      "source": "icongo/bank-logos",
+      "slug": "QujingCityCommercialBank",
+      "logo_base": "qjccb",
+      "hibank_name": ""
+    },
+    "朝阳银行": {
+      "logo": "bank_logos/icongo/朝阳银行_31680e1ab1.png",
+      "color": "#00447B",
+      "source": "icongo/bank-logos",
+      "slug": "BankofChaoyang",
+      "logo_base": "cycb",
+      "hibank_name": ""
+    },
+    "本溪银行": {
+      "logo": "bank_logos/hibank/本溪银行_be700b2f92.png",
+      "color": "#C0000D",
+      "source": "HiBank",
+      "slug": "BankofBenxi",
+      "logo_base": "",
+      "hibank_name": "本溪银行"
+    },
+    "杭州银行": {
+      "logo": "bank_logos/icongo/杭州银行_4b4f85d417.png",
+      "color": "#0089C0",
+      "source": "icongo/bank-logos",
+      "slug": "BankofHangzhou",
+      "logo_base": "hzbank",
+      "hibank_name": ""
+    },
+    "板信商业银行": {
+      "logo": "bank_logos/fallback/板信商业银行_ec7635cac4.png",
+      "color": "#514077",
+      "source": "fallback",
+      "slug": "BankofPanhsin",
+      "logo_base": "",
+      "hibank_name": "板信商业银行"
+    },
+    "枣庄银行": {
+      "logo": "bank_logos/icongo/枣庄银行_5787592a41.png",
+      "color": "#006EA5",
+      "source": "icongo/bank-logos",
+      "slug": "ZaozhuangBank",
+      "logo_base": "zaozhuangbank",
+      "hibank_name": ""
+    },
+    "柳州银行": {
+      "logo": "bank_logos/icongo/柳州银行_12ee2ce5d4.png",
+      "color": "#C0000D",
+      "source": "icongo/bank-logos",
+      "slug": "BankofLiuzhou",
+      "logo_base": "bolz",
+      "hibank_name": ""
+    },
+    "桂林银行": {
+      "logo": "bank_logos/icongo/桂林银行_a50ba613f5.png",
+      "color": "#005289",
+      "source": "icongo/bank-logos",
+      "slug": "GuilinBank",
+      "logo_base": "guilinbank",
+      "hibank_name": ""
+    },
+    "桃园信用合作社": {
+      "logo": "bank_logos/fallback/桃园信用合作社_402518e33a.png",
+      "color": "#9C4F14",
+      "source": "fallback",
+      "slug": "TheCreditCooperativeofTaoyuan",
+      "logo_base": "",
+      "hibank_name": "桃园信用合作社"
+    },
+    "梅州客商银行": {
+      "logo": "bank_logos/hibank/梅州客商银行_3c0fcd64b8.png",
+      "color": "#9E181D",
+      "source": "HiBank",
+      "slug": "MeizhouHakkaBank",
+      "logo_base": "",
+      "hibank_name": "梅州客商银行"
+    },
+    "正信银行": {
+      "logo": "bank_logos/icongo/正信银行_26da2f71b7.png",
+      "color": "#89000D",
+      "source": "icongo/bank-logos",
+      "slug": "ZhengXinBank",
+      "logo_base": "zxbk",
+      "hibank_name": ""
+    },
+    "武汉众邦银行": {
+      "logo": "bank_logos/icongo/武汉众邦银行_a838d45ed8.png",
+      "color": "#002960",
+      "source": "icongo/bank-logos",
+      "slug": "WUHANZBANK",
+      "logo_base": "z-bank",
+      "hibank_name": ""
+    },
+    "武汉农商银行": {
+      "logo": "bank_logos/icongo/武汉农商银行_f4cd498e63.png",
+      "color": "#B2000D",
+      "source": "icongo/bank-logos",
+      "slug": "WuhanRuralCommercialBank",
+      "logo_base": "whrcbank",
+      "hibank_name": ""
+    },
+    "比利时联合银行": {
+      "logo": "bank_logos/fallback/比利时联合银行_50b0c83ea2.png",
+      "color": "#514077",
+      "source": "fallback",
+      "slug": "KBCBank",
+      "logo_base": "",
+      "hibank_name": ""
+    },
+    "民生银行": {
+      "logo": "bank_logos/icongo/民生银行_ab4445d3e6.png",
+      "color": "#005289",
+      "source": "icongo/bank-logos",
+      "slug": "ChinaMinshengBanking",
+      "logo_base": "cmbc",
+      "hibank_name": ""
+    },
+    "永丰商业银行": {
+      "logo": "bank_logos/icongo/永丰商业银行_184e58897e.png",
+      "color": "#C01B0D",
+      "source": "icongo/bank-logos",
+      "slug": "BankSinoPac",
+      "logo_base": "sinopac",
+      "hibank_name": ""
+    },
+    "永丰银行": {
+      "logo": "bank_logos/icongo/永丰银行_520b998f22.png",
+      "color": "#C01B0D",
+      "source": "icongo/bank-logos",
+      "slug": "BankSinoPac",
+      "logo_base": "sinopac",
+      "hibank_name": ""
+    },
+    "汇业银行": {
+      "logo": "bank_logos/fallback/汇业银行_e8f28e270e.png",
+      "color": "#9C4F14",
+      "source": "fallback",
+      "slug": "BancoDeltaAsia",
+      "logo_base": "",
+      "hibank_name": "汇业银行"
+    },
+    "汇丰银行": {
+      "logo": "bank_logos/icongo/汇丰银行_b7a49e515f.png",
+      "color": "#C0000D",
+      "source": "icongo/bank-logos",
+      "slug": "HSBCBank",
+      "logo_base": "hsbc",
+      "hibank_name": ""
+    },
+    "汇丰（台湾）商业银行": {
+      "logo": "bank_logos/icongo/汇丰_台湾_商业银行_2bb2f83cd5.png",
+      "color": "#C0000D",
+      "source": "icongo/bank-logos",
+      "slug": "HSBCBankTaiwan",
+      "logo_base": "hsbc",
+      "hibank_name": ""
+    },
+    "汇立银行": {
+      "logo": "bank_logos/fallback/汇立银行_6bed1097dd.png",
+      "color": "#5B8343",
+      "source": "fallback",
+      "slug": "WeLabBank",
+      "logo_base": "",
+      "hibank_name": "汇立银行"
+    },
+    "汉口银行": {
+      "logo": "bank_logos/icongo/汉口银行_b203931d1c.png",
+      "color": "#006E97",
+      "source": "icongo/bank-logos",
+      "slug": "HankouBank",
+      "logo_base": "hkbchina",
+      "hibank_name": ""
+    },
+    "江苏农商联合银行": {
+      "logo": "bank_logos/hibank/江苏农商联合银行_210964205c.png",
+      "color": "#C06E1B",
+      "source": "HiBank",
+      "slug": "JiangsuRuralCommercialUnitedBank",
+      "logo_base": "",
+      "hibank_name": "江苏农商联合银行"
+    },
+    "江苏太仓农商银行": {
+      "logo": "bank_logos/hibank/江苏太仓农商银行_3dd99774bd.png",
+      "color": "#003789",
+      "source": "HiBank",
+      "slug": "JiangsuTaicangRuralCommercialBank",
+      "logo_base": "",
+      "hibank_name": "江苏太仓农商银行"
+    },
+    "江苏常熟农商银行": {
+      "logo": "bank_logos/hibank/江苏常熟农商银行_d03a7eb4a5.png",
+      "color": "#44371B",
+      "source": "HiBank",
+      "slug": "JiangsuChangshuRuralCommercialBank",
+      "logo_base": "",
+      "hibank_name": "江苏常熟农商银行"
+    },
+    "江苏张家港农商银行": {
+      "logo": "bank_logos/hibank/江苏张家港农商银行_5d77eb8505.png",
+      "color": "#C0971B",
+      "source": "HiBank",
+      "slug": "JiangsuZhangjiagangRuralCommercialBank",
+      "logo_base": "",
+      "hibank_name": "江苏张家港农商银行"
+    },
+    "江苏无锡农商银行": {
+      "logo": "bank_logos/hibank/江苏无锡农商银行_23d6bea410.png",
+      "color": "#B20D0D",
+      "source": "HiBank",
+      "slug": "WuxiRuralCommercialBank",
+      "logo_base": "",
+      "hibank_name": "江苏无锡农商银行"
+    },
+    "江苏昆山农商银行": {
+      "logo": "bank_logos/hibank/江苏昆山农商银行_000a338704.png",
+      "color": "#890000",
+      "source": "HiBank",
+      "slug": "JiangsuKunshanRuralCommercialBank",
+      "logo_base": "",
+      "hibank_name": "江苏昆山农商银行"
+    },
+    "江苏江南农商银行": {
+      "logo": "bank_logos/hibank/江苏江南农商银行_93d13fd992.png",
+      "color": "#7B1B1B",
+      "source": "HiBank",
+      "slug": "JiangsuJiangnanRuralCommercialBank",
+      "logo_base": "",
+      "hibank_name": "江苏江南农商银行"
+    },
+    "江苏江阴农商银行": {
+      "logo": "bank_logos/hibank/江苏江阴农商银行_5fabbba792.png",
+      "color": "#005229",
+      "source": "HiBank",
+      "slug": "JiangsuJiangyinRuralCommercialBank",
+      "logo_base": "",
+      "hibank_name": "江苏江阴农商银行"
+    },
+    "江苏苏商银行": {
+      "logo": "bank_logos/icongo/江苏苏商银行_c1736b6cab.png",
+      "color": "#370D52",
+      "source": "icongo/bank-logos",
+      "slug": "JiangsuSuMerchantsBank",
+      "logo_base": "ts-bank",
+      "hibank_name": ""
+    },
+    "江苏苏州农商银行": {
+      "logo": "bank_logos/hibank/江苏苏州农商银行_6a563c209a.png",
+      "color": "#245F81",
+      "source": "HiBank",
+      "slug": "SuzhouRuralCommercialBank",
+      "logo_base": "",
+      "hibank_name": "江苏苏州农商银行"
+    },
+    "江苏银行": {
+      "logo": "bank_logos/icongo/江苏银行_24e4b260df.png",
+      "color": "#005297",
+      "source": "icongo/bank-logos",
+      "slug": "BankofJiangsu",
+      "logo_base": "jsbchina",
+      "hibank_name": ""
+    },
+    "江苏长江商业银行": {
+      "logo": "bank_logos/icongo/江苏长江商业银行_a533a35588.png",
+      "color": "#C0000D",
+      "source": "icongo/bank-logos",
+      "slug": "JiangsuChangjiangCommercialBank",
+      "logo_base": "cjccb",
+      "hibank_name": ""
+    },
+    "江西农信": {
+      "logo": "bank_logos/hibank/江西农信_5fec7b4972.png",
+      "color": "#007B37",
+      "source": "HiBank",
+      "slug": "JiangxiRuralCreditCooperativeUnion",
+      "logo_base": "",
+      "hibank_name": "江西农信"
+    },
+    "江西裕民银行": {
+      "logo": "bank_logos/hibank/江西裕民银行_200970b475.png",
+      "color": "#514077",
+      "source": "HiBank",
+      "slug": "JiangxiYuminBank",
+      "logo_base": "",
+      "hibank_name": "江西裕民银行"
+    },
+    "江西银行": {
+      "logo": "bank_logos/icongo/江西银行_5bcb18fd6e.png",
+      "color": "#007B7B",
+      "source": "icongo/bank-logos",
+      "slug": "JiangxiBank",
+      "logo_base": "jx-bank",
+      "hibank_name": ""
+    },
+    "沧州银行": {
+      "logo": "bank_logos/icongo/沧州银行_63ddcf785c.png",
+      "color": "#00376E",
+      "source": "icongo/bank-logos",
+      "slug": "BankofCangzhou",
+      "logo_base": "bankcz",
+      "hibank_name": ""
+    },
+    "河北农信": {
+      "logo": "bank_logos/hibank/河北农信_a6895d2b6a.png",
+      "color": "#007B37",
+      "source": "HiBank",
+      "slug": "HebeiRuralCreditCooperativeUnion",
+      "logo_base": "",
+      "hibank_name": "河北农信"
+    },
+    "河北蠡州北银农商银行": {
+      "logo": "bank_logos/hibank/河北蠡州北银农商银行_01424c1a3b.png",
+      "color": "#C0000D",
+      "source": "HiBank",
+      "slug": "HebeiLizhouBOBRuralCommercialBank",
+      "logo_base": "",
+      "hibank_name": "河北蠡州北银农商银行"
+    },
+    "河北银行": {
+      "logo": "bank_logos/icongo/河北银行_5267a6328c.png",
+      "color": "#0D376E",
+      "source": "icongo/bank-logos",
+      "slug": "BankofHebei",
+      "logo_base": "hebbank",
+      "hibank_name": ""
+    },
+    "河南农商银行": {
+      "logo": "bank_logos/hibank/河南农商银行_b42aac50e5.png",
+      "color": "#970000",
+      "source": "HiBank",
+      "slug": "HenanRuralCommercialBank",
+      "logo_base": "",
+      "hibank_name": "河南农商银行"
+    },
+    "泉州银行": {
+      "logo": "bank_logos/icongo/泉州银行_6e462584ee.png",
+      "color": "#00377B",
+      "source": "icongo/bank-logos",
+      "slug": "BankofQuanzhou",
+      "logo_base": "qzccbank",
+      "hibank_name": ""
+    },
+    "法国兴业银行": {
+      "logo": "bank_logos/icongo/法国兴业银行_f02d579fdd.png",
+      "color": "#C0000D",
+      "source": "icongo/bank-logos",
+      "slug": "SocieteGenerale",
+      "logo_base": "societegenerale",
+      "hibank_name": ""
+    },
+    "法国外贸银行": {
+      "logo": "bank_logos/hibank/法国外贸银行_5765c3dee6.png",
+      "color": "#444489",
+      "source": "HiBank",
+      "slug": "Natixis",
+      "logo_base": "",
+      "hibank_name": "法国外贸银行"
+    },
+    "法国巴黎银行": {
+      "logo": "bank_logos/hibank/法国巴黎银行_2238fc27a4.png",
+      "color": "#006E52",
+      "source": "HiBank",
+      "slug": "BNPParibas",
+      "logo_base": "",
+      "hibank_name": "法国巴黎银行"
+    },
+    "泰国汇商银行": {
+      "logo": "bank_logos/fallback/泰国汇商银行_b42703a77c.png",
+      "color": "#9E181D",
+      "source": "fallback",
+      "slug": "TheSiamCommercialBank",
+      "logo_base": "",
+      "hibank_name": ""
+    },
+    "泰国泰京银行": {
+      "logo": "bank_logos/fallback/泰国泰京银行_7c50001957.png",
+      "color": "#9C4F14",
+      "source": "fallback",
+      "slug": "KrungThaiBank",
+      "logo_base": "",
+      "hibank_name": ""
+    },
+    "泰安银行": {
+      "logo": "bank_logos/icongo/泰安银行_0cb118932e.png",
+      "color": "#C0000D",
+      "source": "icongo/bank-logos",
+      "slug": "BankofTaian",
+      "logo_base": "taccb",
+      "hibank_name": ""
+    },
+    "泸州银行": {
+      "logo": "bank_logos/icongo/泸州银行_4e321414bc.png",
+      "color": "#891B1B",
+      "source": "icongo/bank-logos",
+      "slug": "LuzhouBank",
+      "logo_base": "lzccb",
+      "hibank_name": ""
+    },
+    "济宁银行": {
+      "logo": "bank_logos/icongo/济宁银行_0c8a12b170.png",
+      "color": "#004489",
+      "source": "icongo/bank-logos",
+      "slug": "BankofJining",
+      "logo_base": "jn-bank",
+      "hibank_name": ""
+    },
+    "浙商银行": {
+      "logo": "bank_logos/icongo/浙商银行_3306f64bf3.png",
+      "color": "#C0000D",
+      "source": "icongo/bank-logos",
+      "slug": "ChinaZheshangBank",
+      "logo_base": "czbank",
+      "hibank_name": ""
+    },
+    "浙江农商联合银行": {
+      "logo": "bank_logos/hibank/浙江农商联合银行_3cfc339751.png",
+      "color": "#007B37",
+      "source": "HiBank",
+      "slug": "ZhejiangRuralCommercialUnitedBank",
+      "logo_base": "",
+      "hibank_name": "浙江农商联合银行"
+    },
+    "浙江民泰商业银行": {
+      "logo": "bank_logos/hibank/浙江民泰商业银行_c09418e859.png",
+      "color": "#C00D1B",
+      "source": "HiBank",
+      "slug": "ZhejiangMintaiCommercialBank",
+      "logo_base": "",
+      "hibank_name": "浙江民泰商业银行"
+    },
+    "浙江泰隆商业银行": {
+      "logo": "bank_logos/hibank/浙江泰隆商业银行_79634dde5f.png",
+      "color": "#0C416E",
+      "source": "HiBank",
+      "slug": "ZhejiangTailongCommercialBank",
+      "logo_base": "",
+      "hibank_name": "浙江泰隆商业银行"
+    },
+    "浙江稠州商业银行": {
+      "logo": "bank_logos/icongo/浙江稠州商业银行_056e7bc967.png",
+      "color": "#891B1B",
+      "source": "icongo/bank-logos",
+      "slug": "ZhejiangChouzhouCommercialBank",
+      "logo_base": "czcb",
+      "hibank_name": ""
+    },
+    "浙江网商银行": {
+      "logo": "bank_logos/hibank/浙江网商银行_ea3c78a388.png",
+      "color": "#1A6842",
+      "source": "HiBank",
+      "slug": "ZhejiangEcommerceBank",
+      "logo_base": "",
+      "hibank_name": "浙江网商银行"
+    },
+    "浦发银行": {
+      "logo": "bank_logos/icongo/浦发银行_7f83e1af69.png",
+      "color": "#001B6E",
+      "source": "icongo/bank-logos",
+      "slug": "ShanghaiPudongDevelopmentBank",
+      "logo_base": "spdb",
+      "hibank_name": ""
+    },
+    "海丰农商银行": {
+      "logo": "bank_logos/hibank/海丰农商银行_177aea867e.png",
+      "color": "#443700",
+      "source": "HiBank",
+      "slug": "HaifengRuralCommercialBank",
+      "logo_base": "",
+      "hibank_name": "海丰农商银行"
+    },
+    "海南农商银行": {
+      "logo": "bank_logos/hibank/海南农商银行_9577d4cb48.png",
+      "color": "#B2001B",
+      "source": "HiBank",
+      "slug": "HainanRuralCommercialBank",
+      "logo_base": "",
+      "hibank_name": "海南农商银行"
+    },
+    "海南银行": {
+      "logo": "bank_logos/hibank/海南银行_e1d6fbb130.png",
+      "color": "#008952",
+      "source": "HiBank",
+      "slug": "BankofHainan",
+      "logo_base": "",
+      "hibank_name": "海南银行"
+    },
+    "海口联合农商银行": {
+      "logo": "bank_logos/hibank/海口联合农商银行_7d4479f541.png",
+      "color": "#1B296E",
+      "source": "HiBank",
+      "slug": "HaikouUnitedRuralCommercialBank",
+      "logo_base": "",
+      "hibank_name": "海口联合农商银行"
+    },
+    "淡水信用合作社": {
+      "logo": "bank_logos/fallback/淡水信用合作社_acb927256f.png",
+      "color": "#9C4F14",
+      "source": "fallback",
+      "slug": "TheTamsuiCreditCooperative",
+      "logo_base": "",
+      "hibank_name": "淡水信用合作社"
+    },
+    "淡水第一信用合作社": {
+      "logo": "bank_logos/fallback/淡水第一信用合作社_0ded8b0546.png",
+      "color": "#0C416E",
+      "source": "fallback",
+      "slug": "TheTamshuiFirstCreditCooperativeBank",
+      "logo_base": "",
+      "hibank_name": "淡水第一信用合作社"
+    },
+    "深圳农商银行": {
+      "logo": "bank_logos/hibank/深圳农商银行_19dd166c84.png",
+      "color": "#443700",
+      "source": "HiBank",
+      "slug": "ShenzhenRuralCommercialBank",
+      "logo_base": "",
+      "hibank_name": "深圳农商银行"
+    },
+    "深圳前海微众银行": {
+      "logo": "bank_logos/hibank/深圳前海微众银行_9b2025cbfa.png",
+      "color": "#B2000D",
+      "source": "HiBank",
+      "slug": "WeBank",
+      "logo_base": "",
+      "hibank_name": "深圳前海微众银行"
+    },
+    "渔会信用部": {
+      "logo": "bank_logos/fallback/渔会信用部_23eaba6329.png",
+      "color": "#5B8343",
+      "source": "fallback",
+      "slug": "CreditDepartmentsofFishermensAssociations",
+      "logo_base": "",
+      "hibank_name": "渔会信用部"
+    },
+    "渣打国际商业银行": {
+      "logo": "bank_logos/hibank/渣打国际商业银行_849527ce20.png",
+      "color": "#008929",
+      "source": "HiBank",
+      "slug": "StandardCharteredBankTaiwan",
+      "logo_base": "",
+      "hibank_name": "渣打国际商业银行"
+    },
+    "渣打银行": {
+      "logo": "bank_logos/icongo/渣打银行_8151963652.png",
+      "color": "#006089",
+      "source": "icongo/bank-logos",
+      "slug": "StandardCharteredBank",
+      "logo_base": "sc",
+      "hibank_name": ""
+    },
+    "渣打银行（香港）": {
+      "logo": "bank_logos/hibank/渣打银行_香港_cf3e8ac5da.png",
+      "color": "#008929",
+      "source": "HiBank",
+      "slug": "StandardCharteredBankHongKong",
+      "logo_base": "",
+      "hibank_name": "渣打银行（香港）"
+    },
+    "渤海银行": {
+      "logo": "bank_logos/icongo/渤海银行_550e11d71f.png",
+      "color": "#00376E",
+      "source": "icongo/bank-logos",
+      "slug": "ChinaBohaiBank",
+      "logo_base": "cbhb",
+      "hibank_name": ""
+    },
+    "温州民商银行": {
+      "logo": "bank_logos/hibank/温州民商银行_85fa24ca03.png",
+      "color": "#005297",
+      "source": "HiBank",
+      "slug": "WenzhouMinshangBank",
+      "logo_base": "",
+      "hibank_name": "温州民商银行"
+    },
+    "温州银行": {
+      "logo": "bank_logos/icongo/温州银行_e7f31de0e0.png",
+      "color": "#683582",
+      "source": "icongo/bank-logos",
+      "slug": "BankofWenzhou",
+      "logo_base": "wzcb",
+      "hibank_name": ""
+    },
+    "湖北农信": {
+      "logo": "bank_logos/hibank/湖北农信_ffb80733be.png",
+      "color": "#000DC0",
+      "source": "HiBank",
+      "slug": "HubeiRuralCreditCooperativeUnion",
+      "logo_base": "",
+      "hibank_name": "湖北农信"
+    },
+    "湖北银行": {
+      "logo": "bank_logos/icongo/湖北银行_73f11fd1e4.png",
+      "color": "#C00D1B",
+      "source": "icongo/bank-logos",
+      "slug": "HubeiBank",
+      "logo_base": "hubeibank",
+      "hibank_name": ""
+    },
+    "湖南三湘银行": {
+      "logo": "bank_logos/hibank/湖南三湘银行_470b5f157d.png",
+      "color": "#C0000D",
+      "source": "HiBank",
+      "slug": "BankofSanxiang",
+      "logo_base": "",
+      "hibank_name": "湖南三湘银行"
+    },
+    "湖南农信": {
+      "logo": "bank_logos/hibank/湖南农信_a73d62972a.png",
+      "color": "#C00000",
+      "source": "HiBank",
+      "slug": "HunanRuralCreditCooperativeUnion",
+      "logo_base": "",
+      "hibank_name": "湖南农信"
+    },
+    "湖南银行": {
+      "logo": "bank_logos/hibank/湖南银行_ca8eef4679.png",
+      "color": "#00297B",
+      "source": "HiBank",
+      "slug": "BankofHunan",
+      "logo_base": "",
+      "hibank_name": "湖南银行"
+    },
+    "湖州银行": {
+      "logo": "bank_logos/icongo/湖州银行_1ccc7b868a.png",
+      "color": "#9C4F14",
+      "source": "icongo/bank-logos",
+      "slug": "BankofHuzhou",
+      "logo_base": "hzccb",
+      "hibank_name": ""
+    },
+    "潍坊银行": {
+      "logo": "bank_logos/icongo/潍坊银行_7dde63d8a2.png",
+      "color": "#B2000D",
+      "source": "icongo/bank-logos",
+      "slug": "BankofWeifang",
+      "logo_base": "bankwf",
+      "hibank_name": ""
+    },
+    "潮州农商银行": {
+      "logo": "bank_logos/hibank/潮州农商银行_10abed41e6.png",
+      "color": "#9C4F14",
+      "source": "HiBank",
+      "slug": "ChaozhouRuralCommercialBank",
+      "logo_base": "",
+      "hibank_name": "潮州农商银行"
+    },
+    "澎湖县第一信用合作社": {
+      "logo": "bank_logos/fallback/澎湖县第一信用合作社_98178dfbc3.png",
+      "color": "#514077",
+      "source": "fallback",
+      "slug": "PenghuFirstCreditCooperative",
+      "logo_base": "",
+      "hibank_name": "澎湖县第一信用合作社"
+    },
+    "澎湖第二信用合作社": {
+      "logo": "bank_logos/fallback/澎湖第二信用合作社_3f047a03a3.png",
+      "color": "#683582",
+      "source": "fallback",
+      "slug": "TheSecondCreditCooperativeAssociationofPenghu",
+      "logo_base": "",
+      "hibank_name": "澎湖第二信用合作社"
+    },
+    "澳大利亚和新西兰银行": {
+      "logo": "bank_logos/icongo/澳大利亚和新西兰银行_1ac7d63369.png",
+      "color": "#007BB2",
+      "source": "icongo/bank-logos",
+      "slug": "AustraliaandNewZealandBank",
+      "logo_base": "anz",
+      "hibank_name": ""
+    },
+    "澳大利亚国民银行": {
+      "logo": "bank_logos/fallback/澳大利亚国民银行_d3be39ca06.png",
+      "color": "#8D222C",
+      "source": "fallback",
+      "slug": "NationalAustraliaBank",
+      "logo_base": "",
+      "hibank_name": ""
+    },
+    "澳大利亚澳洲联邦银行": {
+      "logo": "bank_logos/hibank/澳大利亚澳洲联邦银行_5c791115c3.png",
+      "color": "#C09729",
+      "source": "HiBank",
+      "slug": "CommonwealthBankofAustralia",
+      "logo_base": "",
+      "hibank_name": "澳大利亚澳洲联邦银行"
+    },
+    "澳大利亚西太平洋银行": {
+      "logo": "bank_logos/fallback/澳大利亚西太平洋银行_c2dbc8c897.png",
+      "color": "#0C7A6C",
+      "source": "fallback",
+      "slug": "WestpacBanking",
+      "logo_base": "",
+      "hibank_name": ""
+    },
+    "澳门华人银行": {
+      "logo": "bank_logos/fallback/澳门华人银行_ce2edabfd8.png",
+      "color": "#0C7A6C",
+      "source": "fallback",
+      "slug": "TheMacauChineseBank",
+      "logo_base": "",
+      "hibank_name": "澳门华人银行"
+    },
+    "澳门发展银行": {
+      "logo": "bank_logos/fallback/澳门发展银行_e334196a7b.png",
+      "color": "#5B8343",
+      "source": "fallback",
+      "slug": "MacaoDevelopmentBank",
+      "logo_base": "",
+      "hibank_name": "澳门发展银行"
+    },
+    "澳门商业银行": {
+      "logo": "bank_logos/icongo/澳门商业银行_f7bd3ea1f8.png",
+      "color": "#0D6060",
+      "source": "icongo/bank-logos",
+      "slug": "BancoComercialdeMacau",
+      "logo_base": "bcm",
+      "hibank_name": ""
+    },
+    "澳门国际银行": {
+      "logo": "bank_logos/hibank/澳门国际银行_aff0d8d4a0.png",
+      "color": "#006EB2",
+      "source": "HiBank",
+      "slug": "LusoInternationalBanking",
+      "logo_base": "",
+      "hibank_name": "澳门国际银行"
+    },
+    "烟台银行": {
+      "logo": "bank_logos/icongo/烟台银行_f20fd0cd10.png",
+      "color": "#005297",
+      "source": "icongo/bank-logos",
+      "slug": "YantaiBank",
+      "logo_base": "yantaibank",
+      "hibank_name": ""
+    },
+    "玉山商业银行": {
+      "logo": "bank_logos/fallback/玉山商业银行_35be9e48de.png",
+      "color": "#1E4A8E",
+      "source": "fallback",
+      "slug": "ESunCommercialBank",
+      "logo_base": "",
+      "hibank_name": "玉山商业银行"
+    },
+    "玉山银行": {
+      "logo": "bank_logos/hibank/玉山银行_b77bdcdb9c.png",
+      "color": "#007B7B",
+      "source": "HiBank",
+      "slug": "ESunCommercialBank",
+      "logo_base": "",
+      "hibank_name": "玉山银行"
+    },
+    "王道商业银行": {
+      "logo": "bank_logos/icongo/王道商业银行_461518f5b8.png",
+      "color": "#C06E0D",
+      "source": "icongo/bank-logos",
+      "slug": "OBank",
+      "logo_base": "o-bank",
+      "hibank_name": ""
+    },
+    "理慧银行": {
+      "logo": "bank_logos/fallback/理慧银行_c2c9d2b458.png",
+      "color": "#0C7A6C",
+      "source": "fallback",
+      "slug": "liviBank",
+      "logo_base": "",
+      "hibank_name": "理慧银行"
+    },
+    "瑞兴商业银行": {
+      "logo": "bank_logos/fallback/瑞兴商业银行_9787be47da.png",
+      "color": "#8D222C",
+      "source": "fallback",
+      "slug": "TaipeiStarBank",
+      "logo_base": "",
+      "hibank_name": "瑞兴商业银行"
+    },
+    "瑞典北欧斯安银行": {
+      "logo": "bank_logos/hibank/瑞典北欧斯安银行_9efec8b7f1.png",
+      "color": "#448929",
+      "source": "HiBank",
+      "slug": "SkandinaviskaEnskildaBanken",
+      "logo_base": "",
+      "hibank_name": "瑞典北欧斯安银行"
+    },
+    "瑞典银行": {
+      "logo": "bank_logos/hibank/瑞典银行_1acfb9d29f.png",
+      "color": "#97A5B2",
+      "source": "HiBank",
+      "slug": "Swedbank",
+      "logo_base": "",
+      "hibank_name": "瑞典银行"
+    },
+    "瑞士银行": {
+      "logo": "bank_logos/icongo/瑞士银行_9c2e5ee0d2.png",
+      "color": "#C0000D",
+      "source": "icongo/bank-logos",
+      "slug": "UBS",
+      "logo_base": "ubs",
+      "hibank_name": ""
+    },
+    "瑞穗银行": {
+      "logo": "bank_logos/icongo/瑞穗银行_b6b91061cf.png",
+      "color": "#C06E0D",
+      "source": "icongo/bank-logos",
+      "slug": "MizuhoBank",
+      "logo_base": "o-bank",
+      "hibank_name": ""
+    },
+    "甘肃农信": {
+      "logo": "bank_logos/hibank/甘肃农信_3949698185.png",
+      "color": "#006029",
+      "source": "HiBank",
+      "slug": "GansuRuralCreditCooperativeUnion",
+      "logo_base": "",
+      "hibank_name": "甘肃农信"
+    },
+    "甘肃银行": {
+      "logo": "bank_logos/icongo/甘肃银行_2b26be8f3a.png",
+      "color": "#A55229",
+      "source": "icongo/bank-logos",
+      "slug": "BankofGansu",
+      "logo_base": "gsbankchina",
+      "hibank_name": ""
+    },
+    "盘谷银行": {
+      "logo": "bank_logos/icongo/盘谷银行_f0f47365c0.png",
+      "color": "#00007B",
+      "source": "icongo/bank-logos",
+      "slug": "BangkokBank",
+      "logo_base": "bangkokbank",
+      "hibank_name": ""
+    },
+    "盘锦银行": {
+      "logo": "bank_logos/icongo/盘锦银行_a18671fc75.png",
+      "color": "#C0291B",
+      "source": "icongo/bank-logos",
+      "slug": "BankofPanjin",
+      "logo_base": "bankofpj",
+      "hibank_name": ""
+    },
+    "盛京银行": {
+      "logo": "bank_logos/icongo/盛京银行_cb61360199.png",
+      "color": "#C0000D",
+      "source": "icongo/bank-logos",
+      "slug": "ShengjingBank",
+      "logo_base": "shengjingbank",
+      "hibank_name": ""
+    },
+    "石嘴山银行": {
+      "logo": "bank_logos/icongo/石嘴山银行_7c6ee7c122.png",
+      "color": "#370D0D",
+      "source": "icongo/bank-logos",
+      "slug": "BankofShizuishan",
+      "logo_base": "szsccb",
+      "hibank_name": ""
+    },
+    "福建农信": {
+      "logo": "bank_logos/hibank/福建农信_ca8de2081b.png",
+      "color": "#007B37",
+      "source": "HiBank",
+      "slug": "FujianRuralCreditCooperativeUnion",
+      "logo_base": "",
+      "hibank_name": "福建农信"
+    },
+    "福建华通银行": {
+      "logo": "bank_logos/hibank/福建华通银行_737fc01be2.png",
+      "color": "#006EB2",
+      "source": "HiBank",
+      "slug": "FujianOneBank",
+      "logo_base": "",
+      "hibank_name": "福建华通银行"
+    },
+    "福建海峡银行": {
+      "logo": "bank_logos/icongo/福建海峡银行_5700389e69.png",
+      "color": "#004489",
+      "source": "icongo/bank-logos",
+      "slug": "FujianHaixiaBank",
+      "logo_base": "fjhxbank",
+      "hibank_name": ""
+    },
+    "科威特国民银行": {
+      "logo": "bank_logos/hibank/科威特国民银行_3641981ddc.png",
+      "color": "#1B2960",
+      "source": "HiBank",
+      "slug": "NationalBankofKuwait",
+      "logo_base": "",
+      "hibank_name": "科威特国民银行"
+    },
+    "秦农农商银行": {
+      "logo": "bank_logos/hibank/秦农农商银行_16ee0fcc62.png",
+      "color": "#B20D00",
+      "source": "HiBank",
+      "slug": "ShaanxiQinNongRuralCommercialBank",
+      "logo_base": "",
+      "hibank_name": "秦农农商银行"
+    },
+    "秦皇岛银行": {
+      "logo": "bank_logos/icongo/秦皇岛银行_7bff9a5283.png",
+      "color": "#004489",
+      "source": "icongo/bank-logos",
+      "slug": "BankofQinhuangdao",
+      "logo_base": "qhdbank",
+      "hibank_name": ""
+    },
+    "立桥银行": {
+      "logo": "bank_logos/fallback/立桥银行_3a4bd2ce9b.png",
+      "color": "#245F81",
+      "source": "fallback",
+      "slug": "BancoWellLink",
+      "logo_base": "",
+      "hibank_name": "立桥银行"
+    },
+    "第一商业银行": {
+      "logo": "bank_logos/icongo/第一商业银行_c8f98355c0.png",
+      "color": "#005237",
+      "source": "icongo/bank-logos",
+      "slug": "FirstCommercialBank",
+      "logo_base": "firstbank",
+      "hibank_name": ""
+    },
+    "约旦阿拉伯银行": {
+      "logo": "bank_logos/fallback/约旦阿拉伯银行_37116d21c8.png",
+      "color": "#8D222C",
+      "source": "fallback",
+      "slug": "ArabBank",
+      "logo_base": "",
+      "hibank_name": ""
+    },
+    "绍兴银行": {
+      "logo": "bank_logos/icongo/绍兴银行_60f95ca4eb.png",
+      "color": "#0D7BB2",
+      "source": "icongo/bank-logos",
+      "slug": "BankofShaoxing",
+      "logo_base": "sxccb",
+      "hibank_name": ""
+    },
+    "绵阳市商业银行": {
+      "logo": "bank_logos/icongo/绵阳市商业银行_2a9d7e916c.png",
+      "color": "#004489",
+      "source": "icongo/bank-logos",
+      "slug": "MianyangCityCommercialBank",
+      "logo_base": "mycc",
+      "hibank_name": ""
+    },
+    "美国北美信托银行": {
+      "logo": "bank_logos/fallback/美国北美信托银行_1b9fe4e5cb.png",
+      "color": "#683582",
+      "source": "fallback",
+      "slug": "TheNorthernTrustCompany",
+      "logo_base": "",
+      "hibank_name": ""
+    },
+    "美国富国银行": {
+      "logo": "bank_logos/icongo/美国富国银行_68b39cc01a.png",
+      "color": "#C06E0D",
+      "source": "icongo/bank-logos",
+      "slug": "WellsFargoBank",
+      "logo_base": "o-bank",
+      "hibank_name": ""
+    },
+    "美国建东银行": {
+      "logo": "bank_logos/fallback/美国建东银行_da717889e0.png",
+      "color": "#0C7A6C",
+      "source": "fallback",
+      "slug": "BankofTheOrient",
+      "logo_base": "",
+      "hibank_name": ""
+    },
+    "美国纽约梅隆银行": {
+      "logo": "bank_logos/hibank/美国纽约梅隆银行_f341549396.png",
+      "color": "#003744",
+      "source": "HiBank",
+      "slug": "TheBankofNewYorkMellon",
+      "logo_base": "",
+      "hibank_name": "美国纽约梅隆银行"
+    },
+    "美国道富银行": {
+      "logo": "bank_logos/fallback/美国道富银行_95de1c6517.png",
+      "color": "#1E4A8E",
+      "source": "fallback",
+      "slug": "StateStreetBank",
+      "logo_base": "",
+      "hibank_name": ""
+    },
+    "美国银行": {
+      "logo": "bank_logos/icongo/美国银行_7c7f3c35da.png",
+      "color": "#005289",
+      "source": "icongo/bank-logos",
+      "slug": "BankofAmerica",
+      "logo_base": "bankofamerica",
+      "hibank_name": ""
+    },
+    "联邦商业银行": {
+      "logo": "bank_logos/fallback/联邦商业银行_630ff22657.png",
+      "color": "#683582",
+      "source": "fallback",
+      "slug": "UnionBankofTaiwan",
+      "logo_base": "",
+      "hibank_name": "联邦商业银行"
+    },
+    "自贡银行": {
+      "logo": "bank_logos/icongo/自贡银行_1cdb913ea0.png",
+      "color": "#A5000D",
+      "source": "icongo/bank-logos",
+      "slug": "BankofZigong",
+      "logo_base": "zgbank",
+      "hibank_name": ""
+    },
+    "花旗银行": {
+      "logo": "bank_logos/icongo/花旗银行_111ba8e26f.png",
+      "color": "#001B60",
+      "source": "icongo/bank-logos",
+      "slug": "Citibank",
+      "logo_base": "citibank",
+      "hibank_name": ""
+    },
+    "花旗银行（香港）": {
+      "logo": "bank_logos/icongo/花旗银行_香港_8c97c47262.png",
+      "color": "#001B60",
+      "source": "icongo/bank-logos",
+      "slug": "CitibankHongKong",
+      "logo_base": "citibank",
+      "hibank_name": ""
+    },
+    "花旗（台湾）商业银行": {
+      "logo": "bank_logos/icongo/花旗_台湾_商业银行_6aac7600f5.png",
+      "color": "#001B60",
+      "source": "icongo/bank-logos",
+      "slug": "CitibankTaiwan",
+      "logo_base": "citibank",
+      "hibank_name": ""
+    },
+    "花莲第一信用合作社": {
+      "logo": "bank_logos/fallback/花莲第一信用合作社_0d824316af.png",
+      "color": "#0C416E",
+      "source": "fallback",
+      "slug": "TheFirstCreditCooperativeofHualien",
+      "logo_base": "",
+      "hibank_name": "花莲第一信用合作社"
+    },
+    "花莲第二信用合作社": {
+      "logo": "bank_logos/fallback/花莲第二信用合作社_2a0c43e853.png",
+      "color": "#1A6842",
+      "source": "fallback",
+      "slug": "HualienndCreditCooperative",
+      "logo_base": "",
+      "hibank_name": "花莲第二信用合作社"
+    },
+    "苏州银行": {
+      "logo": "bank_logos/icongo/苏州银行_041e435876.png",
+      "color": "#526E29",
+      "source": "icongo/bank-logos",
+      "slug": "BankofSuzhou",
+      "logo_base": "suzhoubank",
+      "hibank_name": ""
+    },
+    "英国巴克莱银行": {
+      "logo": "bank_logos/icongo/英国巴克莱银行_fcbe384808.png",
+      "color": "#007BB2",
+      "source": "icongo/bank-logos",
+      "slug": "BarclaysBank",
+      "logo_base": "barclays",
+      "hibank_name": ""
+    },
+    "荷兰合作银行": {
+      "logo": "bank_logos/icongo/荷兰合作银行_e3b606a3aa.png",
+      "color": "#C06E0D",
+      "source": "icongo/bank-logos",
+      "slug": "CoperatieveRabobank",
+      "logo_base": "o-bank",
+      "hibank_name": ""
+    },
+    "荷兰安智银行": {
+      "logo": "bank_logos/icongo/荷兰安智银行_38d70b8d39.png",
+      "color": "#C0000D",
+      "source": "icongo/bank-logos",
+      "slug": "INGBank",
+      "logo_base": "shengjingbank",
+      "hibank_name": ""
+    },
+    "莱商银行": {
+      "logo": "bank_logos/icongo/莱商银行_92cf2abd18.png",
+      "color": "#891B0D",
+      "source": "icongo/bank-logos",
+      "slug": "LaishangBank",
+      "logo_base": "lsbankchina",
+      "hibank_name": ""
+    },
+    "营口银行": {
+      "logo": "bank_logos/icongo/营口银行_8fb2551351.png",
+      "color": "#00377B",
+      "source": "icongo/bank-logos",
+      "slug": "BankofYingkou",
+      "logo_base": "bankofyk",
+      "hibank_name": ""
+    },
+    "葫芦岛银行": {
+      "logo": "bank_logos/icongo/葫芦岛银行_034869addf.png",
+      "color": "#B2000D",
+      "source": "icongo/bank-logos",
+      "slug": "BankofHuludao",
+      "logo_base": "bankofhld",
+      "hibank_name": ""
+    },
+    "蒙商银行": {
+      "logo": "bank_logos/hibank/蒙商银行_add9ecf640.png",
+      "color": "#006EB2",
+      "source": "HiBank",
+      "slug": "MengshangBank",
+      "logo_base": "",
+      "hibank_name": "蒙商银行"
+    },
+    "蒙特利尔银行": {
+      "logo": "bank_logos/icongo/蒙特利尔银行_8ae3e96b02.png",
+      "color": "#C0000D",
+      "source": "icongo/bank-logos",
+      "slug": "BankofMontreal",
+      "logo_base": "bmo",
+      "hibank_name": ""
+    },
+    "蚂蚁银行（澳门）": {
+      "logo": "bank_logos/fallback/蚂蚁银行_澳门_9b55806933.png",
+      "color": "#5B8343",
+      "source": "fallback",
+      "slug": "AntBankMacao",
+      "logo_base": "",
+      "hibank_name": "蚂蚁银行（澳门）"
+    },
+    "蚂蚁银行（香港）": {
+      "logo": "bank_logos/fallback/蚂蚁银行_香港_952ab278d4.png",
+      "color": "#1E4A8E",
+      "source": "fallback",
+      "slug": "AntBankHongKong",
+      "logo_base": "",
+      "hibank_name": "蚂蚁银行（香港）"
+    },
+    "衡水银行": {
+      "logo": "bank_logos/hibank/衡水银行_7562a01d15.png",
+      "color": "#00377B",
+      "source": "HiBank",
+      "slug": "BankofHengshui",
+      "logo_base": "",
+      "hibank_name": "衡水银行"
+    },
+    "西安银行": {
+      "logo": "bank_logos/icongo/西安银行_fab5f67cb6.png",
+      "color": "#004489",
+      "source": "icongo/bank-logos",
+      "slug": "TheBankofXian",
+      "logo_base": "xacbank",
+      "hibank_name": ""
+    },
+    "西班牙对外银行": {
+      "logo": "bank_logos/fallback/西班牙对外银行_97ebb6e448.png",
+      "color": "#8D222C",
+      "source": "fallback",
+      "slug": "BancoBilbaoVizcayaArgentaria",
+      "logo_base": "",
+      "hibank_name": ""
+    },
+    "西班牙桑坦德银行": {
+      "logo": "bank_logos/fallback/西班牙桑坦德银行_60b8824d00.png",
+      "color": "#9E181D",
+      "source": "fallback",
+      "slug": "BancoSantander",
+      "logo_base": "",
+      "hibank_name": ""
+    },
+    "西藏银行": {
+      "logo": "bank_logos/hibank/西藏银行_71caa775b8.png",
+      "color": "#007BB2",
+      "source": "HiBank",
+      "slug": "BankofTibet",
+      "logo_base": "",
+      "hibank_name": "西藏银行"
+    },
+    "贵州农信": {
+      "logo": "bank_logos/hibank/贵州农信_d3498078dc.png",
+      "color": "#007B37",
+      "source": "HiBank",
+      "slug": "GuizhouRuralCreditCooperativeUnion",
+      "logo_base": "",
+      "hibank_name": "贵州农信"
+    },
+    "贵州银行": {
+      "logo": "bank_logos/icongo/贵州银行_e85028fab0.png",
+      "color": "#B2000D",
+      "source": "icongo/bank-logos",
+      "slug": "BankofGuizhou",
+      "logo_base": "bgzchina",
+      "hibank_name": ""
+    },
+    "贵阳农商银行": {
+      "logo": "bank_logos/hibank/贵阳农商银行_888c14da0f.png",
+      "color": "#C01B00",
+      "source": "HiBank",
+      "slug": "GuiyangRuralCommercialBank",
+      "logo_base": "",
+      "hibank_name": "贵阳农商银行"
+    },
+    "贵阳银行": {
+      "logo": "bank_logos/icongo/贵阳银行_79e9358a9b.png",
+      "color": "#C0000D",
+      "source": "icongo/bank-logos",
+      "slug": "BankofGuiyang",
+      "logo_base": "bankgy",
+      "hibank_name": ""
+    },
+    "资阳民生村镇银行(民生银行)": {
+      "logo": "bank_logos/hibank/资阳民生村镇银行_民生银行_de298a7323.png",
+      "color": "#448960",
+      "source": "HiBank",
+      "slug": "",
+      "logo_base": "",
+      "hibank_name": "民生银行"
+    },
+    "赣州银行": {
+      "logo": "bank_logos/icongo/赣州银行_7fb76ea3e5.png",
+      "color": "#A50D0D",
+      "source": "icongo/bank-logos",
+      "slug": "BankofGanzhou",
+      "logo_base": "gzccb",
+      "hibank_name": ""
+    },
+    "辽宁农商银行": {
+      "logo": "bank_logos/hibank/辽宁农商银行_dae835a1d4.png",
+      "color": "#0C7A6C",
+      "source": "HiBank",
+      "slug": "LiaoningRuralCommercialBank",
+      "logo_base": "",
+      "hibank_name": "辽宁农商银行"
+    },
+    "辽宁振兴银行": {
+      "logo": "bank_logos/hibank/辽宁振兴银行_37763640d1.png",
+      "color": "#A50000",
+      "source": "HiBank",
+      "slug": "NewUpBankofLiaoning",
+      "logo_base": "",
+      "hibank_name": "辽宁振兴银行"
+    },
+    "辽沈银行": {
+      "logo": "bank_logos/hibank/辽沈银行_266f8421ed.png",
+      "color": "#B2291B",
+      "source": "HiBank",
+      "slug": "LiaoshenBank",
+      "logo_base": "",
+      "hibank_name": "辽沈银行"
+    },
+    "达州银行": {
+      "logo": "bank_logos/icongo/达州银行_78f0dda3b7.png",
+      "color": "#60441B",
+      "source": "icongo/bank-logos",
+      "slug": "BankofDazhou",
+      "logo_base": "dzccb",
+      "hibank_name": ""
+    },
+    "远东国际商业银行": {
+      "logo": "bank_logos/fallback/远东国际商业银行_661d7d2aac.png",
+      "color": "#1A6842",
+      "source": "fallback",
+      "slug": "FarEasternInternationalBank",
+      "logo_base": "",
+      "hibank_name": "远东国际商业银行"
+    },
+    "连线商业银行": {
+      "logo": "bank_logos/fallback/连线商业银行_c1cd56bdaa.png",
+      "color": "#0C416E",
+      "source": "fallback",
+      "slug": "LINEBankTaiwan",
+      "logo_base": "",
+      "hibank_name": "连线商业银行"
+    },
+    "遂宁银行": {
+      "logo": "bank_logos/icongo/遂宁银行_8872bd3810.png",
+      "color": "#376E89",
+      "source": "icongo/bank-logos",
+      "slug": "SuiningBank",
+      "logo_base": "snccb",
+      "hibank_name": ""
+    },
+    "邛崃国民村镇银行(浙江宁波鄞州农商)": {
+      "logo": "bank_logos/hibank/邛崃国民村镇银行_浙江宁波鄞州农商_32b899e247.png",
+      "color": "#007B37",
+      "source": "HiBank",
+      "slug": "",
+      "logo_base": "",
+      "hibank_name": "鄞州农商银行"
+    },
+    "邢台银行": {
+      "logo": "bank_logos/hibank/邢台银行_238e2b509e.png",
+      "color": "#00296E",
+      "source": "HiBank",
+      "slug": "BankofXingtai",
+      "logo_base": "",
+      "hibank_name": "邢台银行"
+    },
+    "邮储银行": {
+      "logo": "bank_logos/icongo/邮储银行_e8ed4b2f37.png",
+      "color": "#0D6E29",
+      "source": "icongo/bank-logos",
+      "slug": "PostalSavingsBankofChina",
+      "logo_base": "psbc",
+      "hibank_name": ""
+    },
+    "邯郸银行": {
+      "logo": "bank_logos/icongo/邯郸银行_3ab8690bc7.png",
+      "color": "#C00D1B",
+      "source": "icongo/bank-logos",
+      "slug": "BankofHandan",
+      "logo_base": "hdcb",
+      "hibank_name": ""
+    },
+    "郑州银行": {
+      "logo": "bank_logos/icongo/郑州银行_4cf78427cc.png",
+      "color": "#C0000D",
+      "source": "icongo/bank-logos",
+      "slug": "BankofZhengzhou",
+      "logo_base": "zzbank",
+      "hibank_name": ""
+    },
+    "都江堰金都村镇银行(四川银行)": {
+      "logo": "bank_logos/hibank/都江堰金都村镇银行_四川银行_e92e8b34ef.png",
+      "color": "#006EA5",
+      "source": "HiBank",
+      "slug": "",
+      "logo_base": "",
+      "hibank_name": "四川银行"
+    },
+    "鄂尔多斯银行": {
+      "logo": "bank_logos/icongo/鄂尔多斯银行_f515b095ee.png",
+      "color": "#007B37",
+      "source": "icongo/bank-logos",
+      "slug": "OrdosBank",
+      "logo_base": "ordosbank",
+      "hibank_name": ""
+    },
+    "鄞州农商银行": {
+      "logo": "bank_logos/hibank/鄞州农商银行_6a638c6143.png",
+      "color": "#007B37",
+      "source": "HiBank",
+      "slug": "YinzhouRuralCommercialBank",
+      "logo_base": "",
+      "hibank_name": "鄞州农商银行"
+    },
+    "重庆三峡银行": {
+      "logo": "bank_logos/icongo/重庆三峡银行_4d25a51cf1.png",
+      "color": "#526E97",
+      "source": "icongo/bank-logos",
+      "slug": "ChongqingThreeGorgesBank",
+      "logo_base": "ccqtgb",
+      "hibank_name": ""
+    },
+    "重庆农商银行": {
+      "logo": "bank_logos/icongo/重庆农商银行_eb7e660e71.png",
+      "color": "#C00D0D",
+      "source": "icongo/bank-logos",
+      "slug": "ChongqingRuralCommercialBank",
+      "logo_base": "cqrcb",
+      "hibank_name": ""
+    },
+    "重庆富民银行": {
+      "logo": "bank_logos/hibank/重庆富民银行_0f2d915f33.png",
+      "color": "#1B89B2",
+      "source": "HiBank",
+      "slug": "ChongqingFuminBank",
+      "logo_base": "",
+      "hibank_name": "重庆富民银行"
+    },
+    "重庆银行": {
+      "logo": "bank_logos/icongo/重庆银行_ff3a7d42bf.png",
+      "color": "#008937",
+      "source": "icongo/bank-logos",
+      "slug": "BankofChongqing",
+      "logo_base": "cqcbank",
+      "hibank_name": ""
+    },
+    "金华银行": {
+      "logo": "bank_logos/icongo/金华银行_19cab05824.png",
+      "color": "#002960",
+      "source": "icongo/bank-logos",
+      "slug": "BankofJinhua",
+      "logo_base": "jhccb",
+      "hibank_name": ""
+    },
+    "金堂汇金村镇银行(自贡银行)": {
+      "logo": "bank_logos/hibank/金堂汇金村镇银行_自贡银行_2dbb17f2cd.png",
+      "color": "#C05200",
+      "source": "HiBank",
+      "slug": "",
+      "logo_base": "",
+      "hibank_name": "自贡银行"
+    },
+    "金门县信用合作社": {
+      "logo": "bank_logos/fallback/金门县信用合作社_8c017e27e5.png",
+      "color": "#514077",
+      "source": "fallback",
+      "slug": "KinmenCreditCooperative",
+      "logo_base": "",
+      "hibank_name": "金门县信用合作社"
+    },
+    "铁岭银行": {
+      "logo": "bank_logos/icongo/铁岭银行_f7e77236ba.png",
+      "color": "#B20D0D",
+      "source": "icongo/bank-logos",
+      "slug": "BankofTieling",
+      "logo_base": "bankoftieling",
+      "hibank_name": ""
+    },
+    "长城华西银行": {
+      "logo": "bank_logos/hibank/长城华西银行_8ecce9dc64.png",
+      "color": "#006097",
+      "source": "HiBank",
+      "slug": "GreatWallWestChinaBank",
+      "logo_base": "",
+      "hibank_name": "长城华西银行"
+    },
+    "长安银行": {
+      "logo": "bank_logos/icongo/长安银行_163e9efe0c.png",
+      "color": "#B2000D",
+      "source": "icongo/bank-logos",
+      "slug": "ChanganBank",
+      "logo_base": "ccabchina",
+      "hibank_name": ""
+    },
+    "长沙银行": {
+      "logo": "bank_logos/icongo/长沙银行_4651bf2b6d.png",
+      "color": "#B2000D",
+      "source": "icongo/bank-logos",
+      "slug": "BankofChangsha",
+      "logo_base": "cscb",
+      "hibank_name": ""
+    },
+    "阜新银行": {
+      "logo": "bank_logos/icongo/阜新银行_0ef19d2e9a.png",
+      "color": "#2960A5",
+      "source": "icongo/bank-logos",
+      "slug": "BankofFuxin",
+      "logo_base": "fuxinbank",
+      "hibank_name": ""
+    },
+    "阳信商业银行": {
+      "logo": "bank_logos/fallback/阳信商业银行_a628b445c0.png",
+      "color": "#245F81",
+      "source": "fallback",
+      "slug": "SunnyBank",
+      "logo_base": "",
+      "hibank_name": "阳信商业银行"
+    },
+    "阿联酋阿布扎比第一银行": {
+      "logo": "bank_logos/fallback/阿联酋阿布扎比第一银行_f1dc9450ce.png",
+      "color": "#0C416E",
+      "source": "fallback",
+      "slug": "FirstAbuDhabiBank",
+      "logo_base": "",
+      "hibank_name": ""
+    },
+    "陕西信合": {
+      "logo": "bank_logos/hibank/陕西信合_50763836d5.png",
+      "color": "#007B44",
+      "source": "HiBank",
+      "slug": "ShaanxiRuralCreditCooperativeUnion",
+      "logo_base": "",
+      "hibank_name": "陕西信合"
+    },
+    "雅安市商业银行": {
+      "logo": "bank_logos/hibank/雅安市商业银行_7d28e6dc4b.png",
+      "color": "#008937",
+      "source": "HiBank",
+      "slug": "YaanCityCommercialBank",
+      "logo_base": "",
+      "hibank_name": "雅安市商业银行"
+    },
+    "集友银行": {
+      "logo": "bank_logos/hibank/集友银行_9d60e434db.png",
+      "color": "#97001B",
+      "source": "HiBank",
+      "slug": "ChiyuBanking",
+      "logo_base": "",
+      "hibank_name": "集友银行"
+    },
+    "青岛银行": {
+      "logo": "bank_logos/icongo/青岛银行_ffa23cbd90.png",
+      "color": "#B2000D",
+      "source": "icongo/bank-logos",
+      "slug": "BankofQingdao",
+      "logo_base": "qdccb",
+      "hibank_name": ""
+    },
+    "青海农信": {
+      "logo": "bank_logos/hibank/青海农信_52659d35c4.png",
+      "color": "#0D9737",
+      "source": "HiBank",
+      "slug": "QinghaiRuralCreditCooperativeUnion",
+      "logo_base": "",
+      "hibank_name": "青海农信"
+    },
+    "青海银行": {
+      "logo": "bank_logos/icongo/青海银行_a4bb99cd4c.png",
+      "color": "#7B0060",
+      "source": "icongo/bank-logos",
+      "slug": "BankofQinghai",
+      "logo_base": "bankqh",
+      "hibank_name": ""
+    },
+    "鞍山银行": {
+      "logo": "bank_logos/icongo/鞍山银行_8780f4e0fe.png",
+      "color": "#1B377B",
+      "source": "icongo/bank-logos",
+      "slug": "BankofAnshan",
+      "logo_base": "bankofas",
+      "hibank_name": ""
+    },
+    "韩亚银行": {
+      "logo": "bank_logos/icongo/韩亚银行_2081cd1be7.png",
+      "color": "#006E60",
+      "source": "icongo/bank-logos",
+      "slug": "KEBHanaBank",
+      "logo_base": "hanabank",
+      "hibank_name": ""
+    },
+    "韩国产业银行": {
+      "logo": "bank_logos/hibank/韩国产业银行_7fc18d1577.png",
+      "color": "#002960",
+      "source": "HiBank",
+      "slug": "KoreaDevelopmentBank",
+      "logo_base": "",
+      "hibank_name": "韩国产业银行"
+    },
+    "韩国农协银行": {
+      "logo": "bank_logos/fallback/韩国农协银行_b14a3b35b5.png",
+      "color": "#A53124",
+      "source": "fallback",
+      "slug": "NongHyupBank",
+      "logo_base": "",
+      "hibank_name": ""
+    },
+    "韩国爱恩银行": {
+      "logo": "bank_logos/icongo/韩国爱恩银行_b48e61ef4b.png",
+      "color": "#00377B",
+      "source": "icongo/bank-logos",
+      "slug": "iMBank",
+      "logo_base": "eximbank",
+      "hibank_name": ""
+    },
+    "韩国釜山银行": {
+      "logo": "bank_logos/fallback/韩国釜山银行_7c19481f70.png",
+      "color": "#9C4F14",
+      "source": "fallback",
+      "slug": "TheBusanBank",
+      "logo_base": "",
+      "hibank_name": ""
+    },
+    "韶关农商银行": {
+      "logo": "bank_logos/hibank/韶关农商银行_8651ed9485.png",
+      "color": "#0C7A6C",
+      "source": "HiBank",
+      "slug": "ShaoguanRuralCommercialBank",
+      "logo_base": "",
+      "hibank_name": "韶关农商银行"
+    },
+    "首都银行": {
+      "logo": "bank_logos/hibank/首都银行_92a5f65a9e.png",
+      "color": "#0D3789",
+      "source": "HiBank",
+      "slug": "MetropolitanBank",
+      "logo_base": "",
+      "hibank_name": "首都银行"
+    },
+    "香港上海汇丰银行": {
+      "logo": "bank_logos/hibank/香港上海汇丰银行_de4f0e3c3e.png",
+      "color": "#C0000D",
+      "source": "HiBank",
+      "slug": "TheHongkongandShanghaiBankingCorporation",
+      "logo_base": "",
+      "hibank_name": "香港上海汇丰银行"
+    },
+    "马来西亚联昌银行": {
+      "logo": "bank_logos/fallback/马来西亚联昌银行_980aec6cfb.png",
+      "color": "#514077",
+      "source": "fallback",
+      "slug": "CIMBBankBerhad",
+      "logo_base": "",
+      "hibank_name": ""
+    },
+    "马来西亚马来亚银行": {
+      "logo": "bank_logos/icongo/马来西亚马来亚银行_52c26522ad.png",
+      "color": "#7B600D",
+      "source": "icongo/bank-logos",
+      "slug": "MalayanBankingBerhad",
+      "logo_base": "maybank",
+      "hibank_name": ""
+    },
+    "高雄市第三信用合作社": {
+      "logo": "bank_logos/fallback/高雄市第三信用合作社_8b62f84d2d.png",
+      "color": "#8D222C",
+      "source": "fallback",
+      "slug": "TheKaohsiungThirdCreditCooperative",
+      "logo_base": "",
+      "hibank_name": "高雄市第三信用合作社"
+    },
+    "高雄银行": {
+      "logo": "bank_logos/fallback/高雄银行_88cb9aa33c.png",
+      "color": "#9C4F14",
+      "source": "fallback",
+      "slug": "BankofKaohsiung",
+      "logo_base": "",
+      "hibank_name": "高雄银行"
+    },
+    "鹿港信用合作社": {
+      "logo": "bank_logos/fallback/鹿港信用合作社_513606a161.png",
+      "color": "#A53124",
+      "source": "fallback",
+      "slug": "TheCreditCooperativeofLuKang",
+      "logo_base": "",
+      "hibank_name": "鹿港信用合作社"
+    },
+    "黄河农商银行": {
+      "logo": "bank_logos/icongo/黄河农商银行_f1f816ea7e.png",
+      "color": "#0C416E",
+      "source": "icongo/bank-logos",
+      "slug": "YellowRiverRuralCommercialBank",
+      "logo_base": "bankyellowriver",
+      "hibank_name": ""
+    },
+    "黑龙江农信": {
+      "logo": "bank_logos/hibank/黑龙江农信_af4eaeca55.png",
+      "color": "#007B37",
+      "source": "HiBank",
+      "slug": "HeilongjiangRuralCreditCooperativeUnion",
+      "logo_base": "",
+      "hibank_name": "黑龙江农信"
+    },
+    "齐商银行": {
+      "logo": "bank_logos/icongo/齐商银行_a8caef0421.png",
+      "color": "#C0000D",
+      "source": "icongo/bank-logos",
+      "slug": "QishangBank",
+      "logo_base": "qsbank",
+      "hibank_name": ""
+    },
+    "齐鲁银行": {
+      "logo": "bank_logos/icongo/齐鲁银行_b843b92278.png",
+      "color": "#00377B",
+      "source": "icongo/bank-logos",
+      "slug": "QiluBank",
+      "logo_base": "qlbchina",
+      "hibank_name": ""
+    },
+    "龙江银行": {
+      "logo": "bank_logos/icongo/龙江银行_7536fbeffb.png",
+      "color": "#00376E",
+      "source": "icongo/bank-logos",
+      "slug": "BankofLongjiang",
+      "logo_base": "lj-bank",
+      "hibank_name": ""
+    }
+  }
+}

@@ -1,0 +1,7 @@
+Bank logo assets are generated from:
+
+icongo/bank-logos
+https://github.com/icongo/bank-logos
+
+The upstream project is licensed under the MIT License.
+Generated fallback icons are created locally by nonebot-plugin-hibank.

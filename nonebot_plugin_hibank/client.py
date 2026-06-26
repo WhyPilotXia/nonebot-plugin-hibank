@@ -16,7 +16,7 @@ from nonebot import get_plugin_config
 from . import cache
 from .config import HibankConfig
 from .models import BankRef, BranchDetail, CacheStats, CityDetail, CityRef
-from .names import bank_name_match_keys, normalize
+from .names import bank_name_match_keys, bank_names_match, has_protected_region_qualifier, normalize
 
 
 STATE_RE = re.compile(
@@ -24,6 +24,8 @@ STATE_RE = re.compile(
     re.S,
 )
 BRANCH_HREF_RE = re.compile(r"^/branches/([^/]+)/([^/]+)/(.+)$")
+STANDARD_BANK_CATEGORIES = ("全国性", "外资", "区域性", "民营", "村镇")
+GLOBAL_FOREIGN_GROUPS = {"外资法人", "外资分行", "香港", "澳门", "台湾"}
 
 
 class HibankError(RuntimeError):
@@ -111,6 +113,74 @@ class HibankClient:
         bank_names.update(await asyncio.to_thread(self._cached_city_bank_names))
         return bank_names
 
+    async def all_bank_records(self) -> list[dict[str, str]]:
+        indexes = await self.ensure_indexes()
+        records: list[dict[str, str]] = []
+        seen_keys: set[str] = set()
+        banks = indexes.get("banks", [])
+        if isinstance(banks, list):
+            for group in banks:
+                if not isinstance(group, dict):
+                    continue
+                value = group.get("value", [])
+                if not isinstance(value, list):
+                    continue
+                for item in value:
+                    if not isinstance(item, dict):
+                        continue
+                    name = str(item.get("name", "")).strip()
+                    if not name:
+                        continue
+                    keys = bank_name_match_keys(name)
+                    if keys & seen_keys:
+                        continue
+                    seen_keys.update(keys)
+                    records.append(
+                        {
+                            "name": name,
+                            "slug": str(item.get("slug", "")).strip(),
+                        }
+                    )
+
+        for name in sorted(await asyncio.to_thread(self._cached_city_bank_names)):
+            keys = bank_name_match_keys(name)
+            if keys & seen_keys:
+                continue
+            seen_keys.update(keys)
+            records.append({"name": name, "slug": ""})
+        return records
+
+    async def bank_category_groups(self) -> dict[str, list[str]]:
+        groups: dict[str, set[str]] = {category: set() for category in STANDARD_BANK_CATEGORIES}
+        cached_groups = await asyncio.to_thread(self._cached_city_bank_category_groups)
+        for category, banks in cached_groups.items():
+            groups.setdefault(category, set()).update(banks)
+
+        indexes = await self.ensure_indexes()
+        index_banks = indexes.get("banks", [])
+        if isinstance(index_banks, list):
+            for group in index_banks:
+                if not isinstance(group, dict):
+                    continue
+                category = self._global_group_to_category(str(group.get("label", "")))
+                value = group.get("value", [])
+                if not isinstance(value, list):
+                    continue
+                for item in value:
+                    if not isinstance(item, dict):
+                        continue
+                    name = item.get("name")
+                    if isinstance(name, str) and name.strip():
+                        bank_name = name.strip()
+                        if not self._category_groups_contain(groups, bank_name):
+                            groups.setdefault(category, set()).add(bank_name)
+
+        return {
+            category: sorted(groups.get(category, set()))
+            for category in (*STANDARD_BANK_CATEGORIES, "其他")
+            if groups.get(category)
+        }
+
     def _cached_city_bank_names(self) -> set[str]:
         bank_names: set[str] = set()
         if not cache.CITY_DIR.exists():
@@ -130,6 +200,41 @@ class HibankClient:
                     if name:
                         bank_names.add(name)
         return bank_names
+
+    def _cached_city_bank_category_groups(self) -> dict[str, set[str]]:
+        result: dict[str, set[str]] = {}
+        if not cache.CITY_DIR.exists():
+            return result
+        for path in cache.CITY_DIR.glob("*.json"):
+            payload = cache.read_json(path)
+            if not isinstance(payload, dict):
+                continue
+            groups = payload.get("groups", {})
+            if not isinstance(groups, dict):
+                continue
+            for category, banks in groups.items():
+                if not isinstance(banks, list):
+                    continue
+                bucket = result.setdefault(str(category), set())
+                for bank in banks:
+                    name = str(bank).strip()
+                    if name:
+                        bucket.add(name)
+        return result
+
+    def _global_group_to_category(self, label: str) -> str:
+        if label == "全国性":
+            return "全国性"
+        if label in GLOBAL_FOREIGN_GROUPS or "外资" in label:
+            return "外资"
+        return "区域性"
+
+    def _category_groups_contain(self, groups: dict[str, set[str]], bank_name: str) -> bool:
+        return any(
+            bank_names_match(bank_name, existing)
+            for banks in groups.values()
+            for existing in banks
+        )
 
     async def split_known_banks(self, banks: list[str]) -> tuple[list[str], list[str]]:
         known_names = await self.all_bank_names()
@@ -162,6 +267,15 @@ class HibankClient:
                 ),
                 None,
             )
+            if canonical_name is None:
+                canonical_name = next(
+                    (
+                        known_name
+                        for known_name in sorted_names
+                        if bank_names_match(target, known_name)
+                    ),
+                    None,
+                )
             if canonical_name is not None:
                 known.append(canonical_name)
             else:
@@ -307,11 +421,20 @@ class HibankClient:
         matches: list[tuple[int, str, str]] = []
         for name, path in candidates.items():
             name_keys = bank_name_match_keys(name)
-            if query_keys & name_keys:
+            protected_pair = has_protected_region_qualifier(query) or has_protected_region_qualifier(name)
+            if query_keys & name_keys or bank_names_match(query, name):
                 score = 100
-            elif any(name_key.startswith(query_key) for name_key in name_keys for query_key in query_keys):
+            elif not protected_pair and any(
+                name_key.startswith(query_key)
+                for name_key in name_keys
+                for query_key in query_keys
+            ):
                 score = 80
-            elif any(query_key in name_key for name_key in name_keys for query_key in query_keys):
+            elif not protected_pair and any(
+                query_key in name_key
+                for name_key in name_keys
+                for query_key in query_keys
+            ):
                 score = 60
             else:
                 continue
