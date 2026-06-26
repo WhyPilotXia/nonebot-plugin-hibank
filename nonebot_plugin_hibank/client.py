@@ -16,6 +16,7 @@ from nonebot import get_plugin_config
 from . import cache
 from .config import HibankConfig
 from .models import BankRef, BranchDetail, CacheStats, CityDetail, CityRef
+from .names import bank_name_match_keys, normalize
 
 
 STATE_RE = re.compile(
@@ -23,18 +24,6 @@ STATE_RE = re.compile(
     re.S,
 )
 BRANCH_HREF_RE = re.compile(r"^/branches/([^/]+)/([^/]+)/(.+)$")
-SUFFIXES = (
-    "省",
-    "市",
-    "自治区",
-    "特别行政区",
-    "壮族自治区",
-    "回族自治区",
-    "维吾尔自治区",
-    "自治州",
-    "地区",
-    "盟",
-)
 
 
 class HibankError(RuntimeError):
@@ -119,22 +108,65 @@ class HibankClient:
                     name = item.get("name")
                     if isinstance(name, str) and name.strip():
                         bank_names.add(name.strip())
+        bank_names.update(await asyncio.to_thread(self._cached_city_bank_names))
+        return bank_names
+
+    def _cached_city_bank_names(self) -> set[str]:
+        bank_names: set[str] = set()
+        if not cache.CITY_DIR.exists():
+            return bank_names
+        for path in cache.CITY_DIR.glob("*.json"):
+            payload = cache.read_json(path)
+            if not isinstance(payload, dict):
+                continue
+            groups = payload.get("groups", {})
+            if not isinstance(groups, dict):
+                continue
+            for banks in groups.values():
+                if not isinstance(banks, list):
+                    continue
+                for bank in banks:
+                    name = str(bank).strip()
+                    if name:
+                        bank_names.add(name)
         return bank_names
 
     async def split_known_banks(self, banks: list[str]) -> tuple[list[str], list[str]]:
         known_names = await self.all_bank_names()
-        known_by_norm = {normalize(name) for name in known_names}
+        known_by_norm: dict[str, str] = {}
+        sorted_names = sorted(
+            known_names,
+            key=lambda name: (
+                "(" not in name and "（" not in name,
+                len(name),
+                name,
+            ),
+        )
+        for name in sorted_names:
+            for key in bank_name_match_keys(name):
+                known_by_norm.setdefault(key, name)
         known: list[str] = []
         unknown: list[str] = []
         for bank in banks:
             target = bank.strip()
             if not target:
                 continue
-            if normalize(target) in known_by_norm:
-                known.append(target)
+            target_keys = bank_name_match_keys(target)
+            target_norm = normalize(target)
+            ordered_keys = [target_norm] + sorted(target_keys - {target_norm}, key=len)
+            canonical_name = next(
+                (
+                    known_by_norm[key]
+                    for key in ordered_keys
+                    if key in known_by_norm
+                ),
+                None,
+            )
+            if canonical_name is not None:
+                known.append(canonical_name)
             else:
                 unknown.append(target)
-        return known, unknown
+        return list(dict.fromkeys(known)), list(dict.fromkeys(unknown))
 
     async def iter_cities(self) -> list[CityRef]:
         indexes = await self.ensure_indexes()
@@ -262,8 +294,8 @@ class HibankClient:
         )
 
     def resolve_bank(self, city_detail: CityDetail, query: str) -> BankRef:
-        query_norm = normalize(query)
-        if not query_norm:
+        query_keys = bank_name_match_keys(query)
+        if not query_keys:
             raise HibankError("请提供银行名。")
         candidates = city_detail.bank_paths
         if not candidates:
@@ -274,13 +306,12 @@ class HibankClient:
             }
         matches: list[tuple[int, str, str]] = []
         for name, path in candidates.items():
-            name_norm = normalize(name)
-            base_norm = normalize(name.split("(", 1)[0])
-            if query_norm == name_norm or query_norm == base_norm:
+            name_keys = bank_name_match_keys(name)
+            if query_keys & name_keys:
                 score = 100
-            elif name_norm.startswith(query_norm) or base_norm.startswith(query_norm):
+            elif any(name_key.startswith(query_key) for name_key in name_keys for query_key in query_keys):
                 score = 80
-            elif query_norm in name_norm:
+            elif any(query_key in name_key for name_key in name_keys for query_key in query_keys):
                 score = 60
             else:
                 continue
@@ -374,15 +405,5 @@ class HibankClient:
             if name:
                 paths[html.unescape(name)] = match.group(3)
         return paths
-
-
-def normalize(value: str) -> str:
-    text = str(value).strip().lower()
-    for char in (" ", "\t", "\n", "\r", "　", "-", "_"):
-        text = text.replace(char, "")
-    for suffix in SUFFIXES:
-        text = text.replace(suffix, "")
-    return text
-
 
 client = HibankClient()
