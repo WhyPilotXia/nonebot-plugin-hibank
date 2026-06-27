@@ -4,7 +4,13 @@ import asyncio
 import re
 
 from nonebot import on_command
-from nonebot.adapters.onebot.v11 import Message, MessageEvent, MessageSegment
+from nonebot.adapters.onebot.v11 import (
+    Bot,
+    GroupMessageEvent,
+    Message,
+    MessageEvent,
+    MessageSegment,
+)
 from nonebot.exception import FinishedException, PausedException, RejectedException
 from nonebot.log import logger
 from nonebot.params import CommandArg
@@ -14,11 +20,15 @@ from nonebot.typing import T_State
 from .bank_icons import clear_bank_asset_cache, update_bank_icon_assets
 from .client import HibankError, client, normalize
 from .marks import (
+    BankMarkEntry,
     MarkKind,
     add_user_banks,
+    find_entry,
+    get_user_entries,
     get_user_marks,
     remove_user_banks,
-    set_user_banks,
+    set_entry_card_numbers,
+    set_user_entries,
 )
 from .names import bank_name_match_keys, bank_names_match
 from .render import (
@@ -30,12 +40,13 @@ from .render import (
     render_city_search,
     render_card_pack_mark_list,
     render_help,
-    render_mark_list,
 )
 
 
 PAGE_RE = re.compile(r"\s+(\d+)$")
 HELP_ARGS = {"帮助", "-h", "--help", "help"}
+COUNT_RE = re.compile(r"^[1-9]\d*$")
+CARD_NUMBER_RE = re.compile(r"^[0-9*]+$")
 
 
 bank_command = on_command("bank", priority=5, block=True)
@@ -49,6 +60,7 @@ mark_list_command = on_command("标记列表", priority=5, block=True)
 follow_command = on_command("关注", aliases={"follow"}, priority=5, block=True)
 unfollow_command = on_command("取消关注", aliases={"unfollow"}, priority=5, block=True)
 follow_list_command = on_command("关注列表", priority=5, block=True)
+card_number_command = on_command("卡号", priority=5, block=True)
 batch_mark_command = on_command("批量标记", priority=5, block=True)
 batch_follow_command = on_command("批量关注", priority=5, block=True)
 batch_unmark_command = on_command("批量取消标记", priority=5, block=True)
@@ -58,10 +70,37 @@ copy_follow_command = on_command("复制关注", priority=5, block=True)
 update_icons_command = on_command("更新银行图标", permission=SUPERUSER, priority=5, block=True)
 
 FLOW_EXCEPTIONS = (FinishedException, PausedException, RejectedException)
+ERROR_EMOJI_ID = "67"
 
 
 def image_segment(image_bytes: bytes) -> MessageSegment:
     return MessageSegment.image(image_to_base64(image_bytes))
+
+
+async def set_message_emoji_like(
+    bot: Bot,
+    event: MessageEvent,
+    emoji_id: str,
+    enabled: bool = True,
+) -> None:
+    if not isinstance(event, GroupMessageEvent):
+        return
+    try:
+        await bot.call_api(
+            "set_msg_emoji_like",
+            group_id=event.group_id,
+            message_id=event.message_id,
+            emoji_id=emoji_id,
+            set=enabled,
+        )
+    except Exception as exc:
+        logger.opt(exception=exc).warning("HiBank 表情状态设置失败")
+
+
+async def finish_silent_image_error(matcher, bot: Bot, event: MessageEvent, log_message: str, exc: Exception) -> None:
+    logger.opt(exception=exc).error(log_message)
+    await set_message_emoji_like(bot, event, ERROR_EMOJI_ID)
+    await matcher.finish()
 
 
 def split_city_bank_page(argument: str) -> tuple[str, str, int]:
@@ -101,16 +140,16 @@ async def send_branch_detail(matcher, argument: str) -> None:
 
 
 @bank_command.handle()
-async def handle_bank(event: MessageEvent, args: Message = CommandArg()) -> None:
-    raw = args.extract_plain_text().strip()
-    if not raw or raw in HELP_ARGS:
-        await finish_image(bank_command, render_help())
-
-    action, _, rest = raw.partition(" ")
-    action = action.strip()
-    rest = rest.strip()
-
+async def handle_bank(bot: Bot, event: MessageEvent, args: Message = CommandArg()) -> None:
     try:
+        raw = args.extract_plain_text().strip()
+        if not raw or raw in HELP_ARGS:
+            await finish_image(bank_command, render_help())
+
+        action, _, rest = raw.partition(" ")
+        action = action.strip()
+        rest = rest.strip()
+
         if action == "城市":
             await send_city_detail(bank_command, rest, event)
 
@@ -142,12 +181,11 @@ async def handle_bank(event: MessageEvent, args: Message = CommandArg()) -> None
     except HibankError as exc:
         await bank_command.finish(str(exc))
     except Exception as exc:
-        logger.exception("HiBank 命令处理失败")
-        await bank_command.finish(f"HiBank 查询失败：{exc}")
+        await finish_silent_image_error(bank_command, bot, event, "HiBank 命令处理失败", exc)
 
 
 @city_command.handle()
-async def handle_city(event: MessageEvent, args: Message = CommandArg()) -> None:
+async def handle_city(bot: Bot, event: MessageEvent, args: Message = CommandArg()) -> None:
     city_query = args.extract_plain_text().strip()
     try:
         await send_city_detail(city_command, city_query, event)
@@ -156,12 +194,11 @@ async def handle_city(event: MessageEvent, args: Message = CommandArg()) -> None
     except HibankError as exc:
         await city_command.finish(str(exc))
     except Exception as exc:
-        logger.exception("HiBank 城市查询失败")
-        await city_command.finish(f"HiBank 城市查询失败：{exc}")
+        await finish_silent_image_error(city_command, bot, event, "HiBank 城市查询失败", exc)
 
 
 @branch_command.handle()
-async def handle_branch(args: Message = CommandArg()) -> None:
+async def handle_branch(bot: Bot, event: MessageEvent, args: Message = CommandArg()) -> None:
     argument = args.extract_plain_text().strip()
     try:
         await send_branch_detail(branch_command, argument)
@@ -170,12 +207,11 @@ async def handle_branch(args: Message = CommandArg()) -> None:
     except HibankError as exc:
         await branch_command.finish(str(exc))
     except Exception as exc:
-        logger.exception("HiBank 网点查询失败")
-        await branch_command.finish(f"HiBank 网点查询失败：{exc}")
+        await finish_silent_image_error(branch_command, bot, event, "HiBank 网点查询失败", exc)
 
 
 @search_city_command.handle()
-async def handle_search_city(args: Message = CommandArg()) -> None:
+async def handle_search_city(bot: Bot, event: MessageEvent, args: Message = CommandArg()) -> None:
     keyword = args.extract_plain_text().strip()
     if not keyword:
         await search_city_command.finish("请提供关键词，例如：/搜城市 成都")
@@ -187,12 +223,11 @@ async def handle_search_city(args: Message = CommandArg()) -> None:
     except HibankError as exc:
         await search_city_command.finish(str(exc))
     except Exception as exc:
-        logger.exception("HiBank 搜城市失败")
-        await search_city_command.finish(f"HiBank 搜城市失败：{exc}")
+        await finish_silent_image_error(search_city_command, bot, event, "HiBank 搜城市失败", exc)
 
 
 @search_bank_command.handle()
-async def handle_search_bank(args: Message = CommandArg()) -> None:
+async def handle_search_bank(bot: Bot, event: MessageEvent, args: Message = CommandArg()) -> None:
     keyword = args.extract_plain_text().strip()
     if not keyword:
         await search_bank_command.finish("请提供关键词，例如：/搜银行 农商")
@@ -204,12 +239,49 @@ async def handle_search_bank(args: Message = CommandArg()) -> None:
     except HibankError as exc:
         await search_bank_command.finish(str(exc))
     except Exception as exc:
-        logger.exception("HiBank 搜银行失败")
-        await search_bank_command.finish(f"HiBank 搜银行失败：{exc}")
+        await finish_silent_image_error(search_bank_command, bot, event, "HiBank 搜银行失败", exc)
 
 
 def parse_bank_names(argument: str) -> list[str]:
     return [part for part in " ".join(argument.strip().split()).split(" ") if part]
+
+
+def parse_bank_names_with_count(argument: str) -> tuple[list[str], int | None]:
+    parts = parse_bank_names(argument)
+    if len(parts) >= 2 and COUNT_RE.fullmatch(parts[-1]):
+        return parts[:-1], int(parts[-1])
+    return parts, None
+
+
+def validate_card_numbers(card_numbers: list[str]) -> list[str]:
+    for card_number in card_numbers:
+        if not CARD_NUMBER_RE.fullmatch(card_number):
+            raise HibankError("这是卡号不是蛋糕名~不能含有非数字。")
+        if len(card_number) > 19:
+            raise HibankError(f"你这卡号位数{len(card_number)}位，是蛋糕银行发的吗？重设！")
+    return card_numbers
+
+
+def looks_like_card_number(value: str) -> bool:
+    return any(char.isdigit() or char == "*" for char in value)
+
+
+def parse_card_number_argument(argument: str) -> tuple[str, list[str]]:
+    parts = parse_bank_names(argument)
+    if len(parts) < 2:
+        raise HibankError("请提供银行名和卡号，例如：/卡号 浙江网商银行 6210*")
+
+    split_at = len(parts)
+    while split_at > 0 and looks_like_card_number(parts[split_at - 1]):
+        split_at -= 1
+    if split_at == len(parts):
+        split_at = len(parts) - 1
+
+    bank_query = " ".join(parts[:split_at]).strip()
+    card_numbers = parts[split_at:]
+    if not bank_query or not card_numbers:
+        raise HibankError("请提供银行名和卡号，例如：/卡号 浙江网商银行 6210*")
+    return bank_query, validate_card_numbers(card_numbers)
 
 
 def mark_kind_name(kind: MarkKind) -> str:
@@ -220,13 +292,17 @@ def mark_kind_list_title(kind: MarkKind, user_id: str) -> str:
     return f"{user_id} 的{mark_kind_name(kind)}列表"
 
 
-def parse_batch_argument(argument: str, kind: MarkKind) -> tuple[str, str]:
+def parse_batch_argument(argument: str, kind: MarkKind) -> tuple[str, str, int | None]:
     parts = parse_bank_names(argument)
+    count: int | None = None
+    if len(parts) >= 3 and COUNT_RE.fullmatch(parts[-1]):
+        count = int(parts[-1])
+        parts = parts[:-1]
     if len(parts) < 2:
         raise HibankError(
-            f"用法：/批量{mark_kind_name(kind)} <城市名> <分类>，例如：/批量{mark_kind_name(kind)} 成都 全国性"
+            f"用法：/批量{mark_kind_name(kind)} <城市名> <分类> [次数]，例如：/批量{mark_kind_name(kind)} 成都 全国性"
         )
-    return " ".join(parts[:-1]), parts[-1]
+    return " ".join(parts[:-1]), parts[-1], count
 
 
 def find_category_banks(groups: dict[str, list[str]], category_query: str) -> tuple[str, list[str]]:
@@ -255,7 +331,15 @@ def extract_target_user_id(args: Message) -> str:
     raise HibankError("请指定一个 QQ，例如：/复制标记 @某人 或 /复制标记 123456")
 
 
-def copy_prompt_message(kind: MarkKind, source_user_id: str, source_banks: list[str], self_empty: bool) -> Message:
+def sorted_entries(entries: dict[str, BankMarkEntry]) -> list[BankMarkEntry]:
+    return sorted(entries.values(), key=lambda item: item.name)
+
+
+def copy_prompt_message(
+    kind: MarkKind,
+    source_list_image: bytes,
+    self_empty: bool,
+) -> Message:
     if self_empty:
         text = f"对方{mark_kind_name(kind)}列表如下。回复“复制”写入本账号，回复“取消”放弃。"
     else:
@@ -265,18 +349,19 @@ def copy_prompt_message(kind: MarkKind, source_user_id: str, source_banks: list[
         )
     return (
         MessageSegment.text(text + "\n")
-        + image_segment(render_mark_list(mark_kind_list_title(kind, source_user_id), source_banks))
+        + image_segment(source_list_image)
     )
 
 
 def classify_banks_by_category(
     category_groups: dict[str, list[str]],
-    banks: list[str],
-) -> tuple[dict[str, list[str]], list[str]]:
-    grouped: dict[str, list[str]] = {category: [] for category in category_groups}
-    unmatched: list[str] = []
+    entries: list[BankMarkEntry],
+) -> tuple[dict[str, list[BankMarkEntry]], list[BankMarkEntry]]:
+    grouped: dict[str, list[BankMarkEntry]] = {category: [] for category in category_groups}
+    unmatched: list[BankMarkEntry] = []
     used_keys: set[str] = set()
-    for saved_bank in banks:
+    for saved_entry in entries:
+        saved_bank = saved_entry.name
         saved_keys = bank_name_match_keys(saved_bank)
         matched_category = ""
         matched_bank = ""
@@ -293,10 +378,10 @@ def classify_banks_by_category(
                 break
         if matched_bank:
             if not matched_keys or not (matched_keys & used_keys):
-                grouped[matched_category].append(matched_bank)
+                grouped[matched_category].append(saved_entry)
                 used_keys.update(matched_keys)
             continue
-        unmatched.append(saved_bank)
+        unmatched.append(saved_entry)
     return grouped, unmatched
 
 
@@ -308,11 +393,10 @@ async def send_mark_list(
 ) -> None:
     if argument.strip():
         await matcher.finish(f"用法：/{mark_kind_name(kind)}列表（无需城市参数）")
-    marks = get_user_marks(event.get_user_id())
-    banks = sorted(marks.marked if kind == "marked" else marks.followed)
+    entries = sorted_entries(get_user_entries(event.get_user_id(), kind))
     title = f"已{mark_kind_name(kind)}银行"
     category_groups = await client.bank_category_groups()
-    grouped, unmatched = classify_banks_by_category(category_groups, banks)
+    grouped, unmatched = classify_banks_by_category(category_groups, entries)
     await finish_image(
         matcher,
         render_card_pack_mark_list(
@@ -331,7 +415,7 @@ async def handle_add_marks(
     argument: str,
     kind: MarkKind,
 ) -> None:
-    banks = parse_bank_names(argument)
+    banks, count = parse_bank_names_with_count(argument)
     if not banks:
         await matcher.finish(f"请提供银行名，例如：/{mark_kind_name(kind)} 成都银行 南京银行")
     known, unknown = await client.split_known_banks(banks)
@@ -340,11 +424,12 @@ async def handle_add_marks(
         state["hibank_mark_banks"] = known + unknown
         state["hibank_mark_known"] = known
         state["hibank_mark_unknown"] = unknown
+        state["hibank_mark_count"] = count
         await matcher.pause(
             "以下银行未在全局索引和已缓存城市中找到，回复“确认”仍然写入，回复其他内容取消："
             + "、".join(unknown)
         )
-    added = add_user_banks(event.get_user_id(), kind, known)
+    added = add_user_banks(event.get_user_id(), kind, known, count=count)
     await matcher.finish(f"已{mark_kind_name(kind)} {len(known)} 个银行，新增 {added} 个。")
 
 
@@ -357,10 +442,12 @@ async def handle_add_marks_confirm(
     kind = state.get("hibank_mark_kind")
     banks = state.get("hibank_mark_banks", [])
     unknown = state.get("hibank_mark_unknown", [])
+    count = state.get("hibank_mark_count")
+    count_value = int(count) if isinstance(count, int) else None
     if kind not in {"marked", "followed"} or not isinstance(banks, list):
         await matcher.finish("没有待确认的银行。")
     if answer.strip() == "确认":
-        added = add_user_banks(event.get_user_id(), kind, [str(item) for item in banks])
+        added = add_user_banks(event.get_user_id(), kind, [str(item) for item in banks], count=count_value)
         await matcher.finish(
             f"已确认并{mark_kind_name(kind)} {len(banks)} 个银行，新增 {added} 个。"
         )
@@ -387,7 +474,7 @@ async def handle_batch_marks(
     kind: MarkKind,
     remove: bool = False,
 ) -> None:
-    city_query, category_query = parse_batch_argument(argument, kind)
+    city_query, category_query, count = parse_batch_argument(argument, kind)
     city = await client.resolve_city(city_query)
     detail = await client.get_city_detail(city)
     category, banks = find_category_banks(detail.groups, category_query)
@@ -398,10 +485,44 @@ async def handle_batch_marks(
         await matcher.finish(
             f"已批量取消{mark_kind_name(kind)}：{detail.city.city} {category} {len(banks)} 个银行，实际移除 {changed} 个。"
         )
-    changed = add_user_banks(event.get_user_id(), kind, banks)
+    changed = add_user_banks(event.get_user_id(), kind, banks, count=count)
     await matcher.finish(
         f"已批量{mark_kind_name(kind)}：{detail.city.city} {category} {len(banks)} 个银行，新增 {changed} 个。"
     )
+
+
+async def resolve_bank_name_for_user(bank_query: str) -> str:
+    known, _ = await client.split_known_banks([bank_query])
+    return known[0] if known else bank_query
+
+
+def find_user_bank_entry(user_id: str, kind: MarkKind, bank_name: str) -> BankMarkEntry | None:
+    return find_entry(get_user_entries(user_id, kind), bank_name)
+
+
+async def handle_card_numbers(
+    matcher,
+    event: MessageEvent,
+    argument: str,
+) -> None:
+    bank_query, card_numbers = parse_card_number_argument(argument)
+    standard_name = await resolve_bank_name_for_user(bank_query)
+    user_id = event.get_user_id()
+    updated_kinds: list[MarkKind] = []
+    matched_name = standard_name
+
+    for kind in ("marked", "followed"):
+        entry = find_user_bank_entry(user_id, kind, standard_name) or find_user_bank_entry(user_id, kind, bank_query)
+        if entry is None:
+            continue
+        matched_name = entry.name
+        if set_entry_card_numbers(user_id, kind, entry.name, card_numbers):
+            updated_kinds.append(kind)
+
+    if not updated_kinds:
+        await matcher.finish("请先标记或关注这个银行。")
+    kinds_text = "、".join(mark_kind_name(kind) for kind in updated_kinds)
+    await matcher.finish(f"已更新{kinds_text}卡号：{matched_name}")
 
 
 async def handle_copy_marks(
@@ -415,20 +536,26 @@ async def handle_copy_marks(
     target_user_id = event.get_user_id()
     if source_user_id == target_user_id:
         await matcher.finish(f"不能复制自己的{mark_kind_name(kind)}列表。")
-    source_marks = get_user_marks(source_user_id)
-    source_banks = sorted(source_marks.marked if kind == "marked" else source_marks.followed)
-    if not source_banks:
+    source_entries = sorted_entries(get_user_entries(source_user_id, kind))
+    if not source_entries:
         await matcher.finish(f"对方{mark_kind_name(kind)}列表为空。")
 
-    target_marks = get_user_marks(target_user_id)
-    target_banks = sorted(target_marks.marked if kind == "marked" else target_marks.followed)
-    self_empty = not target_banks
+    target_entries = sorted_entries(get_user_entries(target_user_id, kind))
+    self_empty = not target_entries
     state["hibank_copy_kind"] = kind
     state["hibank_copy_source_user_id"] = source_user_id
-    state["hibank_copy_source_banks"] = source_banks
-    state["hibank_copy_target_banks"] = target_banks
+    state["hibank_copy_source_entries"] = source_entries
+    state["hibank_copy_target_entries"] = target_entries
     state["hibank_copy_self_empty"] = self_empty
-    await matcher.pause(copy_prompt_message(kind, source_user_id, source_banks, self_empty))
+    category_groups = await client.bank_category_groups()
+    grouped, unmatched = classify_banks_by_category(category_groups, source_entries)
+    source_list_image = render_card_pack_mark_list(
+        mark_kind_list_title(kind, source_user_id),
+        grouped,
+        unmatched,
+        kind,
+    )
+    await matcher.pause(copy_prompt_message(kind, source_list_image, self_empty))
 
 
 async def handle_copy_marks_confirm(
@@ -438,25 +565,24 @@ async def handle_copy_marks_confirm(
     answer: str,
 ) -> None:
     kind = state.get("hibank_copy_kind")
-    source_banks = state.get("hibank_copy_source_banks", [])
-    target_banks = state.get("hibank_copy_target_banks", [])
+    source_entries = state.get("hibank_copy_source_entries", [])
+    target_entries = state.get("hibank_copy_target_entries", [])
     self_empty = bool(state.get("hibank_copy_self_empty"))
     action = answer.strip()
-    if kind not in {"marked", "followed"} or not isinstance(source_banks, list):
+    if kind not in {"marked", "followed"} or not isinstance(source_entries, list):
         await matcher.finish("没有待复制的数据。")
     if action == "取消":
         await matcher.finish("已取消，未写入。")
     if self_empty:
         if action != "复制":
             await matcher.reject("请回复“复制”或“取消”。")
-        count = set_user_banks(event.get_user_id(), kind, [str(item) for item in source_banks])
+        count = set_user_entries(event.get_user_id(), kind, source_entries)
         await matcher.finish(f"已复制{mark_kind_name(kind)}列表，共 {count} 个银行。")
     if action == "合并":
-        merged = sorted({str(item) for item in source_banks} | {str(item) for item in target_banks})
-        count = set_user_banks(event.get_user_id(), kind, merged)
+        count = set_user_entries(event.get_user_id(), kind, [*target_entries, *source_entries])
         await matcher.finish(f"已合并{mark_kind_name(kind)}列表，共 {count} 个银行。")
     if action == "复制":
-        count = set_user_banks(event.get_user_id(), kind, [str(item) for item in source_banks])
+        count = set_user_entries(event.get_user_id(), kind, source_entries)
         await matcher.finish(f"已复制{mark_kind_name(kind)}列表，共 {count} 个银行。")
     await matcher.reject("请回复“合并”“复制”或“取消”。")
 
@@ -539,6 +665,19 @@ async def handle_unfollow(event: MessageEvent, args: Message = CommandArg()) -> 
         await unfollow_command.finish(f"HiBank 取消关注失败：{exc}")
 
 
+@card_number_command.handle()
+async def handle_card_number(event: MessageEvent, args: Message = CommandArg()) -> None:
+    try:
+        await handle_card_numbers(card_number_command, event, args.extract_plain_text())
+    except FLOW_EXCEPTIONS:
+        raise
+    except HibankError as exc:
+        await card_number_command.finish(str(exc))
+    except Exception as exc:
+        logger.exception("HiBank 卡号设置失败")
+        await card_number_command.finish(f"HiBank 卡号设置失败：{exc}")
+
+
 @batch_mark_command.handle()
 async def handle_batch_mark(event: MessageEvent, args: Message = CommandArg()) -> None:
     try:
@@ -605,6 +744,7 @@ async def handle_batch_unfollow(event: MessageEvent, args: Message = CommandArg(
 
 @copy_mark_command.handle()
 async def handle_copy_mark(
+    bot: Bot,
     event: MessageEvent,
     state: T_State,
     args: Message = CommandArg(),
@@ -616,8 +756,7 @@ async def handle_copy_mark(
     except HibankError as exc:
         await copy_mark_command.finish(str(exc))
     except Exception as exc:
-        logger.exception("HiBank 复制标记失败")
-        await copy_mark_command.finish(f"HiBank 复制标记失败：{exc}")
+        await finish_silent_image_error(copy_mark_command, bot, event, "HiBank 复制标记失败", exc)
 
 
 @copy_mark_command.handle()
@@ -633,6 +772,7 @@ async def handle_copy_mark_confirm(event: MessageEvent, state: T_State) -> None:
 
 @copy_follow_command.handle()
 async def handle_copy_follow(
+    bot: Bot,
     event: MessageEvent,
     state: T_State,
     args: Message = CommandArg(),
@@ -644,8 +784,7 @@ async def handle_copy_follow(
     except HibankError as exc:
         await copy_follow_command.finish(str(exc))
     except Exception as exc:
-        logger.exception("HiBank 复制关注失败")
-        await copy_follow_command.finish(f"HiBank 复制关注失败：{exc}")
+        await finish_silent_image_error(copy_follow_command, bot, event, "HiBank 复制关注失败", exc)
 
 
 @copy_follow_command.handle()
@@ -660,7 +799,7 @@ async def handle_copy_follow_confirm(event: MessageEvent, state: T_State) -> Non
 
 
 @mark_list_command.handle()
-async def handle_mark_list(event: MessageEvent, args: Message = CommandArg()) -> None:
+async def handle_mark_list(bot: Bot, event: MessageEvent, args: Message = CommandArg()) -> None:
     try:
         await send_mark_list(mark_list_command, event, args.extract_plain_text(), "marked")
     except FLOW_EXCEPTIONS:
@@ -668,12 +807,11 @@ async def handle_mark_list(event: MessageEvent, args: Message = CommandArg()) ->
     except HibankError as exc:
         await mark_list_command.finish(str(exc))
     except Exception as exc:
-        logger.exception("HiBank 标记列表失败")
-        await mark_list_command.finish(f"HiBank 标记列表失败：{exc}")
+        await finish_silent_image_error(mark_list_command, bot, event, "HiBank 标记列表失败", exc)
 
 
 @follow_list_command.handle()
-async def handle_follow_list(event: MessageEvent, args: Message = CommandArg()) -> None:
+async def handle_follow_list(bot: Bot, event: MessageEvent, args: Message = CommandArg()) -> None:
     try:
         await send_mark_list(follow_list_command, event, args.extract_plain_text(), "followed")
     except FLOW_EXCEPTIONS:
@@ -681,8 +819,7 @@ async def handle_follow_list(event: MessageEvent, args: Message = CommandArg()) 
     except HibankError as exc:
         await follow_list_command.finish(str(exc))
     except Exception as exc:
-        logger.exception("HiBank 关注列表失败")
-        await follow_list_command.finish(f"HiBank 关注列表失败：{exc}")
+        await finish_silent_image_error(follow_list_command, bot, event, "HiBank 关注列表失败", exc)
 
 
 @update_icons_command.handle()

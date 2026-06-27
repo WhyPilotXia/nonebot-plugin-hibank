@@ -10,7 +10,7 @@ from PIL import Image, ImageDraw, ImageFont
 
 from .bank_icons import resolve_bank_asset
 from .models import BranchDetail, CacheStats, CityDetail, CityRef
-from .marks import UserBankMarks
+from .marks import BankMarkEntry, UserBankMarks
 from .names import bank_name_match_keys, bank_names_match
 
 
@@ -182,9 +182,9 @@ def render_city_detail(detail: CityDetail, user_marks: UserBankMarks | None = No
             draw.text((MARGIN + 14, y), f"{index}.", font=item_font, fill="#667085")
             line_y = y
             for line in lines:
-                fill = "#98a2b3" if style == "marked" else "#F780BE" if style == "followed" else "#1f2937"
+                fill = "#F780BE" if style in {"followed", "both"} else "#98a2b3" if style == "marked" else "#1f2937"
                 draw.text((MARGIN + 58, line_y), line, font=item_font, fill=fill)
-                if style == "marked":
+                if style in {"marked", "both"}:
                     baseline = line_y + 16
                     draw.line(
                         (MARGIN + 58, baseline, MARGIN + 58 + text_width(draw, line, item_font), baseline),
@@ -218,9 +218,13 @@ def bank_style(bank: str, user_marks: UserBankMarks | None) -> str | None:
         for key in bank_name_match_keys(item)
     }
     current = bank_name_match_keys(bank)
-    if current & marked or any(bank_names_match(bank, item) for item in user_marks.marked):
+    is_marked = bool(current & marked) or any(bank_names_match(bank, item) for item in user_marks.marked)
+    is_followed = bool(current & followed) or any(bank_names_match(bank, item) for item in user_marks.followed)
+    if is_marked and is_followed:
+        return "both"
+    if is_marked:
         return "marked"
-    if current & followed or any(bank_names_match(bank, item) for item in user_marks.followed):
+    if is_followed:
         return "followed"
     return None
 
@@ -314,8 +318,76 @@ def render_bank_search(keyword: str, results: list[str]) -> bytes:
     return render_simple_list(f"银行搜索：{keyword}", results or ["未找到匹配银行"])
 
 
-def render_mark_list(title: str, banks: list[str]) -> bytes:
-    rows = banks or ["暂无"]
+def _as_mark_entry(item: BankMarkEntry | str) -> BankMarkEntry:
+    if isinstance(item, BankMarkEntry):
+        return item
+    return BankMarkEntry(str(item))
+
+
+def _entry_total_count(entry: BankMarkEntry) -> int:
+    return max(1, int(entry.count or 1), len(entry.card_numbers))
+
+
+def _entry_card_views(entry: BankMarkEntry) -> list[tuple[str, str, int]]:
+    total_count = _entry_total_count(entry)
+    card_numbers = list(entry.card_numbers)
+    if not card_numbers:
+        return [(entry.name, "", total_count)]
+    views: list[tuple[str, str, int]] = []
+    for index, card_number in enumerate(card_numbers):
+        count = 1
+        if index == len(card_numbers) - 1 and total_count > len(card_numbers):
+            count = total_count - len(card_numbers) + 1
+        views.append((entry.name, card_number, count))
+    return views
+
+
+def _card_title(bank: str, count: int) -> str:
+    if count > 1:
+        return f"{bank}（{count}）"
+    return bank
+
+
+def _expand_card_number(pattern: str) -> str:
+    value = "".join(char if char.isdigit() or char == "*" else "*" for char in str(pattern).strip())
+    target_length = 19 if len(value) > 16 else 16
+    if not value:
+        return "*" * target_length
+    if len(value) >= target_length:
+        return value[:target_length]
+
+    leading_stars = len(value) - len(value.lstrip("*"))
+    trailing_stars = len(value) - len(value.rstrip("*"))
+    padding = "*" * (target_length - len(value))
+    if leading_stars == 1:
+        return padding + value
+    if leading_stars > 1:
+        return value + padding
+    if trailing_stars > 1:
+        return padding + value
+    return value + padding
+
+
+def format_card_number(pattern: str) -> str:
+    expanded = _expand_card_number(pattern)
+    return "  ".join(expanded[index : index + 4] for index in range(0, len(expanded), 4))
+
+
+def _mark_list_rows(items: list[BankMarkEntry | str]) -> list[str]:
+    rows: list[str] = []
+    for item in items:
+        entry = _as_mark_entry(item)
+        for bank, card_number, count in _entry_card_views(entry):
+            title = _card_title(bank, count)
+            if card_number or entry.card_numbers:
+                rows.append(f"{title}  {format_card_number(card_number)}")
+            else:
+                rows.append(title)
+    return rows
+
+
+def render_mark_list(title: str, banks: list[BankMarkEntry | str]) -> bytes:
+    rows = _mark_list_rows(banks) or ["暂无"]
     return render_simple_list(title, rows)
 
 
@@ -508,7 +580,15 @@ def _draw_fallback_symbol(
     )
 
 
-def _render_bank_card(bank: str, kind: str, width: int, height: int) -> Image.Image:
+def _render_bank_card(
+    bank: str,
+    kind: str,
+    width: int,
+    height: int,
+    *,
+    card_number: str = "",
+    count: int = 1,
+) -> Image.Image:
     asset = resolve_bank_asset(bank)
     card = Image.new("RGBA", (width, height), (0, 0, 0, 0))
     _draw_card_background(card, asset.color, radius=20)
@@ -531,21 +611,22 @@ def _render_bank_card(bank: str, kind: str, width: int, height: int) -> Image.Im
 
     text_x = icon_x + logo_size + 22
     text_width_limit = max(220, width - text_x - 34)
-    name_font = _fit_font(draw, bank, 34, text_width_limit, 22)
+    title = _card_title(bank, count)
+    name_font = _fit_font(draw, title, 34, text_width_limit, 22)
     desc_font = get_font(22)
     number_font = get_symbol_font(30)
-    draw.text((text_x, 36), bank, font=name_font, fill=(255, 255, 255, 248))
-    draw.text((text_x, 82), "储蓄卡", font=desc_font, fill=(255, 255, 255, 205))
+    draw.text((text_x, 36), title, font=name_font, fill=(255, 255, 255, 248))
+    draw.text((text_x, 82), "七七卡", font=desc_font, fill=(255, 255, 255, 205))
 
-    number = "••••  ••••  ••••  ••••"
+    number = format_card_number(card_number)
     draw.text((text_x, height - 64), number, font=number_font, fill=(255, 255, 255, 235))
     return card
 
 
 def render_card_pack_mark_list(
     title: str,
-    grouped_banks: dict[str, list[str]],
-    unmatched_banks: list[str],
+    grouped_banks: dict[str, list[BankMarkEntry | str]],
+    unmatched_banks: list[BankMarkEntry | str],
     kind: str,
 ) -> bytes:
     title_font = get_font(40)
@@ -554,11 +635,26 @@ def render_card_pack_mark_list(
     empty_font = get_font(26)
     small_font = get_font(20)
 
-    sections = [(category, banks) for category, banks in grouped_banks.items() if banks]
+    sections = [(category, [_as_mark_entry(item) for item in banks]) for category, banks in grouped_banks.items() if banks]
     if unmatched_banks:
-        sections.append(("其他", unmatched_banks))
-    total_count = sum(len(banks) for _, banks in sections)
-    classified_count = sum(len(banks) for banks in grouped_banks.values())
+        sections.append(("其他", [_as_mark_entry(item) for item in unmatched_banks]))
+    card_sections = [
+        (
+            category,
+            [
+                (bank, card_number, count)
+                for entry in entries
+                for bank, card_number, count in _entry_card_views(entry)
+            ],
+        )
+        for category, entries in sections
+    ]
+    total_count = sum(_entry_total_count(entry) for _, entries in sections for entry in entries)
+    classified_count = sum(
+        _entry_total_count(_as_mark_entry(entry))
+        for entries in grouped_banks.values()
+        for entry in entries
+    )
 
     column_gap = 24
     card_width = (IMAGE_WIDTH - MARGIN * 2 - column_gap) // 2
@@ -568,8 +664,8 @@ def render_card_pack_mark_list(
     height = 174
     if not sections:
         height += 96
-    for _, banks in sections:
-        row_count = (len(banks) + 1) // 2
+    for _, cards in card_sections:
+        row_count = (len(cards) + 1) // 2
         height += 46 + row_count * (card_height + card_gap) + section_gap
     height += 52
 
@@ -593,22 +689,22 @@ def render_card_pack_mark_list(
             fill="#ffffff",
         )
         draw.text((MARGIN + 28, y + 21), "暂无", font=empty_font, fill="#667085")
-    for category, banks in sections:
+    for category, cards in card_sections:
         draw.text(
             (MARGIN + 4, y),
-            f"{category} · {len(banks)} 张",
+            f"{category} · {sum(count for _, _, count in cards)} 张",
             font=section_font,
             fill="#475467",
         )
         y += 46
-        for index, bank in enumerate(banks):
+        for index, (bank, card_number, count) in enumerate(cards):
             column = index % 2
             if column == 0 and index:
                 y += card_height + card_gap
             x = MARGIN + column * (card_width + column_gap)
-            card = _render_bank_card(bank, kind, card_width, card_height)
+            card = _render_bank_card(bank, kind, card_width, card_height, card_number=card_number, count=count)
             image.alpha_composite(card, (x, y))
-        if banks:
+        if cards:
             y += card_height + card_gap
         y += section_gap
 
@@ -633,11 +729,12 @@ def render_help() -> bytes:
         "/bank 网点 <城市名> <银行名> [页码] | /网点 <城市名> <银行名> [页码]",
         "/bank 搜城市 <关键词> | /搜城市 <关键词>",
         "/bank 搜银行 <关键词> | /搜银行 <关键词>",
-        "/<标记/关注> <银行名...> 或 /<mark/follow> <银行名...>",
+        "/<标记/关注> <银行名...> [次数] 或 /<mark/follow> <银行名...> [次数]",
         "/<取消标记/取消关注> <银行名...> 或 /<unmark/unfollow> <银行名...>",
-        "/<批量标记/批量关注> <城市名> <分类>",
+        "/<批量标记/批量关注> <城市名> <分类> [次数]",
         "/<批量取消标记/批量取消关注> <城市名> <分类>",
         "/<复制标记/复制关注> <@用户/QQ号>",
+        "/卡号 <银行名> <卡号...>",
         "/<标记列表/关注列表>",
         "/更新银行图标（仅超级用户）",
         "/bank 缓存",

@@ -16,7 +16,13 @@ from nonebot import get_plugin_config
 from . import cache
 from .config import HibankConfig
 from .models import BankRef, BranchDetail, CacheStats, CityDetail, CityRef
-from .names import bank_name_match_keys, bank_names_match, has_protected_region_qualifier, normalize
+from .names import (
+    bank_name_match_keys,
+    bank_names_match,
+    canonical_bank_name,
+    has_protected_region_qualifier,
+    normalize,
+)
 
 
 STATE_RE = re.compile(
@@ -109,7 +115,7 @@ class HibankClient:
                         continue
                     name = item.get("name")
                     if isinstance(name, str) and name.strip():
-                        bank_names.add(name.strip())
+                        bank_names.add(canonical_bank_name(name))
         bank_names.update(await asyncio.to_thread(self._cached_city_bank_names))
         return bank_names
 
@@ -128,7 +134,7 @@ class HibankClient:
                 for item in value:
                     if not isinstance(item, dict):
                         continue
-                    name = str(item.get("name", "")).strip()
+                    name = canonical_bank_name(str(item.get("name", "")))
                     if not name:
                         continue
                     keys = bank_name_match_keys(name)
@@ -171,7 +177,7 @@ class HibankClient:
                         continue
                     name = item.get("name")
                     if isinstance(name, str) and name.strip():
-                        bank_name = name.strip()
+                        bank_name = canonical_bank_name(name)
                         if not self._category_groups_contain(groups, bank_name):
                             groups.setdefault(category, set()).add(bank_name)
 
@@ -196,7 +202,7 @@ class HibankClient:
                 if not isinstance(banks, list):
                     continue
                 for bank in banks:
-                    name = str(bank).strip()
+                    name = canonical_bank_name(str(bank))
                     if name:
                         bank_names.add(name)
         return bank_names
@@ -217,7 +223,7 @@ class HibankClient:
                     continue
                 bucket = result.setdefault(str(category), set())
                 for bank in banks:
-                    name = str(bank).strip()
+                    name = canonical_bank_name(str(bank))
                     if name:
                         bucket.add(name)
         return result
