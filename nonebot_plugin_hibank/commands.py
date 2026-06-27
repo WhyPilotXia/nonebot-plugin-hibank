@@ -30,7 +30,7 @@ from .marks import (
     set_entry_card_numbers,
     set_user_entries,
 )
-from .names import bank_name_match_keys, bank_names_match
+from .names import bank_name_match_keys, bank_names_match, has_protected_region_qualifier
 from .render import (
     image_to_base64,
     render_bank_search,
@@ -47,6 +47,7 @@ PAGE_RE = re.compile(r"\s+(\d+)$")
 HELP_ARGS = {"帮助", "-h", "--help", "help"}
 COUNT_RE = re.compile(r"^[1-9]\d*$")
 CARD_NUMBER_RE = re.compile(r"^[0-9*]+$")
+OVERSEAS_BANK_KEYWORDS = ("香港", "澳门", "台湾")
 
 
 bank_command = on_command("bank", priority=5, block=True)
@@ -71,6 +72,7 @@ update_icons_command = on_command("更新银行图标", permission=SUPERUSER, pr
 
 FLOW_EXCEPTIONS = (FinishedException, PausedException, RejectedException)
 ERROR_EMOJI_ID = "67"
+IMAGE_COMMAND_EMOJI_ID = "424"
 
 
 def image_segment(image_bytes: bytes) -> MessageSegment:
@@ -101,6 +103,10 @@ async def finish_silent_image_error(matcher, bot: Bot, event: MessageEvent, log_
     logger.opt(exception=exc).error(log_message)
     await set_message_emoji_like(bot, event, ERROR_EMOJI_ID)
     await matcher.finish()
+
+
+async def mark_image_command_started(bot: Bot, event: MessageEvent) -> None:
+    await set_message_emoji_like(bot, event, IMAGE_COMMAND_EMOJI_ID)
 
 
 def split_city_bank_page(argument: str) -> tuple[str, str, int]:
@@ -142,6 +148,7 @@ async def send_branch_detail(matcher, argument: str) -> None:
 @bank_command.handle()
 async def handle_bank(bot: Bot, event: MessageEvent, args: Message = CommandArg()) -> None:
     try:
+        await mark_image_command_started(bot, event)
         raw = args.extract_plain_text().strip()
         if not raw or raw in HELP_ARGS:
             await finish_image(bank_command, render_help())
@@ -188,6 +195,7 @@ async def handle_bank(bot: Bot, event: MessageEvent, args: Message = CommandArg(
 async def handle_city(bot: Bot, event: MessageEvent, args: Message = CommandArg()) -> None:
     city_query = args.extract_plain_text().strip()
     try:
+        await mark_image_command_started(bot, event)
         await send_city_detail(city_command, city_query, event)
     except FLOW_EXCEPTIONS:
         raise
@@ -201,6 +209,7 @@ async def handle_city(bot: Bot, event: MessageEvent, args: Message = CommandArg(
 async def handle_branch(bot: Bot, event: MessageEvent, args: Message = CommandArg()) -> None:
     argument = args.extract_plain_text().strip()
     try:
+        await mark_image_command_started(bot, event)
         await send_branch_detail(branch_command, argument)
     except FLOW_EXCEPTIONS:
         raise
@@ -216,6 +225,7 @@ async def handle_search_city(bot: Bot, event: MessageEvent, args: Message = Comm
     if not keyword:
         await search_city_command.finish("请提供关键词，例如：/搜城市 成都")
     try:
+        await mark_image_command_started(bot, event)
         results = await client.search_cities(keyword)
         await finish_image(search_city_command, render_city_search(keyword, results))
     except FLOW_EXCEPTIONS:
@@ -232,6 +242,7 @@ async def handle_search_bank(bot: Bot, event: MessageEvent, args: Message = Comm
     if not keyword:
         await search_bank_command.finish("请提供关键词，例如：/搜银行 农商")
     try:
+        await mark_image_command_started(bot, event)
         results = await client.search_banks(keyword)
         await finish_image(search_bank_command, render_bank_search(keyword, results))
     except FLOW_EXCEPTIONS:
@@ -381,8 +392,18 @@ def classify_banks_by_category(
                 grouped[matched_category].append(saved_entry)
                 used_keys.update(matched_keys)
             continue
+        if should_group_as_overseas(saved_bank):
+            if not saved_keys or not (saved_keys & used_keys):
+                grouped.setdefault("境外", []).append(saved_entry)
+                used_keys.update(saved_keys)
+            continue
         unmatched.append(saved_entry)
     return grouped, unmatched
+
+
+def should_group_as_overseas(bank_name: str) -> bool:
+    text = str(bank_name)
+    return any(keyword in text for keyword in OVERSEAS_BANK_KEYWORDS) or has_protected_region_qualifier(text)
 
 
 async def send_mark_list(
@@ -750,6 +771,7 @@ async def handle_copy_mark(
     args: Message = CommandArg(),
 ) -> None:
     try:
+        await mark_image_command_started(bot, event)
         await handle_copy_marks(copy_mark_command, event, state, args, "marked")
     except FLOW_EXCEPTIONS:
         raise
@@ -778,6 +800,7 @@ async def handle_copy_follow(
     args: Message = CommandArg(),
 ) -> None:
     try:
+        await mark_image_command_started(bot, event)
         await handle_copy_marks(copy_follow_command, event, state, args, "followed")
     except FLOW_EXCEPTIONS:
         raise
@@ -801,6 +824,7 @@ async def handle_copy_follow_confirm(event: MessageEvent, state: T_State) -> Non
 @mark_list_command.handle()
 async def handle_mark_list(bot: Bot, event: MessageEvent, args: Message = CommandArg()) -> None:
     try:
+        await mark_image_command_started(bot, event)
         await send_mark_list(mark_list_command, event, args.extract_plain_text(), "marked")
     except FLOW_EXCEPTIONS:
         raise
@@ -813,6 +837,7 @@ async def handle_mark_list(bot: Bot, event: MessageEvent, args: Message = Comman
 @follow_list_command.handle()
 async def handle_follow_list(bot: Bot, event: MessageEvent, args: Message = CommandArg()) -> None:
     try:
+        await mark_image_command_started(bot, event)
         await send_mark_list(follow_list_command, event, args.extract_plain_text(), "followed")
     except FLOW_EXCEPTIONS:
         raise
@@ -832,7 +857,8 @@ async def handle_update_icons() -> None:
             "银行图标已更新："
             f"共 {result['total']} 个，icongo {result['icongo']} 个，"
             f"HiBank {result['hibank']} 个，"
-            f"本地兜底 {result['fallback']} 个，源不可用 {result['failed']} 个。"
+            f"本地兜底 {result['fallback']} 个，"
+            f"手工保留 {result['manual']} 个，源不可用 {result['failed']} 个。"
         )
     except FLOW_EXCEPTIONS:
         raise

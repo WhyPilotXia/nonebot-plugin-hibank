@@ -26,6 +26,7 @@ LOGO_DIR = ASSET_DIR / "bank_logos"
 ICONGO_LOGO_DIR = LOGO_DIR / "icongo"
 HIBANK_LOGO_DIR = LOGO_DIR / "hibank"
 FALLBACK_LOGO_DIR = LOGO_DIR / "fallback"
+MANUAL_LOGO_DIR = LOGO_DIR / "manual"
 INDEX_FILE = ASSET_DIR / "bank_assets.json"
 SOURCE_URL = "https://github.com/icongo/bank-logos/archive/refs/heads/main.zip"
 SOURCE_NAME = "icongo/bank-logos"
@@ -33,6 +34,7 @@ SOURCE_REPO = "https://github.com/icongo/bank-logos"
 HIBANK_BANKS_URL = "https://hi.zzz.moe/banks"
 HIBANK_LOGO_PREFIX = "https://storage.my-api.cn/static/images/logo/"
 HIBANK_SOURCE_NAME = "HiBank"
+MANUAL_SOURCE_NAME = "manual"
 
 README_IMG_RE = re.compile(
     r"<img\s+[^>]*src=\"\.\/logos\/([^\"]+)\"[^>]*"
@@ -338,11 +340,39 @@ def _download_hibank_logo_task(
     return bank_name, _extract_theme_color(image, fallback_color)
 
 
+def _load_manual_assets() -> dict[str, dict[str, str]]:
+    try:
+        payload = json.loads(INDEX_FILE.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError):
+        return {}
+    banks = payload.get("banks", {})
+    if not isinstance(banks, dict):
+        return {}
+
+    manual_assets: dict[str, dict[str, str]] = {}
+    for name, value in banks.items():
+        if not isinstance(value, dict):
+            continue
+        if str(value.get("source") or "") != MANUAL_SOURCE_NAME:
+            continue
+        manual_assets[str(name)] = {
+            "logo": str(value.get("logo") or ""),
+            "color": str(value.get("color") or color_from_text(str(name))),
+            "source": MANUAL_SOURCE_NAME,
+            "slug": str(value.get("slug") or ""),
+            "logo_base": str(value.get("logo_base") or ""),
+            "hibank_name": str(value.get("hibank_name") or ""),
+        }
+    return manual_assets
+
+
 def update_bank_icon_assets(bank_records: Iterable[Mapping[str, str]]) -> dict[str, int | str]:
     ASSET_DIR.mkdir(parents=True, exist_ok=True)
     ICONGO_LOGO_DIR.mkdir(parents=True, exist_ok=True)
     HIBANK_LOGO_DIR.mkdir(parents=True, exist_ok=True)
     FALLBACK_LOGO_DIR.mkdir(parents=True, exist_ok=True)
+    MANUAL_LOGO_DIR.mkdir(parents=True, exist_ok=True)
+    manual_assets = _load_manual_assets()
     for logo_dir in (ICONGO_LOGO_DIR, HIBANK_LOGO_DIR, FALLBACK_LOGO_DIR):
         for old_png in logo_dir.glob("*.png"):
             old_png.unlink()
@@ -363,7 +393,7 @@ def update_bank_icon_assets(bank_records: Iterable[Mapping[str, str]]) -> dict[s
             if not path.stem.endswith("-rect")
         }
 
-        banks: dict[str, dict[str, str]] = {}
+        banks: dict[str, dict[str, str]] = dict(manual_assets)
         hibank_tasks: list[dict[str, str]] = []
         icongo_matched = 0
         hibank_matched = 0
@@ -468,6 +498,7 @@ def update_bank_icon_assets(bank_records: Iterable[Mapping[str, str]]) -> dict[s
         "sources": [
             {"name": SOURCE_NAME, "url": SOURCE_REPO, "license": "MIT"},
             {"name": HIBANK_SOURCE_NAME, "url": HIBANK_BANKS_URL, "license": "site-provided logo assets"},
+            {"name": MANUAL_SOURCE_NAME, "url": "", "license": "user-provided local assets"},
         ],
         "banks": dict(sorted(banks.items())),
     }
@@ -479,6 +510,7 @@ def update_bank_icon_assets(bank_records: Iterable[Mapping[str, str]]) -> dict[s
         "icongo": icongo_matched,
         "hibank": hibank_matched,
         "fallback": fallback,
+        "manual": len(manual_assets),
         "failed": failed,
         "source": f"{SOURCE_REPO}; {HIBANK_BANKS_URL}",
     }
@@ -504,18 +536,65 @@ def clear_bank_asset_cache() -> None:
     load_bank_assets.cache_clear()
 
 
+def _asset_logo_path(payload: Mapping[str, str]) -> Path | None:
+    logo_value = str(payload.get("logo", "")).strip()
+    logo_path = ASSET_DIR / logo_value if logo_value else None
+    if logo_path is not None and not logo_path.exists():
+        return None
+    return logo_path
+
+
+def _is_real_logo_payload(payload: Mapping[str, str] | None) -> bool:
+    return bool(
+        payload
+        and str(payload.get("source") or "fallback") != "fallback"
+        and _asset_logo_path(payload) is not None
+    )
+
+
+def _find_asset_payload(bank_name: str, assets: Mapping[str, dict[str, str]]) -> dict[str, str] | None:
+    payload = assets.get(bank_name)
+    if payload is not None:
+        return payload
+    return next(
+        (
+            value
+            for known_name, value in assets.items()
+            if bank_names_match(bank_name, known_name)
+        ),
+        None,
+    )
+
+
+def _find_parent_asset_payload(
+    bank_name: str,
+    assets: Mapping[str, dict[str, str]],
+) -> dict[str, str] | None:
+    if "村镇银行" not in bank_name:
+        return None
+    for parent_name in _hibank_parent_names(bank_name):
+        payload = _find_asset_payload(parent_name, assets)
+        if _is_real_logo_payload(payload):
+            return payload
+    return None
+
+
+def _asset_from_payload(bank_name: str, payload: Mapping[str, str]) -> BankAsset:
+    return BankAsset(
+        name=bank_name,
+        color=str(payload.get("color") or color_from_text(bank_name)),
+        logo=_asset_logo_path(payload),
+        source=str(payload.get("source") or "fallback"),
+    )
+
+
 def resolve_bank_asset(bank_name: str) -> BankAsset:
     assets = load_bank_assets()
-    payload = assets.get(bank_name)
-    if payload is None:
-        payload = next(
-            (
-                value
-                for known_name, value in assets.items()
-                if bank_names_match(bank_name, known_name)
-            ),
-            None,
-        )
+    payload = _find_asset_payload(bank_name, assets)
+    if not _is_real_logo_payload(payload):
+        parent_payload = _find_parent_asset_payload(bank_name, assets)
+        if parent_payload is not None:
+            payload = parent_payload
     if payload is None:
         return BankAsset(
             name=bank_name,
@@ -523,13 +602,4 @@ def resolve_bank_asset(bank_name: str) -> BankAsset:
             logo=None,
             source="fallback",
         )
-    logo_value = str(payload.get("logo", "")).strip()
-    logo_path = ASSET_DIR / logo_value if logo_value else None
-    if logo_path is not None and not logo_path.exists():
-        logo_path = None
-    return BankAsset(
-        name=bank_name,
-        color=str(payload.get("color") or color_from_text(bank_name)),
-        logo=logo_path,
-        source=str(payload.get("source") or "fallback"),
-    )
+    return _asset_from_payload(bank_name, payload)

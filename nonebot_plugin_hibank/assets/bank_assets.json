@@ -3379,6 +3379,22 @@
       "slug": "BankofLongjiang",
       "logo_base": "lj-bank",
       "hibank_name": ""
-    }
+    },
+    "蛋糕银行": {
+  "logo": "bank_logos/manual/蛋糕银行.jpg",
+  "color": "#FFCE47",
+  "source": "manual",
+  "slug": "",
+  "logo_base": "",
+  "hibank_name": ""
+},
+    "七七银行": {
+  "logo": "bank_logos/manual/七七银行.jpg",
+  "color": "#3A3669",
+  "source": "manual",
+  "slug": "",
+  "logo_base": "",
+  "hibank_name": ""
+}
   }
 }

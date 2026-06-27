@@ -30,8 +30,9 @@ STATE_RE = re.compile(
     re.S,
 )
 BRANCH_HREF_RE = re.compile(r"^/branches/([^/]+)/([^/]+)/(.+)$")
-STANDARD_BANK_CATEGORIES = ("全国性", "外资", "区域性", "民营", "村镇")
-GLOBAL_FOREIGN_GROUPS = {"外资法人", "外资分行", "香港", "澳门", "台湾"}
+STANDARD_BANK_CATEGORIES = ("全国性", "外资", "境外", "区域性", "民营", "村镇")
+GLOBAL_FOREIGN_GROUPS = {"外资法人", "外资分行"}
+GLOBAL_OVERSEAS_GROUPS = {"香港", "澳门", "台湾"}
 
 
 class HibankError(RuntimeError):
@@ -231,6 +232,8 @@ class HibankClient:
     def _global_group_to_category(self, label: str) -> str:
         if label == "全国性":
             return "全国性"
+        if label in GLOBAL_OVERSEAS_GROUPS:
+            return "境外"
         if label in GLOBAL_FOREIGN_GROUPS or "外资" in label:
             return "外资"
         return "区域性"
